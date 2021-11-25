@@ -1,0 +1,7 @@
+{
+  "database": {
+      "username": "User",
+      "password": "35Nx0t65aNmizeLQ",
+      "host": "mongo:27017/phenology?retryWrites=true&w=majority"
+  }
+}

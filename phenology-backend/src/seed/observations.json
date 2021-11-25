@@ -1,0 +1,92 @@
+[
+  {
+    "id": 1,
+    "date": "2021-11-13",
+    "location": "Miskolc",
+    "gps": "",
+    "plant": {
+      "id": 3,
+      "name": "Közönséges nyír",
+      "latin": "Betula pendula",
+      "phase": [
+        "rügyfakadás",
+        "virágzás kezdete",
+        "virágzás",
+        "virágzás vége",
+        "lombszíneződés kezdete",
+        "lombhullás kezdete"
+      ],
+      "image": "../../assets/image/Feher_akac.jpg",
+      "category": "Fák"
+    },
+    "phase": "virágzás",
+    "photo": "",
+    "note": "fffffff"
+  },
+  {
+    "id": 2,
+    "date": "2021-11-13",
+    "location": "Miskolc",
+    "gps": "",
+    "plant": {
+      "id": 9,
+      "name": "Aranyfa",
+      "latin": "Forsythia",
+      "phase": [
+        "rügyfakadás",
+        "virágzás kezdete",
+        "virágzás",
+        "virágzás vége",
+        "lombszíneződés kezdete",
+        "lombhullás kezdete"
+      ],
+      "image": "../../assets/image/Feher_akac.jpg",
+      "category": "Cserjék"
+    },
+    "phase": "rügyfakadás",
+    "photo": "",
+    "note": ""
+  },
+  {
+    "id": 3,
+    "date": "2021-11-13",
+    "location": "Pécs",
+    "gps": "",
+    "plant": {
+      "id": 10,
+      "name": "Őszi kikerics",
+      "latin": "Colchicum autumnale",
+      "phase": [
+        "virágzás kezdete",
+        "virágzás",
+        "virágzás vége"
+      ],
+      "image": "../../assets/image/Feher_akac.jpg",
+      "category": "Lágyszárúak"
+    },
+    "phase": "virágzás vége",
+    "photo": "",
+    "note": ""
+  },
+  {
+    "id": 4,
+    "date": "2021-11-13",
+    "location": "Pécs",
+    "gps": "",
+    "plant": {
+      "id": 13,
+      "name": "Pipacs",
+      "latin": "Papaver rhoeas",
+      "phase": [
+        "virágzás kezdete",
+        "virágzás",
+        "virágzás vége"
+      ],
+      "image": "../../assets/image/Feher_akac.jpg",
+      "category": "Lágyszárúak"
+    },
+    "phase": "virágzás",
+    "photo": "",
+    "note": ""
+  }
+]
