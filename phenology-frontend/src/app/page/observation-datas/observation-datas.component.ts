@@ -83,8 +83,6 @@ export class ObservationDatasComponent implements OnInit {
 
   save(): any {
 
-    this.observationService.create(this.observation).subscribe(
-      () => this.router.navigate(['/']));
 
     // if (!this.fileUploadForm.get('uploadedImage')?.value) {
     //   alert('Please fill valid details!');
@@ -102,6 +100,9 @@ export class ObservationDatasComponent implements OnInit {
         formData.append('agentId', '007');
         this.observationService.uploadFile(formData);
       }
+
+      this.observationService.create(this.observation).subscribe(
+        () => this.router.navigate(['/']));
     })
   }
 
