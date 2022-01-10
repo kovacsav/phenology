@@ -1,1 +1,19 @@
-<p>map works!</p>
+<!-- <ejs-maps id='rn-container' [zoomSettings]='zoomSettings'>
+  <e-layers>
+ <e-layer [layerType] = 'layerType'></e-layer>
+ </e-layers>
+ </ejs-maps> -->
+
+<ejs-maps id='rn-container' class="d-flex mt-5" [background]='background' [border]='border' [margin]='margin'
+  [zoomSettings]='zoomSettings' [titleSettings]='titleSettings' [centerPosition]="centerPosition" theme="FabricDark">
+  <e-layers>
+    <e-layer [layerType]='layerType' [urlTemplate]='urlTemplate' [markerSettings]='markerSettings'
+      [navigationLineSettings]='navigationLineSettings'>
+    </e-layer>
+  </e-layers>
+</ejs-maps>
+
+
+<!-- <div id="my-map"></div> -->
+
+<!-- <div class="m-5 bg-warning">Vége</div> -->

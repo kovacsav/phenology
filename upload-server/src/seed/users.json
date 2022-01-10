@@ -1,0 +1,106 @@
+[
+  {
+    "firstName": "Magyar",
+    "lastName": "István",
+    "email": "magyar@gmail.com",
+    "active": true,
+    "password": "magyar",
+    "role": 3
+  },
+  {
+    "firstName": "Vitéz",
+    "lastName": "Viola",
+    "email": "vitez@gmail.com",
+    "active": true,
+    "password": "vitez",
+    "role": 3
+  },
+  {
+    "firstName": "Kérő",
+    "lastName": "Károly",
+    "email": "kero@gmail.com",
+    "active": true,
+    "password": "kero",
+    "role": 2
+  },
+  {
+    "firstName": "Sass",
+    "lastName": "Csaba",
+    "email": "sass@gmail.com",
+    "active": true,
+    "password": "sass",
+    "role": 1
+  },
+  {
+    "firstName": "Siket",
+    "lastName": "Sándor",
+    "email": "siket@gmail.com",
+    "active": true,
+    "password": "siket",
+    "role": 2
+  },
+  {
+    "firstName": "Fekete",
+    "lastName": "Péter",
+    "email": "fekete@gmail.com",
+    "active": true,
+    "password": "fekete",
+    "role": 1
+  },
+  {
+    "firstName": "Feke",
+    "lastName": "Mihály",
+    "email": "feke@gmail.com",
+    "active": true,
+    "password": "feke",
+    "role": 2
+  },
+  {
+    "firstName": "Hangos",
+    "lastName": "Kamilla",
+    "email": "hangos@gmail.com",
+    "active": true,
+    "password": "hangos",
+    "role": 2
+  },
+  {
+    "firstName": "Láza",
+    "lastName": "Viktória",
+    "email": "laza@gmail.com",
+    "active": true,
+    "password": "laza",
+    "role": 3
+  },
+  {
+    "firstName": "Kardos",
+    "lastName": "Emese",
+    "email": "kardos@gmail.com",
+    "active": true,
+    "password": "kardos",
+    "role": 1
+  },
+  {
+    "firstName": "Hideg",
+    "lastName": "Eszter",
+    "email": "hideg@gmail.com",
+    "active": true,
+    "password": "hideg",
+    "role": 1
+  },
+  {
+    "firstName": "Végső",
+    "lastName": "Bence",
+    "email": "vegso@gmail.com",
+    "active": true,
+    "password": "vegso",
+    "role": 2
+  },
+  {
+    "firstName": "Lengyel",
+    "lastName": "Tamás",
+    "email": "lengyel@gmail.com",
+    "active": true,
+    "password": "lengyel",
+    "role": 2
+  }
+]

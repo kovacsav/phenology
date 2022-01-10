@@ -85,28 +85,95 @@
         </div> -->
         <h4 class="mt-5 mb-3">Fenológiai fázis</h4>
         <!-- <div *ngFor="let phase of observation.plant.phase">
-
           <div class="form-check form-check-inline">
             <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1">
             <label class="form-check-label" for="inlineRadio1">{{phase}}</label>
           </div>
-
           <div class="form-check form-check-inline">
             <input type="radio" class="btn-check" name="options" id="option2" autocomplete="off">
             <label class="btn btn-secondary" for="option2">{{phase}}</label>
           </div>
         </div> -->
 
-        <div *ngFor="let phase of observation.plant.phase" class="btn-group m-2 mb-5" (click)="setPhase(phase)" role="group" aria-label="">
+        <div *ngFor="let phase of observation.plant.phase" class="btn-group m-2 mb-5" (click)="setPhase(phase)"
+          role="group" aria-label="">
           <input type="radio" class="btn-check" name="btnradio" [id]="phase" autocomplete="off">
           <label class="btn btn-outline-light" [for]="phase">{{phase}}</label>
         </div>
 
+        <!-- Uplaod photo -->
+        <!-- <app-upload-image (pathEvent)="setImagePath($event)"></app-upload-image> -->
 
-        <!-- <img src="../../assets/image/rugyfakadas.png" alt=""> -->
+
+
+        <div class="container">
+          <h3>Fénykép feltöltés</h3>
+
+          <form [formGroup]="fileUploadForm">
+            <div class="row">
+              <div class="col-sm-12">
+                <div>
+                  <h6 class="head-title margin-top-8"><span>Válassz fényképet!</span></h6>
+                </div>
+              </div>
+              <div class="col-sm-6">
+
+                <div class="custom-file">
+
+                  <input type="file" class="custom-file-input" id="customFile" name="uploadedImage"
+                    (change)="onFileSelect($event)" #UploadFileInput multiple>
+                  <!-- <label class="custom-file-label" for="customFile">{{fileInputLabel || 'Choose File'}}</label> -->
+
+                </div>
+
+              </div>
+
+              <!-- <div class="col-sm-6"> <button class="btn btn-primary" type="submit">Upload</button> -->
+              <!-- </div> -->
+
+            </div>
+          </form>
+
+        </div>
+
+
+        <!--
+        <input type="file" class="file-input" (change)="onFileSelected($event)" #fileUpload>
+
+        <div class="file-upload">
+
+          {{fileName || "No file uploaded yet."}}
+
+          <button mat-mini-fab color="primary" class="upload-btn" (click)="fileUpload.click()">
+            <i class="fas fa-attach"></i>
+          </button>
+        </div> -->
+
+
+
+
+
+
       </div>
 
-     <!-- --------------- webcam -->
+      <!-- <img src="../../assets/image/rugyfakadas.png" alt=""> -->
+
+      <!-- <h1>Bootstrap v5.0 Styled Browse Button</h1>
+        <h4>Styled file browse button using Bootstrap v5.0 and Alpine.js</h4>
+        <div class="container">
+          <div class="form-group" x-data="{ fileName: '' }">
+            <div class="input-group shadow">
+              <span class="input-group-text px-3 text-muted"><i class="fas fa-image fa-lg"></i></span>
+              <input type="file" x-ref="file" name="img[]" class="d-none" multiple (change)="onFileSelect($event)">
+              <input type="text" class="form-control form-control-lg" placeholder="Upload Image" x-model="fileName">
+              <button class="browse btn btn-primary px-4" type="button" x-on:click.prevent="$refs.file.click()"><i
+                  class="fas fa-image"></i> Browse</button>
+            </div>
+          </div>
+        </div> -->
+
+
+      <!-- --------------- webcam -->
       <!-- <app-camera (getPicture)="handleImage($event)"></app-camera>
       <div class="webcam-image" *ngIf="webcamImage">
         <img [src]="webcamImage.imageAsDataUrl" />
@@ -121,13 +188,12 @@
             A leírás 2-1400 karakter hosszú lehet!
           </div>
         </div>
-        <textarea name="note" [(ngModel)]="observation.note"
-        type="textarea" class="form-control" pattern="^.{2,1400}$"></textarea>
+        <textarea name="note" [(ngModel)]="observation.note" type="textarea" class="form-control"
+          pattern="^.{2,1400}$"></textarea>
       </div>
 
       {{observation | json}}
 
-      <app-upload-image></app-upload-image>
 
       <button class="btn btn-primary" [disabled]="observationForm.invalid" type="submit">Mentés</button>
 

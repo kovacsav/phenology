@@ -1,0 +1,176 @@
+[
+  {
+    "name": "Fehér akác",
+    "latin": "Robinia pseudoacacia",
+    "phase": [
+      "rügyfakadás",
+      "virágzás kezdete",
+      "virágzás",
+      "virágzás vége",
+      "lombszíneződés kezdete",
+      "lombhullás kezdete"
+    ],
+    "image": "../../assets/image/Feher_akac.jpg",
+    "category": "Fák"
+  },
+  {
+    "name": "Kislevelű hárs",
+    "latin": "Tilia cordata",
+    "phase": [
+      "rügyfakadás",
+      "virágzás kezdete",
+      "virágzás",
+      "virágzás vége",
+      "lombszíneződés kezdete",
+      "lombhullás kezdete"
+    ],
+    "image": "../../assets/image/Feher_akac.jpg",
+    "category": "Fák"
+  },
+  {
+    "name": "Közönséges nyír",
+    "latin": "Betula pendula",
+    "phase": [
+      "rügyfakadás",
+      "virágzás kezdete",
+      "virágzás",
+      "virágzás vége",
+      "lombszíneződés kezdete",
+      "lombhullás kezdete"
+    ],
+    "image": "../../assets/image/Feher_akac.jpg",
+    "category": "Fák"
+  },
+  {
+    "name": "Vadgesztenye",
+    "latin": "Aesculus hippocastanum",
+    "phase": [
+      "rügyfakadás",
+      "virágzás kezdete",
+      "virágzás",
+      "virágzás vége",
+      "termésérés kezdete",
+      "lombszíneződés kezdete",
+      "lombhullás kezdete"
+    ],
+    "image": "../../assets/image/Feher_akac.jpg",
+    "category": "Fák"
+  },
+  {
+    "name": "Húsos som",
+    "latin": "Cornus mas",
+    "phase": [
+      "rügyfakadás",
+      "virágzás kezdete",
+      "virágzás",
+      "virágzás vége",
+      "termésérés kezdete",
+      "lombszíneződés kezdete",
+      "lombhullás kezdete"
+    ],
+    "image": "../../assets/image/Feher_akac.jpg",
+    "category": "Cserjék"
+  },
+  {
+    "name": "Közönséges mogyoró",
+    "latin": "Corylus avellana",
+    "phase": [
+      "rügyfakadás",
+      "virágzás kezdete",
+      "virágzás",
+      "virágzás vége",
+      "termésérés kezdete",
+      "lombszíneződés kezdete",
+      "lombhullás kezdete"
+    ],
+    "image": "../../assets/image/Feher_akac.jpg",
+    "category": "Cserjék"
+  },
+  {
+    "name": "Fekete bodza",
+    "latin": "Sambucus nigra",
+    "phase": [
+      "rügyfakadás",
+      "virágzás kezdete",
+      "virágzás",
+      "virágzás vége",
+      "termésérés kezdete",
+      "lombszíneződés kezdete",
+      "lombhullás kezdete"
+    ],
+    "image": "../../assets/image/Feher_akac.jpg",
+    "category": "Cserjék"
+  },
+  {
+    "name": "Orgona",
+    "latin": "Syringa vulgaris",
+    "phase": [
+      "rügyfakadás",
+      "virágzás kezdete",
+      "virágzás",
+      "virágzás vége",
+      "lombszíneződés kezdete",
+      "lombhullás kezdete"
+    ],
+    "image": "../../assets/image/kozonseges_orgona.jpg",
+    "category": "Cserjék"
+  },
+  {
+    "name": "Aranyfa",
+    "latin": "Forsythia",
+    "phase": [
+      "rügyfakadás",
+      "virágzás kezdete",
+      "virágzás",
+      "virágzás vége",
+      "lombszíneződés kezdete",
+      "lombhullás kezdete"
+    ],
+    "image": "../../assets/image/Feher_akac.jpg",
+    "category": "Cserjék"
+  },
+  {
+    "name": "Őszi kikerics",
+    "latin": "Colchicum autumnale",
+    "phase": [
+      "virágzás kezdete",
+      "virágzás",
+      "virágzás vége"
+    ],
+    "image": "../../assets/image/Feher_akac.jpg",
+    "category": "Lágyszárúak"
+  },
+  {
+    "name": "Gyöngyvirág",
+    "latin": "Convallaria majalis",
+    "phase": [
+      "virágzás kezdete",
+      "virágzás",
+      "virágzás vége"
+    ],
+    "image": "../../assets/image/Feher_akac.jpg",
+    "category": "Lágyszárúak"
+  },
+  {
+    "name": "Pongyola pitypang",
+    "latin": "Taraxacum officinale",
+    "phase": [
+      "virágzás kezdete",
+      "virágzás",
+      "virágzás vége"
+    ],
+    "image": "../../assets/image/Feher_akac.jpg",
+    "category": "Lágyszárúak"
+  },
+  {
+    "name": "Pipacs",
+    "latin": "Papaver rhoeas",
+    "phase": [
+      "virágzás kezdete",
+      "virágzás",
+      "virágzás vége"
+    ],
+    "image": "../../assets/image/Feher_akac.jpg",
+    "category": "Lágyszárúak"
+  }
+]

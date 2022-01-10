@@ -1,8 +1,7 @@
-<div *ngIf="isCameraExist; else noCameraExist">
+<!-- <div *ngIf="isCameraExist; else noCameraExist">
   <div style="text-align:center">
       <div class="btn-group">
           <button class="btn btn-outline-light" (click)="takeSnapshot()">Fénykép</button>
-          <!-- <button class="button" (click)="changeWebCame(true)">Toggle Camera</button> -->
           <button class="btn btn-outline-light" (click)="onOffWebCame()">Kamera váltás</button>
       </div> <br />
       <webcam [height]="500" [width]="1000" [trigger]="triggerObservable" (imageCapture)="handleImage($event)"
@@ -19,4 +18,4 @@
 
 <ng-template #noCameraExist>
   Camera device not available
-</ng-template>
+</ng-template> -->

@@ -1,7 +1,8 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
 import { FormGroup, FormBuilder, FormControl } from '@angular/forms';
 import { NgxFileDropEntry, FileSystemFileEntry, FileSystemDirectoryEntry } from 'ngx-file-drop';
+import { ObservationService } from 'src/app/service/observation.service';
 
 @Component({
   selector: 'app-upload-image',
@@ -10,14 +11,8 @@ import { NgxFileDropEntry, FileSystemFileEntry, FileSystemDirectoryEntry } from 
 })
 export class UploadImageComponent implements OnInit {
 
-  //   public files: NgxFileDropEntry[] = [];
+  // public files: NgxFileDropEntry[] = [];
 
-  // constructor(
-  //   public http: HttpClient
-  // ) { }
-
-  // ngOnInit(): void {
-  // }
 
   // public async dropped(files: NgxFileDropEntry[]) {
   //   this.files = files;
@@ -52,9 +47,9 @@ export class UploadImageComponent implements OnInit {
   //         })
   //         // this.http.post('gs://phenology-af2ec.appspot.com/', formData, { headers: headers, responseType: 'blob' })
   //         this.http.post('gs://phenology-af2ec.appspot.com', formData, { headers: headers, responseType: 'blob' })
-  //         .subscribe(data => {
-  //           // Sanitized logo returned from backend
-  //         })
+  //           .subscribe(data => {
+  //             // Sanitized logo returned from backend
+  //           })
 
 
   //       });
@@ -67,11 +62,11 @@ export class UploadImageComponent implements OnInit {
   //   }
   // }
 
-  // public fileOver(event: Event){
+  // public fileOver(event: Event) {
   //   console.log(event);
   // }
 
-  // public fileLeave(event: Event){
+  // public fileLeave(event: Event) {
   //   console.log(event);
   // }
 
@@ -84,10 +79,13 @@ export class UploadImageComponent implements OnInit {
     description: new FormControl('')
   });
   fileInputLabel: any = '';
+  @Output() pathEvent: EventEmitter<string> = new EventEmitter<string>();
+  pathString: string = ''
 
   constructor(
     private http: HttpClient,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private observationService: ObservationService
   ) { }
 
   ngOnInit(): void {
@@ -99,10 +97,11 @@ export class UploadImageComponent implements OnInit {
   onFileSelect(event: any) {
     const file = event.target.files[0];
     this.fileInputLabel = file.name;
-    // if (this.fileUploadForm.get('uploadedImage')) {
+    if (this.fileUploadForm.get('uploadedImage')) {
       this.fileUploadForm.get('uploadedImage')?.setValue(file);
-
-    // }
+    }
+    this.pathString = `${Date.now()}.jpg`;
+    this.pathEvent.emit(this.pathString);
   }
 
 
@@ -113,24 +112,18 @@ export class UploadImageComponent implements OnInit {
       return false;
     }
 
+
     const formData = new FormData();
-    formData.append('uploadedImage', this.fileUploadForm.get('uploadedImage')?.value);
+
+    formData.append('uploadedImage', this.fileUploadForm.get('uploadedImage')?.value, this.pathString);
     formData.append('agentId', '007');
 
+    // this.observationService.uploadFile(formData, this.uploadFileInput);
 
-    this.http
-      .post<any>('http://localhost:3000/uploadfile', formData).subscribe(response => {
-        console.log(response);
-        if (response.statusCode === 200) {
-          // Reset the file input
-          this.uploadFileInput.nativeElement.value = "";
-          this.fileInputLabel = undefined;
-        }
-      }, er => {
-        console.log(er);
-        alert(er.error.error);
-      });
   }
 
+
+  // setPath(value: string): any {
+  // }
 
 }

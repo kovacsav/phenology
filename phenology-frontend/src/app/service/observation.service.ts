@@ -15,5 +15,22 @@ export class ObservationService extends BaseService<Observation>  {
   ) {
     super(config, http);
     this.entity = 'observations';
-   }
+  }
+
+  uploadFile(formData: FormData): string {
+    this.http
+      .post<any>('http://localhost:3000/uploadfile', formData).subscribe(response => {
+        console.log(response);
+        if (response.statusCode === 200) {
+          // Reset the file input
+          // uploadFileInput.nativeElement.value = "";
+        }
+        return response.uploadedFile.path
+      }, er => {
+        console.log(er);
+        alert(er.error.error);
+      });
+    return '';
+  }
+
 }
