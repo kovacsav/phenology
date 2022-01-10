@@ -875,3 +875,22 @@
 {"level":"info","message":"MongoDB connection has been established successfully."}
 {"level":"info","message":"MongoDB connection has been established successfully."}
 {"level":"info","message":"MongoDB connection has been established successfully."}
+{"level":"info","message":"MongoDB connection has been established successfully."}
+{"level":"info","message":"::ffff:172.20.0.1 - - [10/Jan/2022:20:14:08 +0000] \"GET /users HTTP/1.1\" 304 - \"http://localhost:4200/\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:95.0) Gecko/20100101 Firefox/95.0\"\n"}
+{"level":"info","message":"::ffff:172.20.0.1 - - [10/Jan/2022:20:14:32 +0000] \"POST /login HTTP/1.1\" 200 517 \"http://localhost:4200/\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:95.0) Gecko/20100101 Firefox/95.0\"\n"}
+{"level":"info","message":"::ffff:172.20.0.1 - - [10/Jan/2022:20:14:32 +0000] \"GET /users HTTP/1.1\" 304 - \"http://localhost:4200/\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:95.0) Gecko/20100101 Firefox/95.0\"\n"}
+{"level":"info","message":"::ffff:172.20.0.1 - - [10/Jan/2022:20:14:36 +0000] \"GET /plants HTTP/1.1\" 304 - \"http://localhost:4200/\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:95.0) Gecko/20100101 Firefox/95.0\"\n"}
+{"level":"info","message":"::ffff:172.20.0.1 - - [10/Jan/2022:20:17:15 +0000] \"POST /uploadfile HTTP/1.1\" 200 280 \"http://localhost:4200/\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:95.0) Gecko/20100101 Firefox/95.0\"\n"}
+{"level":"error","message":"ERR 500: Plant validation failed: observations: observations references a non existing ID"}
+{"level":"info","message":"::ffff:172.20.0.1 - - [10/Jan/2022:20:17:15 +0000] \"POST /observations HTTP/1.1\" 500 110 \"http://localhost:4200/\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:95.0) Gecko/20100101 Firefox/95.0\"\n"}
+{"level":"info","message":"::ffff:172.20.0.1 - - [10/Jan/2022:20:17:26 +0000] \"POST /uploadfile HTTP/1.1\" 200 280 \"http://localhost:4200/\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:95.0) Gecko/20100101 Firefox/95.0\"\n"}
+{"level":"error","message":"ERR 500: Plant validation failed: observations: observations references a non existing ID"}
+{"level":"info","message":"::ffff:172.20.0.1 - - [10/Jan/2022:20:17:26 +0000] \"POST /observations HTTP/1.1\" 500 110 \"http://localhost:4200/\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:95.0) Gecko/20100101 Firefox/95.0\"\n"}
+{"level":"info","message":"::ffff:172.20.0.1 - - [10/Jan/2022:20:19:17 +0000] \"POST /uploadfile HTTP/1.1\" 200 280 \"http://localhost:4200/\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:95.0) Gecko/20100101 Firefox/95.0\"\n"}
+{"level":"info","message":"::ffff:172.20.0.1 - - [10/Jan/2022:20:19:17 +0000] \"POST /uploadfile HTTP/1.1\" 200 294 \"http://localhost:4200/\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:95.0) Gecko/20100101 Firefox/95.0\"\n"}
+{"level":"error","message":"ERR 500: Plant validation failed: observations: observations references a non existing ID"}
+{"level":"info","message":"::ffff:172.20.0.1 - - [10/Jan/2022:20:19:17 +0000] \"POST /observations HTTP/1.1\" 500 110 \"http://localhost:4200/\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:95.0) Gecko/20100101 Firefox/95.0\"\n"}
+{"level":"info","message":"::ffff:172.20.0.1 - - [10/Jan/2022:20:20:24 +0000] \"GET /plants HTTP/1.1\" 304 - \"http://localhost:4200/\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:95.0) Gecko/20100101 Firefox/95.0\"\n"}
+{"level":"info","message":"::ffff:172.20.0.1 - - [10/Jan/2022:20:20:45 +0000] \"POST /uploadfile HTTP/1.1\" 200 280 \"http://localhost:4200/\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:95.0) Gecko/20100101 Firefox/95.0\"\n"}
+{"level":"error","message":"ERR 500: Plant validation failed: observations: observations references a non existing ID"}
+{"level":"info","message":"::ffff:172.20.0.1 - - [10/Jan/2022:20:20:45 +0000] \"POST /observations HTTP/1.1\" 500 110 \"http://localhost:4200/\" \"Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:95.0) Gecko/20100101 Firefox/95.0\"\n"}
