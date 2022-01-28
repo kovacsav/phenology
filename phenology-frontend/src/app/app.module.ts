@@ -19,6 +19,11 @@ import { LoginComponent } from './page/login/login.component';
 import { JwtInterceptorService } from './service/jwt-interceptor.service';
 import { NavigationComponent } from './common/navigation/navigation.component';
 import { MapComponent } from './common/map/map.component';
+import { FooterComponent } from './common/footer/footer.component';
+import { ArticleComponent } from './page/article/article.component';
+import { HistoryComponent } from './page/history/history.component';
+import { ObserverComponent } from './page/observer/observer.component';
+import { GuideComponent } from './page/guide/guide.component';
 
 
 @NgModule({
@@ -30,7 +35,12 @@ import { MapComponent } from './common/map/map.component';
     UploadImageComponent,
     LoginComponent,
     NavigationComponent,
-    MapComponent
+    MapComponent,
+    FooterComponent,
+    ArticleComponent,
+    HistoryComponent,
+    ObserverComponent,
+    GuideComponent
   ],
   imports: [
     BrowserModule,

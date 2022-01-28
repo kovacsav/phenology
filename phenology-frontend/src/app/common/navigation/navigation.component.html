@@ -1,6 +1,9 @@
 <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
   <!-- Navbar Brand-->
   <a class="navbar-brand ps-3" routerLink="/"><strong>Fenológiai</strong> megfigyelések</a>
+  <a routerLink="/history" class="nav-link">Történet</a>
+  <a routerLink="/article" class="nav-link">Cikkek</a>
+  <a routerLink="/guide" class="nav-link">Útmutató</a>
   <!-- Sidebar Toggle-->
   <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!"><i class="fa fa-bars"></i></button>
   <!-- Navbar Search-->
@@ -28,7 +31,7 @@
           </ul>
       </li>
       <button routerLink="/login" *ngIf="!(user$ | async)" class="btn btn-success">
-        <i class="fas fa-sign-in-alt"></i>
+        <i class="fa fa-sign-in"></i>
       </button>
   </ul>
 </nav>

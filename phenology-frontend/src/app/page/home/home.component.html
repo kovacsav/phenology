@@ -1,8 +1,54 @@
-<app-navigation></app-navigation>
 
-<button class="btn btn-primary" [routerLink]="'/observation'">Provide datas</button>
+<button class="btn btn-primary" [routerLink]="'/observation'">
+  Provide datas
+</button>
 
 <!-- AIzaSyCg8fF_7JOUEWLbbHKpZ1_vjsiQTTk6e5Q -->
-<br>
+<br />
+
+<div class="row row-cols-1 row-cols-md-3 g-4">
+  <div class="col">
+    <div class="card" class="shadow bg-body rounded">
+      <img src="../../../assets/image/bimbó.jpg" class="card-img-top" alt="..." />
+      <div class="card-body">
+        <h5>Mi a jelentősége?</h5>
+        <h3 class="card-title">Növényfenológiai megfigyelések</h3>
+        <p class="card-text">
+          This is a longer card with supporting text below as a natural lead-in
+          to additional content. This content is a little bit longer.
+        </p>
+        <a [routerLink]="'/history'" class="card-link">Bővebben</a>
+      </div>
+    </div>
+  </div>
+  <div class="col">
+    <div class="card" class="shadow bg-body rounded">
+      <img src="../../../assets/image/virag.jpg" class="card-img-top" alt="..." />
+      <div class="card-body">
+        <h5>Én is részt vehetek?</h5>
+        <h3 class="card-title">Legyél te is megfigyelő!</h3>
+        <p class="card-text">
+          This is a longer card with supporting text below as a natural lead-in
+          to additional content.
+        </p>
+        <a [routerLink]="'/observer'" class="card-link">Bővebben</a>
+      </div>
+    </div>
+  </div>
+  <div class="col">
+    <div class="card" class="shadow bg-body rounded">
+      <img src="../../../assets/image/termes.jpg" class="card-img-top" alt="..." />
+      <div class="card-body">
+        <h5>Mi a legfrissebb?</h5>
+        <h3 class="card-title">Legújabb cikkünk</h3>
+        <p class="card-text">
+          This is a longer card with supporting text below as a natural lead-in
+          to additional content. This content is a little bit longer.
+        </p>
+        <a [routerLink]="'/article'" class="card-link">Bővebben</a>
+      </div>
+    </div>
+  </div>
+</div>
 
 <app-map></app-map>
