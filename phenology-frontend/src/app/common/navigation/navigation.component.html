@@ -1,18 +1,22 @@
-<nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
+<nav class="sb-topnav navbar navbar-expand">
   <!-- Navbar Brand-->
-  <a class="navbar-brand ps-3" routerLink="/"><strong>Fenológiai</strong> megfigyelések</a>
-  <a routerLink="/history" class="nav-link">Történet</a>
-  <a routerLink="/article" class="nav-link">Cikkek</a>
-  <a routerLink="/guide" class="nav-link">Útmutató</a>
+  <a class="navbar-brand ps-3 text-white" routerLink="/"><strong>Növényfenológia</strong></a>
+  <a routerLink="/observation" class="nav-link text-white">Megfigyelések</a>
+  <a routerLink="/article" class="nav-link text-white">Cikkek</a>
+  <a routerLink="/history" class="nav-link text-white">Történet</a>
+  <a routerLink="/guide" class="nav-link text-white">Útmutató</a>
+
   <!-- Sidebar Toggle-->
-  <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!"><i class="fa fa-bars"></i></button>
-  <!-- Navbar Search-->
+  <button class="btn btn-link btn-sm text-white order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!"><i class="fa fa-bars"></i></button>
+
+  <!-- Navbar Search
   <form class="d-none d-md-inline-block form-inline ms-auto me-0 me-md-3 my-2 my-md-0">
       <div class="input-group">
-          <!-- <input class="form-control" type="text" placeholder="Search for..." aria-label="Search for..." aria-describedby="btnNavbarSearch" />
-          <button class="btn btn-primary" id="btnNavbarSearch" type="button"><i class="fas fa-search"></i></button> -->
+          <input class="form-control" type="text" placeholder="Search for..." aria-label="Search for..." aria-describedby="btnNavbarSearch" />
+          <button class="btn btn-primary" id="btnNavbarSearch" type="button"><i class="fas fa-search"></i></button>
       </div>
-  </form>
+  </form> -->
+
   <div class="text-white">
     <div *ngIf="(currentUser$ | async) as currentuser" class="sb-sidenav-footer">
       <div class="small text-white">Logged in as: {{currentuser.firstName}} {{currentuser.lastName}}</div>
