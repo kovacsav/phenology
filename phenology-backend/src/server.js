@@ -32,7 +32,9 @@ const { username, password, host } = config.get("database");
 mongoose
   // .connect(`mongodb+srv://${username}:${password}@${host}`, {
   .connect(
-    ` mongodb+srv://User:35Nx0t65aNmizeLQ@cluster0.r2fm3.mongodb.net/phenology?retryWrites=true&w=majority`,
+   `mongodb://phenology_u:ph55logy@127.0.0.1:27017/phenology?authSource=admin`,
+    //`mongodb+srv://User:Phenology2022@cluster0.r2fm3.mongodb.net/phenology?retryWrites=true&w=majority`,
+    //` mongodb+srv://User:35Nx0t65aNmizeLQ@cluster0.r2fm3.mongodb.net/phenology?retryWrites=true&w=majority`,
     {
       // .connect(`mongodb://${host}`, {
       useNewUrlParser: true,

@@ -1,12 +1,14 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { ArticleComponent } from './page/article/article.component';
+import { DetailedPlantGuideComponent } from './page/guide/detailed-plant-guide/detailed-plant-guide.component';
 import { GuideComponent } from './page/guide/guide.component';
 import { HistoryComponent } from './page/history/history.component';
 
 import { HomeComponent } from './page/home/home.component';
 import { LoginComponent } from './page/login/login.component';
 import { ObservationDatasComponent } from './page/observation-datas/observation-datas.component';
+import { ObservedDatasComponent } from './page/observed-datas/observed-datas.component';
 import { ObserverComponent } from './page/observer/observer.component';
 
 const routes: Routes = [
@@ -31,12 +33,16 @@ const routes: Routes = [
     component: HistoryComponent,
   },
   {
-    path: 'observer',
-    component: ObserverComponent,
+    path: 'data',
+    component: ObservedDatasComponent,
   },
   {
     path: 'guide',
     component: GuideComponent,
+  },
+  {
+    path: 'details',
+    component: DetailedPlantGuideComponent,
   },
   {
     path: '**',

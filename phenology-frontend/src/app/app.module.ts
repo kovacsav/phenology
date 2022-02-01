@@ -22,8 +22,9 @@ import { MapComponent } from './common/map/map.component';
 import { FooterComponent } from './common/footer/footer.component';
 import { ArticleComponent } from './page/article/article.component';
 import { HistoryComponent } from './page/history/history.component';
-import { ObserverComponent } from './page/observer/observer.component';
 import { GuideComponent } from './page/guide/guide.component';
+import { ObservedDatasComponent } from './page/observed-datas/observed-datas.component';
+import { DetailedPlantGuideComponent } from './page/guide/detailed-plant-guide/detailed-plant-guide.component';
 
 
 @NgModule({
@@ -39,8 +40,9 @@ import { GuideComponent } from './page/guide/guide.component';
     FooterComponent,
     ArticleComponent,
     HistoryComponent,
-    ObserverComponent,
-    GuideComponent
+    GuideComponent,
+    ObservedDatasComponent,
+    DetailedPlantGuideComponent
   ],
   imports: [
     BrowserModule,
