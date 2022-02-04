@@ -5,7 +5,8 @@ export class Plant {
   name: string = '';
   latin: string = '';
   phase: string[] = [];
-  image: string = '';
+  image: string[] = [];
   category: string = '';
+  description: string = '';
   // observations?: Observation []= [new Observation()];
 }

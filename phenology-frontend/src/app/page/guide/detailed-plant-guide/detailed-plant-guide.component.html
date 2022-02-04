@@ -1,1 +1,149 @@
-<p>detailed-plant-guide works!</p>
+<h1 class="mt-5">Növények részletes bemutatása</h1>
+
+<h2>Fák</h2>
+<div class="d-block">
+  <div class="row row-cols-3 row-cols-md-6 g-3 mt-3 text-dark">
+    <div class="col" *ngFor="let plant of plants$ | async">
+      <div [ngSwitch]="plant.category">
+        <div *ngSwitchCase="'Fák'">
+          <div class="card h-100">
+            <img
+              [src]="plant.image[0]"
+              class="card-img-top"
+
+              alt="..."
+            />
+            <div class="card-body">
+              <h6 class="card-title fw-bold">{{ plant.name }}</h6>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<h2>Cserjék</h2>
+
+<div class="d-block">
+  <div class="row row-cols-3 row-cols-md-6 g-3 mt-3 text-dark">
+    <div *ngFor="let plant of plants$ | async">
+      <div [ngSwitch]="plant.category">
+        <div class="d-none" *ngSwitchCase="'Fák'" ></div>
+        <div class="" *ngSwitchCase="'Cserjék'">
+          <div class="col card h-100">
+            <img
+              [src]="plant.image[0]"
+              class="card-img-top"
+              alt="..."
+            />
+            <div class="card-body">
+              <h6 class="card-title fw-bold">{{ plant.name }}</h6>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<h2>Lágyszárúak</h2>
+
+<div class="row row-cols-3 row-cols-md-6 g-3 mt-3 text-dark">
+  <div class="col" *ngFor="let plant of plants$ | async">
+    <div [ngSwitch]="plant.category">
+      <div *ngSwitchCase="'Lágyszárúak'">
+        <div class="card h-100">
+          <img
+            [src]="plant.image[0]"
+            class="card-img-top"
+            alt="..."
+          />
+          <div class="card-body">
+            <h6 class="card-title fw-bold">{{ plant.name }}</h6>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row row-cols-3 row-cols-md-6 g-3 mt-3 text-dark">
+  <div class="col" *ngFor="let plant of plants$ | async">
+    <div [ngSwitch]="plant.category">
+      <div *ngSwitchCase="'Fák'">
+        <h2>Fák</h2>
+        <div class="card h-100">
+          <img
+            [src]="plant.image[0]"
+            class="card-img-top"
+            height="100px"
+            alt="..."
+          />
+          <div class="card-body">
+            <h6 class="card-title fw-bold">{{ plant.name }}</h6>
+          </div>
+        </div>
+      </div>
+
+      <div *ngSwitchCase="'Cserjék'">
+        <h2>Cserjék</h2>
+        <div class="card h-100">
+          <img
+            [src]="plant.image[0]"
+            class="card-img-top"
+            height="100px"
+            alt="..."
+          />
+          <div class="card-body">
+            <h6 class="card-title fw-bold">{{ plant.name }}</h6>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col" *ngFor="let plant of plants$ | async">
+      <div *ngIf="plant.category === 'Fák'">
+        <p>{{ plant.category }}</p>
+      </div>
+    </div>
+  </div>
+
+  <h2>Cserjék</h2>
+  <div class="row">
+    <div
+      class="col row-cols-3 row-cols-md-6 g-3 mt-3 text-dark"
+      *ngFor="let plant of plants$ | async"
+    >
+      <div *ngIf="plant.category === 'Cserjék'">
+        <p>{{ plant.category }}</p>
+      </div>
+    </div>
+  </div>
+
+  <h2>Lágyszárúak</h2>
+  <div class="row row-cols-3 row-cols-md-6 g-3 mt-3 text-dark">
+    <div class="col" *ngFor="let plant of plants$ | async">
+      <div *ngIf="plant.category === 'Lágyszárúak'">
+        <p>{{ plant.category }}</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- <p class="card-text">{{plant.latin}}</p> (click)="setPlant(plant)"
+<div *ngSwitch="plant.category">
+      <div *ngSwitchCase="1">
+        <div class="card h-100">
+          <img
+            [src]="plant.image"
+            class="card-img-top"
+            height="100px"
+            alt="..."
+          />
+          <div class="card-body">
+            <h6 class="card-title fw-bold">{{ plant.name }}</h6>
+          </div>
+        </div> -->
+</div>

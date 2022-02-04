@@ -6,8 +6,9 @@ const PlantSchema = mongoose.Schema({
   name: String,
   latin: String,
   phase: [String],
-  image: String,
+  image: [String],
   category: String,
+  description:[String],
   observations: [
     {
       type: mongoose.Schema.Types.ObjectId,
