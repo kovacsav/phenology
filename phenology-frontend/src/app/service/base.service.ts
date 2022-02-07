@@ -25,6 +25,10 @@ export class BaseService<T>  {
     return this.http.get<T>(`${this.config.apiUrl}${this.entity}/${_id}`);
   }
 
+  //getPlantCategory(category: string): Observable<T>[] {
+  //  return this.http.get<T[]>(`${this.config.apiUrl}${this.entity.category}`);
+  //}
+
   create(entity: T): Observable<T> {
     return this.http.post<T>(`${this.config.apiUrl}${this.entity}`, entity);
   };

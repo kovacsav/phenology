@@ -25,6 +25,7 @@ import { HistoryComponent } from './page/history/history.component';
 import { GuideComponent } from './page/guide/guide.component';
 import { ObservedDatasComponent } from './page/observed-datas/observed-datas.component';
 import { DetailedPlantGuideComponent } from './page/guide/detailed-plant-guide/detailed-plant-guide.component';
+import { IndividualPlantGuideComponent } from './page/guide/individual-plant-guide/individual-plant-guide.component';
 
 
 @NgModule({
@@ -42,7 +43,8 @@ import { DetailedPlantGuideComponent } from './page/guide/detailed-plant-guide/d
     HistoryComponent,
     GuideComponent,
     ObservedDatasComponent,
-    DetailedPlantGuideComponent
+    DetailedPlantGuideComponent,
+    IndividualPlantGuideComponent
   ],
   imports: [
     BrowserModule,

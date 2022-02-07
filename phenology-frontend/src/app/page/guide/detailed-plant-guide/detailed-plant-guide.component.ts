@@ -6,29 +6,42 @@ import { PlantService } from 'src/app/service/plant.service';
 @Component({
   selector: 'app-detailed-plant-guide',
   templateUrl: './detailed-plant-guide.component.html',
-  styleUrls: ['./detailed-plant-guide.component.scss']
+  styleUrls: ['./detailed-plant-guide.component.scss'],
 })
 export class DetailedPlantGuideComponent implements OnInit {
 
   plants$: Observable<Plant[]> = this.plantService.getAll();
 
-  trees: Plant[] =  [new Plant()]
-  // <Plant[]> = () => {this.plants$.category;}
-  // shrubs
-  // herbaceous
+  trees: Plant[] = [new Plant()];
+  shrub: Plant[] = [new Plant()];
+  herbaceous: Plant[] = [new Plant()];
 
-  constructor(
-    private plantService: PlantService
+  selectedPlant?: Plant = new Plant();
 
-  ) {
-  }
+  constructor(private plantService: PlantService) {}
+
+
+  // Leszűrjük a növényeket, hogy kategória szerint
+  // tudjuk megjeleníteni
+  // ezek után név szerint rendezzük a tömböket:
 
   ngOnInit(): void {
-    this.plantService.getAll().subscribe((plants => this.trees=plants.filter(plant => plant.category=='Fák')))
-    console.log(this.trees)
+    this.plantService.getAll().subscribe((plants) => {
+      (this.trees = plants.filter((plant) => plant.category == 'Fák')).sort(
+        (a, b) => (a.name < b.name ? -1 : a.name > b.name ? 1 : 0)
+      );
+      (this.shrub = plants.filter((plant) => plant.category == 'Cserjék')).sort(
+        (a, b) => (a.name < b.name ? -1 : a.name > b.name ? 1 : 0)
+      );
+      (this.herbaceous = plants.filter(
+        (plant) => plant.category == 'Lágyszárúak'
+      )).sort((a, b) => (a.name < b.name ? -1 : a.name > b.name ? 1 : 0));
+    });
+    console.log(this.trees);
   }
 
-  //selectPlant(plant: Plant): void {
-  //  this.plants$.plant = plant;
+  //onSelect(plant: Plant): void {
+  //  this.selectedPlant = plant;
   //}
+
 }

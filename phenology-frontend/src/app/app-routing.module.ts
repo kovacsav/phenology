@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { ArticleComponent } from './page/article/article.component';
 import { DetailedPlantGuideComponent } from './page/guide/detailed-plant-guide/detailed-plant-guide.component';
 import { GuideComponent } from './page/guide/guide.component';
+import { IndividualPlantGuideComponent } from './page/guide/individual-plant-guide/individual-plant-guide.component';
 import { HistoryComponent } from './page/history/history.component';
 
 import { HomeComponent } from './page/home/home.component';
@@ -43,6 +44,10 @@ const routes: Routes = [
   {
     path: 'details',
     component: DetailedPlantGuideComponent,
+  },
+  {
+    path: 'plant/:id',
+    component: IndividualPlantGuideComponent,
   },
   {
     path: '**',
