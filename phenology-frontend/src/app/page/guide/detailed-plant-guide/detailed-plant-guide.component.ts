@@ -16,8 +16,6 @@ export class DetailedPlantGuideComponent implements OnInit {
   shrub: Plant[] = [new Plant()];
   herbaceous: Plant[] = [new Plant()];
 
-  selectedPlant?: Plant = new Plant();
-
   constructor(private plantService: PlantService) {}
 
 
@@ -37,11 +35,7 @@ export class DetailedPlantGuideComponent implements OnInit {
         (plant) => plant.category == 'Lágyszárúak'
       )).sort((a, b) => (a.name < b.name ? -1 : a.name > b.name ? 1 : 0));
     });
-    console.log(this.trees);
   }
 
-  //onSelect(plant: Plant): void {
-  //  this.selectedPlant = plant;
-  //}
 
 }

@@ -126,6 +126,7 @@ app.post("/logout", authHandler.logout);
 
 // app.use('/plants', authenticateJwt, require('./controllers/plants/routes'));
 app.use("/plants", require("./controllers/plants/routes"));
+app.use("/articles", require("./controllers/articles/routes"));
 app.use(
   "/observations",
   authenticateJwt,
