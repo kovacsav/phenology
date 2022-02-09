@@ -1,4 +1,5 @@
 import { Plant } from "./plant";
+import { User } from "./user";
 
 export class Observation {
   // _id: string = '';
@@ -10,4 +11,5 @@ export class Observation {
   phase: string = '';
   photo?: string[] = [];
   note?: string = '';
+  user: User = new User;
 }

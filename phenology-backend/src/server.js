@@ -124,12 +124,14 @@ app.post("/login", authHandler.login);
 app.post("/refresh", authHandler.refresh);
 app.post("/logout", authHandler.logout);
 
+//app.get("/observations", require("./controllers/observations/routes"));
+
 // app.use('/plants', authenticateJwt, require('./controllers/plants/routes'));
 app.use("/plants", require("./controllers/plants/routes"));
 app.use("/articles", require("./controllers/articles/routes"));
 app.use(
   "/observations",
-  authenticateJwt,
+//  authenticateJwt,
   require("./controllers/observations/routes")
 );
 app.use("/users", authenticateJwt, require("./controllers/user/routes"));

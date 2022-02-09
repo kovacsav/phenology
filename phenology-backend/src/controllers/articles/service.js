@@ -1,13 +1,13 @@
-const Plant = require('../../models/article.model');
+const Article = require('../../models/article.model');
 
 //exports.create = articleData => {
 //    const article = new article(articleData);
 //    return article.save();
 //};
 
-exports.findAll = () => Article.find().populate('articles');
+exports.findAll = () => Article.find().populate();
 
-exports.findOne = id => Article.findById(id).populate('articles');
+exports.findOne = id => Article.findById(id).populate();
 
 //exports.update = (id, updateData) => Plant.findByIdAndUpdate(id, updateData, {new: true});
 

@@ -8,7 +8,7 @@ const ArticleSchema = mongoose.Schema({
   date: String,
   images: [String],
   main: String,
-  title:String,
+  title: String,
 }, {
     timeStamps: true
 });

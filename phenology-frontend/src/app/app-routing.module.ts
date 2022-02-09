@@ -42,7 +42,7 @@ const routes: Routes = [
     component: GuideComponent,
   },
   {
-    path: 'details',
+    path: 'plant',
     component: DetailedPlantGuideComponent,
   },
   {

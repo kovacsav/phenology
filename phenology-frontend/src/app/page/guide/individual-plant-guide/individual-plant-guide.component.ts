@@ -19,8 +19,8 @@ export class IndividualPlantGuideComponent implements OnInit {
 
   plant$: Observable<Plant> = this.activatedRoute.params.pipe(
       switchMap((params) => {
-        if (params._id) {
-          return this.plantService.get(params._id);
+        if (params.id) {
+          return this.plantService.get(params.id);
         }
         return of(new Plant());
 
@@ -38,6 +38,7 @@ export class IndividualPlantGuideComponent implements OnInit {
 
    ngOnInit(): void {
     //  this.getPlant();
+    //console.log(this.plant$)
   }
 }
 

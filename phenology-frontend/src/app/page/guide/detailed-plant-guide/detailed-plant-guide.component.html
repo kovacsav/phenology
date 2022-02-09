@@ -21,11 +21,12 @@
   <div class="row row-cols-3 row-cols-md-6 g-3 mt-3 text-dark">
     <div class="col" *ngFor="let plant of shrub">
       <div class="card h-100">
-        <img [src]="plant.image[0]" class="card-img-top" alt="..." />
-        <div class="card-body">
-          <h6 class="card-title fw-bold">{{ plant.name }}</h6>
-        </div>
-      </div>
+        <a routerLink="/plant/{{plant._id}}">
+          <img [src]="plant.image[0]" class="card-img-top" alt="..." />
+          <div class="card-body">
+            <h6 class="card-title fw-bold">{{ plant.name }}</h6>
+          </div>
+        </a>
     </div>
   </div>
 </div>
@@ -34,12 +35,12 @@
 <div class="d-block">
   <div class="row row-cols-3 row-cols-md-6 g-3 mt-3 text-dark">
     <div class="col" *ngFor="let plant of herbaceous">
-      <div class="card h-100">
+      <a routerLink="/plant/{{plant._id}}">
         <img [src]="plant.image[0]" class="card-img-top" alt="..." />
         <div class="card-body">
           <h6 class="card-title fw-bold">{{ plant.name }}</h6>
         </div>
-      </div>
+      </a>
     </div>
   </div>
 </div>
