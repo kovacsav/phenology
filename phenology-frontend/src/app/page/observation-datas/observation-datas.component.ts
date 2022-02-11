@@ -1,14 +1,17 @@
 import { DatePipe } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
-import { Component, ElementRef, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
+import { Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 // import { WebcamImage } from 'ngx-webcam';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
+import { switchMap } from 'rxjs/operators';
 import { Observation } from 'src/app/model/observation';
 import { Plant } from 'src/app/model/plant';
+import { User } from 'src/app/model/user';
 import { ObservationService } from 'src/app/service/observation.service';
 import { PlantService } from 'src/app/service/plant.service';
+import { UserService } from 'src/app/service/user.service';
 
 @Component({
   selector: 'app-observation-datas',
@@ -16,12 +19,22 @@ import { PlantService } from 'src/app/service/plant.service';
   styleUrls: ['./observation-datas.component.scss'],
   // providers:[DatePipe]
 })
+
+
 export class ObservationDatasComponent implements OnInit {
+
+//  @Input() user: User = new User;
 
   observation: Observation = new Observation();
   plants$: Observable<Plant[]> = this.plantService.getAll();
   // webcamImage: WebcamImage | null = null;
   observations$: Observable<Observation[]> = this.observationService.getAll();
+
+  // kell nekünk a bejelentkezett user összes adata
+  userString: string = localStorage.getItem('currentUser') || '';
+  currentUser$: Observable<User> = this.userService.getAll().pipe(
+    switchMap(users => users.filter(user => user.email === JSON.parse(this.userString).email))
+  );
 
   title = 'angular-image-file-upload-tutorial';
 
@@ -35,6 +48,10 @@ export class ObservationDatasComponent implements OnInit {
   // @Output() pathEvent: EventEmitter<string> = new EventEmitter<string>();
   fileNames: string[] = [];
 
+  userID: string ='';
+
+  // user$: BehaviorSubject<User | null> = this.authService.currentUserSubject$
+
   // constructor(private datePipe : DatePipe) {
   constructor(
     private observationService: ObservationService,
@@ -42,7 +59,9 @@ export class ObservationDatasComponent implements OnInit {
     private router: Router,
     private http: HttpClient,
     private formBuilder: FormBuilder,
+    private userService: UserService,
   ) {
+    // console.log('observation',this.user$)
     // this.observation.date = new Date().toISOString().split('T')[0];
     this.observation.date = new Date().toISOString();
     // console.log(new Date().toISOString())
@@ -51,6 +70,12 @@ export class ObservationDatasComponent implements OnInit {
     // this.observation.date = this.datePipe.transform(new Date(), 'yyyy-MM-dd');
 
     // this.plants$.subscribe(plants => plants.forEach(plant=>console.log(plant)))
+
+    this.currentUser$.subscribe(user => {this.userID = user._id});
+
+    this.observation.user._id = this.userID;
+
+    console.log(JSON.parse(this.userString).email);
   }
 
 

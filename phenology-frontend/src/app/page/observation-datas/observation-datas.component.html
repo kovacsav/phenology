@@ -193,6 +193,7 @@
       </div>
 
       {{observation | json}}
+      {{ currentUser$ | async}}
 
 
       <button class="btn btn-primary" [disabled]="observationForm.invalid" type="submit">Mentés</button>

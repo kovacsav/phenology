@@ -39,7 +39,8 @@ UserSchema.plugin(idValidator);
 
 module.exports = mongoose.model("User", UserSchema);
 
-/* export class Plant {
+/*
+export class User {
   _id: string = '';
   firstName?: string = '';
   lastName?: string = '';
@@ -48,4 +49,5 @@ module.exports = mongoose.model("User", UserSchema);
   password: string = '';
   accessToken?: string = '';
   role?: string = '';
-} */
+}
+*/

@@ -5,7 +5,7 @@ const config = require("config");
 // const { v4: uuidv4 } = require('uuid');
 // const firebaseAdmin = require('firebase-admin');
 const express = require("express");
-// const fileExtension = require("file-extension");
+const fileExtension = require("file-extension");
 const multer = require("multer");
 // const serviceAccount = require('../config/phenology-af2ec-firebase-adminsdk-fb5ti-973100cbd5.json');
 // console.log(serviceAccount.type)
@@ -126,6 +126,9 @@ app.post("/logout", authHandler.logout);
 
 //app.get("/observations", require("./controllers/observations/routes"));
 
+//app.get("/users", require("./controllers/user/routes"));
+
+
 // app.use('/plants', authenticateJwt, require('./controllers/plants/routes'));
 app.use("/plants", require("./controllers/plants/routes"));
 app.use("/articles", require("./controllers/articles/routes"));
@@ -134,7 +137,9 @@ app.use(
 //  authenticateJwt,
   require("./controllers/observations/routes")
 );
-app.use("/users", authenticateJwt, require("./controllers/user/routes"));
+app.use("/users",
+//authenticateJwt,
+ require("./controllers/users/routes"));
 
 // error handling
 app.use((err, req, res, next) => {

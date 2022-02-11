@@ -11,5 +11,5 @@ export class Observation {
   phase: string = '';
   photo?: string[] = [];
   note?: string = '';
-  user: User = new User;
+  user: User = new User();
 }
