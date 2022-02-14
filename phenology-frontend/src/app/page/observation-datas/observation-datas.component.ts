@@ -32,9 +32,12 @@ export class ObservationDatasComponent implements OnInit {
 
   // kell nekünk a bejelentkezett user összes adata
   userString: string = localStorage.getItem('currentUser') || '';
+  allUser$: Observable<User[]> = this.userService.getAll();
   currentUser$: Observable<User> = this.userService.getAll().pipe(
     switchMap(users => users.filter(user => user.email === JSON.parse(this.userString).email))
   );
+
+  currentUser: User = new User;
 
   title = 'angular-image-file-upload-tutorial';
 
@@ -71,11 +74,6 @@ export class ObservationDatasComponent implements OnInit {
 
     // this.plants$.subscribe(plants => plants.forEach(plant=>console.log(plant)))
 
-    this.currentUser$.subscribe(user => {this.userID = user._id});
-
-    this.observation.user._id = this.userID;
-
-    console.log(JSON.parse(this.userString).email);
   }
 
 
@@ -83,6 +81,20 @@ export class ObservationDatasComponent implements OnInit {
     this.fileUploadForm = this.formBuilder.group({
       uploadedImage: ['']
     });
+
+    this.currentUser$.subscribe(
+      user => {
+        this.observation.user._id = user._id
+      },
+      err => console.error(err),
+      );
+
+      setTimeout(()=>console.log(this.observation.user),500)
+    // this.observation.user._id = this.currentUser._id;
+
+    // console.log(JSON.parse(this.userString).email);
+
+    // console.log(this.currentUser);
   }
 
   onFileSelect(event: any) {

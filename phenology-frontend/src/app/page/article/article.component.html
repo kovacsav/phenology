@@ -1,5 +1,8 @@
-<div class="m-5 " *ngIf="article$ | async as articles">
-  <div class="d-block d-flex" *ngFor="let article of articles">
+<div class="m-5" *ngIf="article$ | async as articles">
+  <div
+    class="d-block d-flex"
+    *ngFor="let article of articles | slice: pageSliceStart:pageSliceEnd"
+  >
     <div class="d-inline-block">
       <p>
         <i> {{ article.date }} </i>
@@ -13,9 +16,35 @@
           style="float: left; max-width: 300px"
           class="me-3"
         />
-        {{ article.main }}
+        <a routerLink="/details/{{ article._id }}">Bővebben</a>
       </p>
     </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-12">
+    <nav class="d-flex justify-content-center">
+      <ul class="pagination">
+        <li [class.disabled]="currentPage === 1" class="page-item">
+          <a (click)="onStepPage($event, -1)" class="page-link" href="#"
+            >Previous</a
+          >
+        </li>
+        <li
+          *ngFor="let btn of paginator"
+          class="page-item"
+          [class.active]="btn.page === currentPage"
+        >
+          <a (click)="onPaginate($event, btn)" class="page-link" href="#">
+            {{ btn.page }}
+          </a>
+        </li>
+        <li class="page-item">
+          <a (click)="onStepPage($event, 1)" class="page-link" href="#">Next</a>
+        </li>
+      </ul>
+    </nav>
   </div>
 </div>
 

@@ -26,6 +26,8 @@ import { GuideComponent } from './page/guide/guide.component';
 import { ObservedDatasComponent } from './page/observed-datas/observed-datas.component';
 import { DetailedPlantGuideComponent } from './page/guide/detailed-plant-guide/detailed-plant-guide.component';
 import { IndividualPlantGuideComponent } from './page/guide/individual-plant-guide/individual-plant-guide.component';
+import { FullArticleComponent } from './page/full-article/full-article.component';
+import { ChallengeComponent } from './page/challenge/challenge.component';
 
 
 @NgModule({
@@ -44,7 +46,9 @@ import { IndividualPlantGuideComponent } from './page/guide/individual-plant-gui
     GuideComponent,
     ObservedDatasComponent,
     DetailedPlantGuideComponent,
-    IndividualPlantGuideComponent
+    IndividualPlantGuideComponent,
+    FullArticleComponent,
+    ChallengeComponent,
   ],
   imports: [
     BrowserModule,

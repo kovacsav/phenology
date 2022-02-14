@@ -193,7 +193,6 @@
       </div>
 
       {{observation | json}}
-      {{ currentUser$ | async}}
 
 
       <button class="btn btn-primary" [disabled]="observationForm.invalid" type="submit">Mentés</button>
@@ -201,3 +200,54 @@
     </form>
   </div>
 </div>
+
+<div *ngIf="(allUser$ | async) as alluser" class="col-10 offset-1">
+
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Id</th>
+        <th>First Name</th>
+        <th>Last Name</th>
+        <th>Email</th>
+        <th>Password</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let user of alluser">
+        <td>{{ user._id }}</td>
+        <td>{{ user.firstName }} </td>
+        <td>{{ user.lastName }}</td>
+        <td>{{ user.email }}</td>
+        <td>{{ user.password }}</td>
+      </tr>
+    </tbody>
+  </table>
+
+  </div>
+
+
+  <div *ngIf="(currentUser$ | async) as user" class="col-10 offset-1">
+
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Id</th>
+          <th>First Name</th>
+          <th>Last Name</th>
+          <th>Email</th>
+          <th>Password</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>{{ user._id }}</td>
+          <td>{{ user.firstName }} </td>
+          <td>{{ user.lastName }}</td>
+          <td>{{ user.email }}</td>
+          <td>{{ user.password }}</td>
+        </tr>
+      </tbody>
+    </table>
+
+    </div>

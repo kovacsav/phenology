@@ -13,32 +13,26 @@ import { map, switchMap } from 'rxjs/operators';
   styleUrls: ['./individual-plant-guide.component.scss'],
 })
 export class IndividualPlantGuideComponent implements OnInit {
-
-//  @Input() plant$: Plant = new Plant();
-
+  //  @Input() plant$: Plant = new Plant();
 
   plant$: Observable<Plant> = this.activatedRoute.params.pipe(
-      switchMap((params) => {
-        if (params.id) {
-          return this.plantService.get(params.id);
-        }
-        return of(new Plant());
+    switchMap((params) => {
+      if (params.id) {
+        return this.plantService.get(params.id);
+      }
+      return of(new Plant());
+    })
+  );
 
-      })
-      );
+  constructor(
+    private plantService: PlantService,
+    private activatedRoute: ActivatedRoute,
+    private router: Router,
+    private location: Location
+  ) {}
 
-
-     constructor(
-       private plantService: PlantService,
-       private activatedRoute: ActivatedRoute,
-       private router: Router,
-       private location: Location
-
-       ) {}
-
-   ngOnInit(): void {
+  ngOnInit(): void {
     //  this.getPlant();
     //console.log(this.plant$)
   }
 }
-

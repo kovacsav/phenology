@@ -1,13 +1,4 @@
 
-(click)="setPlant(plant)"
-<button class="btn btn-primary" [routerLink]="'/observation'">
-  Provide datas
-</button>
-
- AIzaSyCg8fF_7JOUEWLbbHKpZ1_vjsiQTTk6e5Q -->
-
-
-<br />
 
 <div class="container d-flex justify-content-center my-5">
   <div>
@@ -16,10 +7,9 @@
   </div>
 </div>
 
-
 <div class="row row-cols-1 row-cols-md-3 g-4">
   <div class="col">
-    <div class="card h-100" class="shadow bg-body rounded ">
+    <div class="card h-100" class="shadow bg-body rounded">
       <img
         src="../../../assets/image/bimbó.jpg"
         class="card-img-top"
@@ -29,8 +19,14 @@
         <h5>Mi a jelentősége?</h5>
         <h3 class="card-title">Növényfenológiai megfigyelések</h3>
         <p class="card-text">
-          This is a longer card with supporting text below as a natural lead-in
-          to additional content. This content is a little bit longer.
+          A növények fejlődése összegzi a környezeti hatásokat, az időjárási
+          elemek összhatását mutatja. Így a növény kiváló meteorológiai eszköz
+          az éghajlat, az éghajlat változásának jellemzésére. A fenológiai
+          jelenségek a növény fejlődésének látható jelei, a fenológiai fázisok
+          az egyes élettani szakaszok határpontjai, melyek szabályszerű rendben
+          követik egymást, ezért hű képet adnak a fejlődés üteméről. A fenológia
+          eredeti feladata a fejlődési fázisok naptári időpontok szerinti
+          feljegyzése volt.
         </p>
         <div class="card-footer">
           <a [routerLink]="'/history'" class="card-link">Bővebben</a>
@@ -49,11 +45,18 @@
         <h5>Én is részt vehetek?</h5>
         <h3 class="card-title">Legyél te is megfigyelő!</h3>
         <p class="card-text">
-          This is a longer card with supporting text below as a natural lead-in
-          to additional content.
+          Önkénteseket keresünk növényfenológiai megfigyelésekhez: A feladat
+          nagyon egyszerű, figyelni kell, hogy egy-egy növény pl. mikor kezd
+          virágozni, mikor lombosodik, mikor kezd ősszel hullani a levele, és
+          azt itt egy rövid regisztráció után rögzíteni. Nem kell mindenféle
+          növényt folyamatosan figyelni, ha valaki csak egy növényfaj egy
+          fejlődési fázisának kezdetét tudja megfigyelni, az is nagyon jó. Ha ma
+          nem figyeljük és mérjük meg a környezetünk állapotát és azt nem
+          dokumentáljuk, akkor azt a jövőben már soha senki nem fogja tudni
+          megmérni, megfigyelni.
         </p>
         <div class="card-footer">
-          <a [routerLink]="'/observer'" class="card-link">Bővebben</a>
+          <a [routerLink]="'/challenge'" class="card-link">Bővebben</a>
         </div>
       </div>
     </div>
@@ -65,15 +68,14 @@
         class="card-img-top"
         alt="..."
       />
-      <div class="card-body">
+      <div class="card-body" *ngIf="(article$ | async) as article">
         <h5>Mi a legfrissebb?</h5>
-        <h3 class="card-title">Legújabb cikkünk</h3>
+        <h3 class="card-title">{{ article[0].title }}</h3>
         <p class="card-text">
-          This is a longer card with supporting text below as a natural lead-in
-          to additional content. This content is a little bit longer.
+          {{ article[0].abstract }}
         </p>
         <div class="card-footer">
-          <a [routerLink]="'/details'" class="card-link">Bővebben</a>
+          <a routerLink="/details/{{ article[0]._id }}" class="card-link">Bővebben</a>
         </div>
       </div>
     </div>

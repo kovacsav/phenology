@@ -1,21 +1,70 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
+import { map, switchMap } from 'rxjs/operators';
 import { Article } from 'src/app/model/article';
 import { ArticleService } from 'src/app/service/article.service';
+
+interface IPageBtn {
+  page: number;
+}
 
 @Component({
   selector: 'app-article',
   templateUrl: './article.component.html',
-  styleUrls: ['./article.component.scss']
+  styleUrls: ['./article.component.scss'],
 })
 export class ArticleComponent implements OnInit {
 
-  article$: Observable<Article[]> = this.articleService.getAll();
+  article$: Observable<Article[]> = this.articleService
+    .getAll()
+    .pipe(
+      map((item) =>
+        item.sort(
+          (a: any, b: any) =>
+            new Date(b.date).getTime() - new Date(a.date).getTime()
+        )
+      )
+    );
 
+  // Paginator.
 
-  constructor(private articleService: ArticleService ) { }
+  productsProperties: {count: number} = {
+    count: this.article$.subscribe.length,
+  };
+  pageSize: number = 2;
+  pageStart: number = 1;
+  currentPage: number = 1;
 
-  ngOnInit(): void {
+  get paginator(): IPageBtn[] {
+    const pages: IPageBtn[] = [];
+    for (let i = 0; i < this.productsProperties.count / this.pageSize && pages.length < 10; i++) {
+      const page = this.pageStart + i;
+      pages.push({page});
+    }
+    return pages;
+  }
+  get pageSliceStart(): number {
+    const index = this.currentPage - 1;
+    return index === 0 ? 0 : (index * this.pageSize);
+  }
+  get pageSliceEnd(): number {
+    return this.pageSliceStart + this.pageSize;
   }
 
+
+  constructor(private articleService: ArticleService) {}
+
+  ngOnInit(): void {}
+
+  onPaginate(ev: Event, btn: IPageBtn): void {
+    ev.preventDefault();
+    this.currentPage = btn.page;
+    this.pageStart = (btn.page - 2) < 1 ? 1 : (btn.page - 2);
+  }
+
+  onStepPage(ev: Event, step: number): void {
+    ev.preventDefault();
+    this.currentPage += step;
+    this.pageStart = (this.currentPage - 2) < 1 ? 1 : (this.currentPage - 2);
+  }
 }

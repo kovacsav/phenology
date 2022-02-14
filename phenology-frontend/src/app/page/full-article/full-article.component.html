@@ -1,0 +1,22 @@
+<div *ngIf="article$ | async as article" class="col-6 offset-3">
+  <h1>{{ article.title }}</h1>
+
+  <p>{{ article.date }}</p>
+
+  <p>{{ article.abstract }}</p>
+
+  <p>{{ article.main }}</p>
+
+  <div *ngIf="article.images[0]">
+    <img [src]="article.images[0]" alt="" class="m-3" />
+  </div>
+
+  <div *ngIf="article.images[1]">
+    <img [src]="article.images[1]" alt="" class="m-3" />
+  </div>
+
+  <div *ngIf="article.images[2]">
+    <img [src]="article.images[2]" alt="" class="m-3" />
+  </div>
+
+</div>
