@@ -79,7 +79,7 @@
         </select>
       </div> -->
 
-      <div *ngIf="observation.plant.name" class="form-group mt-3">
+      <div *ngIf="observation.plantID" class="form-group mt-3">
         <!-- <div class="d-flex justify-content-between">
           <label for="">Fenológiai fázis</label>
         </div> -->
@@ -95,7 +95,7 @@
           </div>
         </div> -->
 
-        <div *ngFor="let phase of observation.plant.phase" class="btn-group m-2 mb-5" (click)="setPhase(phase)"
+        <div *ngFor="let phase of selectedPlant.phase" class="btn-group m-2 mb-5" (click)="setPhase(phase)"
           role="group" aria-label="">
           <input type="radio" class="btn-check" name="btnradio" [id]="phase" autocomplete="off">
           <label class="btn btn-outline-light" [for]="phase">{{phase}}</label>

@@ -1,11 +1,20 @@
 import { DatePipe } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
-import { Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  EventEmitter,
+  Input,
+  OnInit,
+  Output,
+  ViewChild,
+} from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 // import { WebcamImage } from 'ngx-webcam';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { Observable } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
+import { lastValueFrom } from 'rxjs';
 import { Observation } from 'src/app/model/observation';
 import { Plant } from 'src/app/model/plant';
 import { User } from 'src/app/model/user';
@@ -19,39 +28,45 @@ import { UserService } from 'src/app/service/user.service';
   styleUrls: ['./observation-datas.component.scss'],
   // providers:[DatePipe]
 })
-
-
 export class ObservationDatasComponent implements OnInit {
+  //  @Input() user: User = new User;
 
-//  @Input() user: User = new User;
+  selectedPlant: Plant = new Plant();
+  plants$: Observable<Plant[]> = this.plantService.getAll();
+
+  // webcamImage: WebcamImage | null = null;
 
   observation: Observation = new Observation();
-  plants$: Observable<Plant[]> = this.plantService.getAll();
-  // webcamImage: WebcamImage | null = null;
   observations$: Observable<Observation[]> = this.observationService.getAll();
 
   // kell nekünk a bejelentkezett user összes adata
   userString: string = localStorage.getItem('currentUser') || '';
-  allUser$: Observable<User[]> = this.userService.getAll();
-  currentUser$: Observable<User> = this.userService.getAll().pipe(
-    switchMap(users => users.filter(user => user.email === JSON.parse(this.userString).email))
-  );
 
-  currentUser: User = new User;
+  allUser$: Observable<User[]> = this.userService.getAll();
+  currentUser$: Observable<User> = this.userService
+    .getAll()
+    .pipe(
+      switchMap((users) =>
+        users.filter((user) => user.email === JSON.parse(this.userString).email)
+      )
+    );
+
+  currentUser: User = new User();
 
   title = 'angular-image-file-upload-tutorial';
 
-  @ViewChild('UploadFileInput', { static: false }) uploadFileInput: ElementRef<HTMLInputElement> = {} as ElementRef;
+  @ViewChild('UploadFileInput', { static: false })
+  uploadFileInput: ElementRef<HTMLInputElement> = {} as ElementRef;
   fileUploadForm: FormGroup = new FormGroup({
     title: new FormControl(''),
-    description: new FormControl('')
+    description: new FormControl(''),
   });
   uploadArray: FormGroup[] = [];
   // fileInputLabel: any = '';
   // @Output() pathEvent: EventEmitter<string> = new EventEmitter<string>();
   fileNames: string[] = [];
 
-  userID: string ='';
+  userID: string = '';
 
   // user$: BehaviorSubject<User | null> = this.authService.currentUserSubject$
 
@@ -62,71 +77,50 @@ export class ObservationDatasComponent implements OnInit {
     private router: Router,
     private http: HttpClient,
     private formBuilder: FormBuilder,
-    private userService: UserService,
+    private userService: UserService
   ) {
     // console.log('observation',this.user$)
     // this.observation.date = new Date().toISOString().split('T')[0];
     this.observation.date = new Date().toISOString();
     // console.log(new Date().toISOString())
 
-
     // this.observation.date = this.datePipe.transform(new Date(), 'yyyy-MM-dd');
 
     // this.plants$.subscribe(plants => plants.forEach(plant=>console.log(plant)))
-
   }
-
 
   ngOnInit(): void {
     this.fileUploadForm = this.formBuilder.group({
-      uploadedImage: ['']
+      uploadedImage: [''],
     });
-
-    this.currentUser$.subscribe(
-      user => {
-        this.observation.user._id = user._id
-      },
-      err => console.error(err),
-      );
-
-      setTimeout(()=>console.log(this.observation.user),500)
-    // this.observation.user._id = this.currentUser._id;
-
-    // console.log(JSON.parse(this.userString).email);
-
-    // console.log(this.currentUser);
   }
 
   onFileSelect(event: any) {
     const files = event.target.files;
-    console.log(files)
+    console.log(files);
     // this.fileInputLabel = files.name;
     Array.from(files).forEach((file: any, index: number) => {
       if (this.fileUploadForm.get('uploadedImage')) {
         this.fileUploadForm.get('uploadedImage')?.setValue(file);
-        console.log('this.fileUploadForm', this.fileUploadForm.value)
+        console.log('this.fileUploadForm', this.fileUploadForm.value);
         this.uploadArray.push(this.fileUploadForm.get('uploadedImage')?.value);
         this.fileNames[index] = `${Date.now() + index}.jpg`;
         this.observation.photo?.push(this.fileNames[index]);
       }
-
     });
   }
-
 
   // onFormSubmit(): any {
 
   // }
 
   save(): any {
-
-
     // if (!this.fileUploadForm.get('uploadedImage')?.value) {
     //   alert('Please fill valid details!');
     //   return false;
     // }
-    console.log('filenames', this.fileNames)
-    console.log('this.uploadArray', this.uploadArray)
+    console.log('filenames', this.fileNames);
+    console.log('this.uploadArray', this.uploadArray);
     this.uploadArray.forEach((file: any, index: number) => {
       if (file) {
         // alert('Please fill valid details!');
@@ -137,22 +131,30 @@ export class ObservationDatasComponent implements OnInit {
         formData.append('agentId', '007');
         this.observationService.uploadFile(formData);
       }
+    });
 
-      this.observationService.create(this.observation).subscribe(
-        () => this.router.navigate(['/']));
-    })
+    this.observationService
+      .create(this.observation)
+      .subscribe(() => this.router.navigate(['/']));
+  }
+
+  async setCurrentUser(): Promise<any> {
+    this.currentUser = await lastValueFrom(this.currentUser$);
+    this.observation.userID = this.currentUser._id;
+    //console.log(this.currentUser);
   }
 
   setPlant(plant: Plant): void {
-    this.observation.plant = plant;
+    this.observation.plantID = plant._id;
+    this.setCurrentUser();
+    this.selectedPlant = plant;
   }
 
   setPhase(phase: string): void {
     this.observation.phase = phase;
   }
 
-  setImagePath(fileName: string): void {
-  }
+  setImagePath(fileName: string): void {}
 
   // handleImage(webcamImage: WebcamImage) {
   //   this.webcamImage = webcamImage;
@@ -183,6 +185,4 @@ export class ObservationDatasComponent implements OnInit {
   //     upload$.subscribe();
   //   }
   // }
-
-
 }

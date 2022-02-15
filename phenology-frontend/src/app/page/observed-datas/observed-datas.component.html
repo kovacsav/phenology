@@ -1,4 +1,4 @@
-<div *ngIf="(observation$ | async) as observations" class="col-10 offset-1">
+<div *ngIf="(observedData$ | async) as observations" class="col-10 offset-1">
 
   <table class="table">
     <thead>
@@ -13,9 +13,9 @@
     <tbody>
       <tr *ngFor="let observation of observations">
         <td>{{ observation.date }}</td>
-        <td>{{ observation.user.firstName }} {{ observation.user.lastName }}</td>
+        <td>{{ observation.userFirstName }} {{ observation.userLastName }}</td>
         <td>{{ observation.location }}</td>
-        <td>{{ observation.plant.name }}</td>
+        <td>{{ observation.plantName }}</td>
         <td>{{ observation.phase }}</td>
       </tr>
     </tbody>

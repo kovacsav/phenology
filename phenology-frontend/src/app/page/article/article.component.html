@@ -40,7 +40,7 @@
             {{ btn.page }}
           </a>
         </li>
-        <li class="page-item">
+        <li [class.disabled]="currentPage === lastPage" class="page-item">
           <a (click)="onStepPage($event, 1)" class="page-link" href="#">Next</a>
         </li>
       </ul>
