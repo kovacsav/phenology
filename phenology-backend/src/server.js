@@ -124,7 +124,7 @@ app.post("/login", authHandler.login);
 app.post("/refresh", authHandler.refresh);
 app.post("/logout", authHandler.logout);
 
-//app.get("/observations", require("./controllers/observations/routes"));
+app.get("/observations", require("./controllers/observations/routes"));
 
 //app.get("/users", require("./controllers/user/routes"));
 
@@ -133,9 +133,9 @@ app.post("/logout", authHandler.logout);
 app.use("/plants", require("./controllers/plants/routes"));
 app.use("/articles", require("./controllers/articles/routes"));
 app.use(
-  "/observations",
+  "/newObservation",
 //  authenticateJwt,
-  require("./controllers/observations/routes")
+  require("./controllers/newObservation/routes")
 );
 app.use("/users",
 //authenticateJwt,

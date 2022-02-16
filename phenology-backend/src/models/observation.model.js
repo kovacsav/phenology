@@ -4,35 +4,46 @@ const idValidator = require("mongoose-id-validator");
 // timestamps: https://mongoosejs.com/docs/guide.html#timestamps
 const ObservationSchema = mongoose.Schema(
   {
-    date: String,
-    location: String,
+    date: {
+      type: String,
+      required: true,
+    },
+    location: {
+      type: String,
+      required: true,
+    },
     gps: {
       type: String,
       required: false,
     },
-    plant: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "Plant",
+    plantID: {
+      type: String,
       required: true,
     },
-    phase: String,
-    photo: {
+    phase: {
       type: String,
+      required: true,
+    },
+    photo: {
+      type: [String],
       required: false,
     },
     note: {
       type: String,
       required: false,
     },
-    user: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "User",
+    userID: {
+      type: String,
       required: true,
+    },
+    createdAt: {
+      type: Date,
+      default: new Date(),
     },
   },
   {
     timeStamps: true,
-  }
+  }  
 );
 
 ObservationSchema.plugin(idValidator);

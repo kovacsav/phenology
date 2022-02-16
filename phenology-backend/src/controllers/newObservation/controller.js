@@ -1,13 +1,18 @@
+const express = require("express");
+const logger = require("../../config/logger");
 const service = require("./service");
 const createError = require("http-errors");
-const observation = require("../../models/observation.model");
+//const Observation = require("../../models/observation.model");
 
+const currentModel = require('../../models/observation.model');
+const currentService = require('./service');
 
+/*
 // Read.
 exports.findAll = (req, res, next) => {
-  return service.findAll().then((observation) => {
+  return service.findAll().then((observations) => {
     // logger.debug(`Get all observations, returning ${observations.length} items.`);
-    res.json(observation);
+    res.json(observations);
   });
 };
 
@@ -24,8 +29,9 @@ exports.findOne = (req, res, next) => {
       return next(new createError.InternalServerError(err.message));
     });
   };
+  
+*/
 
-/*
 // Create.
 
 const checkModel = (model, body, next) => {
@@ -58,7 +64,7 @@ module.exports.create = (req, res, next) => {
       .catch(err => next(new createError.InternalServerError(err.message)));
 };
 
-
+/*
 exports.create = (req, res, next) => {
   const { date, plant, phase } = req.body;
   if (!date || !plant || !phase) {
@@ -82,7 +88,7 @@ exports.create = (req, res, next) => {
     .catch((err) => next(new createError.InternalServerError(err.message)));
 };
 
-
+*/
 
 // Update.
 exports.update = (req, res, next) => {
@@ -115,4 +121,3 @@ exports.delete = (req, res, next) => {
       next(new createError.InternalServerError(err.message));
     });
 };
-*/

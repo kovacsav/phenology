@@ -1,8 +1,8 @@
 const Observation = require("../../models/observation.model");
-//const Plant = require("../../models/plant.model");
-//const User = require("../../models/user.model");
+const Plant = require("../../models/plant.model");
+const User = require("../../models/user.model");
 
-/*
+
 exports.create = (observationData) => {
   const observation = new Observation(observationData);
   return observation
@@ -14,9 +14,8 @@ exports.create = (observationData) => {
       return plant.save();
     })
     .then(() => observation);
-    
+    */
 };
-*/
 
 exports.findAll = () =>
   Observation.find()
@@ -25,9 +24,7 @@ exports.findAll = () =>
 
 exports.findOne = (id) => Observation.findById(id).populate("plant");
 
-/*
 exports.update = (id, updateData) =>
   Observation.findByIdAndUpdate(id, updateData, { new: true });
 
 exports.delete = (id) => Observation.findByIdAndRemove(id);
-*/

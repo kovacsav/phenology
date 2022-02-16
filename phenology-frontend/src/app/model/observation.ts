@@ -7,7 +7,7 @@ export class Observation {
   gps?: string = '';
   plantID: string = '';
   phase: string = '';
-  photo?: string[] = [];
+  photo?: string[] = [''];
   note?: string = '';
   userID: string = '';
 }
