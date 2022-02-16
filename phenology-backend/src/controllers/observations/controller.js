@@ -1,6 +1,6 @@
 const service = require("./service");
 const createError = require("http-errors");
-const observation = require("../../models/observation.model");
+//const observation = require("../../models/observation.model");
 
 
 // Read.

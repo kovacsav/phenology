@@ -16,7 +16,7 @@ exports.create = (observationData) => {
     .then(() => observation);
     */
 };
-
+/*
 exports.findAll = () =>
   Observation.find()
     .populate("plant", { name: 1 })
@@ -28,3 +28,4 @@ exports.update = (id, updateData) =>
   Observation.findByIdAndUpdate(id, updateData, { new: true });
 
 exports.delete = (id) => Observation.findByIdAndRemove(id);
+*/

@@ -88,7 +88,7 @@ exports.create = (req, res, next) => {
     .catch((err) => next(new createError.InternalServerError(err.message)));
 };
 
-*/
+
 
 // Update.
 exports.update = (req, res, next) => {
@@ -121,3 +121,4 @@ exports.delete = (req, res, next) => {
       next(new createError.InternalServerError(err.message));
     });
 };
+*/

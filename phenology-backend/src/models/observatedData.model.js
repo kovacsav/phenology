@@ -58,9 +58,16 @@ const ObservatedDataSchema = mongoose.Schema(
   },
   {
     timeStamps: true,
-  }  
+  },
+  //{ collection: 'observation' }, 
 );
 
 ObservatedDataSchema.plugin(idValidator);
 
-module.exports = mongoose.model("Observation", ObservatedDataSchema);
+module.exports = mongoose.model(
+  // model name
+  "ObservatedData",
+  // schema name
+  ObservatedDataSchema,
+  // Mongod DB collection name
+  'observations');

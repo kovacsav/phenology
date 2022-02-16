@@ -124,7 +124,7 @@ app.post("/login", authHandler.login);
 app.post("/refresh", authHandler.refresh);
 app.post("/logout", authHandler.logout);
 
-app.get("/observations", require("./controllers/observations/routes"));
+app.use("/observations", require("./controllers/observations/routes"));
 
 //app.get("/users", require("./controllers/user/routes"));
 

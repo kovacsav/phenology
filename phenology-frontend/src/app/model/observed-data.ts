@@ -10,4 +10,5 @@ export class ObservedData {
   userID: string = '';
   userFirstName: string = '';
   userLastName: string = '';
+  createdAt: string = '';
 }
