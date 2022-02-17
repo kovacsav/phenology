@@ -35,6 +35,7 @@ export class ArticleComponent implements OnInit {
   pageStart: number = 1;
   currentPage: number = 1;
   lastPage: number = 1;
+  maxPage: number = 10;
 
   get paginator(): IPageBtn[] {
     const pages: IPageBtn[] = [];
