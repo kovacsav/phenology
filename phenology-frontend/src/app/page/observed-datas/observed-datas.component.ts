@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 
-import { ObservedDataService } from 'src/app/service/observed-data.service';
+import { ObservationService } from 'src/app/service/observation.service';
 import { Observable } from 'rxjs';
-import { ObservedData } from 'src/app/model/observed-data';
+import { Observation } from 'src/app/model/observation';
 
 @Component({
   selector: 'app-observed-datas',
@@ -11,9 +11,9 @@ import { ObservedData } from 'src/app/model/observed-data';
 })
 export class ObservedDatasComponent implements OnInit {
 
-  observedData$: Observable<ObservedData[]> = this.observedDataService.getAll();
+  observedData$: Observable<Observation[]> = this.observationService.getAll();
 
-  constructor(private observedDataService : ObservedDataService) { }
+  constructor(private observationService : ObservationService) { }
 
   ngOnInit(): void {
     //console.log(this.observation$);

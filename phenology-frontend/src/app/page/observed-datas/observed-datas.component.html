@@ -13,9 +13,9 @@
     <tbody>
       <tr *ngFor="let observation of observations">
         <td>{{ observation.date }}</td>
-        <td>{{ observation.userFirstName }} {{ observation.userLastName }}</td>
+        <td>{{ observation.user.firstName }} {{ observation.user.lastName }}</td>
         <td>{{ observation.location }}</td>
-        <td>{{ observation.plantName }}</td>
+        <td>{{ observation.plant.name }}</td>
         <td>{{ observation.phase }}</td>
       </tr>
     </tbody>

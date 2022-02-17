@@ -132,11 +132,13 @@ app.use("/observations", require("./controllers/observations/routes"));
 // app.use('/plants', authenticateJwt, require('./controllers/plants/routes'));
 app.use("/plants", require("./controllers/plants/routes"));
 app.use("/articles", require("./controllers/articles/routes"));
+/*
 app.use(
   "/newObservation",
 //  authenticateJwt,
   require("./controllers/newObservation/routes")
 );
+*/
 app.use("/users",
 //authenticateJwt,
  require("./controllers/users/routes"));

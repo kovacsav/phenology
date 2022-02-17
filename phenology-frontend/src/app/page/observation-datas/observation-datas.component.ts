@@ -140,12 +140,12 @@ export class ObservationDatasComponent implements OnInit {
 
   async setCurrentUser(): Promise<any> {
     this.currentUser = await lastValueFrom(this.currentUser$);
-    this.observation.userID = this.currentUser._id;
+    this.observation.user._id = this.currentUser._id;
     //console.log(this.currentUser);
   }
 
   setPlant(plant: Plant): void {
-    this.observation.plantID = plant._id;
+    this.observation.plant._id = plant._id;
     this.setCurrentUser();
     this.selectedPlant = plant;
   }

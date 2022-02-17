@@ -3,12 +3,11 @@ const controller = require('./controller');
 
 const router = express.Router();
 
-/*
+
 // create
 router.post('/', (req, res, next) => {
   return controller.create(req, res, next);
 });
-*/
 
 // read
 router.get('/', (req, res, next) => {

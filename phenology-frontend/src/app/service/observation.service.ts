@@ -14,7 +14,7 @@ export class ObservationService extends BaseService<Observation>  {
     public http: HttpClient,
   ) {
     super(config, http);
-    this.entity = 'newObservation';
+    this.entity = 'observations';
   }
 
   uploadFile(formData: FormData): string {

@@ -2,6 +2,8 @@ const service = require("./service");
 const createError = require("http-errors");
 //const observation = require("../../models/observation.model");
 
+const currentModel = require('../../models/observation.model');
+const currentService = require('./service');
 
 // Read.
 exports.findAll = (req, res, next) => {
@@ -25,7 +27,7 @@ exports.findOne = (req, res, next) => {
     });
   };
 
-/*
+
 // Create.
 
 const checkModel = (model, body, next) => {
@@ -58,7 +60,7 @@ module.exports.create = (req, res, next) => {
       .catch(err => next(new createError.InternalServerError(err.message)));
 };
 
-
+/*
 exports.create = (req, res, next) => {
   const { date, plant, phase } = req.body;
   if (!date || !plant || !phase) {
