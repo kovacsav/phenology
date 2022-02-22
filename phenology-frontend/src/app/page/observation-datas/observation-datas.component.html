@@ -2,33 +2,48 @@
   <div class="row">
     <h3 class="py-2">Fenológiai adatok</h3>
     <form #observationForm="ngForm" (ngSubmit)="save()">
-
       <!-- <h4 class="py-2">Megfigyelési adatok</h4> -->
 
       <div class="form-group mt-3">
         <label for="">Időpont</label>
-        <input name="date" [(ngModel)]="observation.date" type="date" class="form-control" required>
-        {{observation.date}}
+        <input
+          name="date"
+          [(ngModel)]="observation.date"
+          type="date"
+          class="form-control"
+          required
+        />
+        {{ observation.date }}
       </div>
 
       <div class="form-group mt-3">
         <label for="">Hely</label>
-        <input name="location" [(ngModel)]="observation.location" type="text" class="form-control" required>
+        <input
+          name="location"
+          [(ngModel)]="observation.location"
+          type="text"
+          class="form-control"
+          required
+        />
       </div>
 
       <h4 class="mt-5">Megfigyelt növény</h4>
       <div class="row row-cols-3 row-cols-md-6 g-3 mt-3 text-dark">
         <div class="col" *ngFor="let plant of plants$ | async">
           <div class="card h-100" (click)="setPlant(plant)">
-            <img [src]="plant.image[0]" class="card-img-top" height="100px" alt="...">
+            <img
+              [src]="plant.image[0]"
+              class="card-img-top"
+              height="100px"
+              alt="..."
+            />
             <div class="card-body">
-              <h6 class="card-title fw-bold">{{plant.name}}</h6>
-              <p class="card-text">{{plant.latin}}</p>
+              <h6 class="card-title fw-bold">{{ plant.name }}</h6>
+              <p class="card-text">{{ plant.latin }}</p>
             </div>
           </div>
         </div>
       </div>
-
 
       <!-- <div class="row row-cols-2 row-cols-md-3 g-3 mt-3 text-dark">
         <div class="card g-3 p-0" *ngFor="let plant of plants$ | async" style="max-width: 540px;"
@@ -46,9 +61,6 @@
           </div>
         </div>
       </div> -->
-
-
-
 
       <!-- <div class="form-group mt-3">
         <div class="d-flex justify-content-between">
@@ -95,47 +107,73 @@
           </div>
         </div> -->
 
-        <div *ngFor="let phase of selectedPlant.phase" class="btn-group m-2 mb-5" (click)="setPhase(phase)"
-          role="group" aria-label="">
-          <input type="radio" class="btn-check" name="btnradio" [id]="phase" autocomplete="off">
-          <label class="btn btn-outline-light" [for]="phase">{{phase}}</label>
+        <div
+          *ngFor="let phase of selectedPlant.phase"
+          class="btn-group m-2 mb-5"
+          (click)="setPhase(phase)"
+          role="group"
+          aria-label=""
+        >
+          <input
+            type="radio"
+            class="btn-check"
+            name="btnradio"
+            [id]="phase"
+            autocomplete="off"
+          />
+          <label class="btn btn-outline-light" [for]="phase">{{ phase }}</label>
         </div>
 
         <!-- Uplaod photo -->
         <!-- <app-upload-image (pathEvent)="setImagePath($event)"></app-upload-image> -->
 
-
-
         <div class="container">
           <h3>Fénykép feltöltés</h3>
+
+          <!--  <button (click)="compressedFile()">Upload and compress Image</button> -->
 
           <form [formGroup]="fileUploadForm">
             <div class="row">
               <div class="col-sm-12">
                 <div>
-                  <h6 class="head-title margin-top-8"><span>Válassz fényképet!</span></h6>
+                  <h6 class="head-title margin-top-8">
+                    <span>Válassz fényképet!</span>
+                  </h6>
                 </div>
               </div>
               <div class="col-sm-6">
-
                 <div class="custom-file">
+                  <label for="image-inpit" class="custom-file-upload">
+                    Tallózás
+                </label>
+                  <input
+                    type="file"
+                    accept=".jpg, .png, .jpeg"
+                    id="image-inpit"
+                    class="custom-file-input"
 
-                  <input type="file" class="custom-file-input" id="customFile" name="uploadedImage"
-                    (change)="onFileSelect($event)" #UploadFileInput multiple>
+                    name="uploadedImage"
+                    (change)="selectFile($event)"
+                    #UploadFileInput
+                    multiple
+                  />
+                  <div class="row">
+                    <div
+                      *ngFor="let selectedFile of compressedFiles"
+                      class="col m-2"
+                    >
+                      <img [src]="selectedFile" width="150" />
+                    </div>
+                  </div>
                   <!-- <label class="custom-file-label" for="customFile">{{fileInputLabel || 'Choose File'}}</label> -->
-
                 </div>
-
               </div>
 
               <!-- <div class="col-sm-6"> <button class="btn btn-primary" type="submit">Upload</button> -->
               <!-- </div> -->
-
             </div>
           </form>
-
         </div>
-
 
         <!--
         <input type="file" class="file-input" (change)="onFileSelected($event)" #fileUpload>
@@ -148,12 +186,6 @@
             <i class="fas fa-attach"></i>
           </button>
         </div> -->
-
-
-
-
-
-
       </div>
 
       <!-- <img src="../../assets/image/rugyfakadas.png" alt=""> -->
@@ -172,37 +204,45 @@
           </div>
         </div> -->
 
-
       <!-- --------------- webcam -->
       <!-- <app-camera (getPicture)="handleImage($event)"></app-camera>
       <div class="webcam-image" *ngIf="webcamImage">
         <img [src]="webcamImage.imageAsDataUrl" />
       </div> -->
 
-
-
       <div class="form-group mt-3">
         <div class="d-flex justify-content-between">
           <label for="">Megjegyzés</label>
-          <div [hidden]="observationForm.controls.note?.valid" class="error-message mt-1">
+          <div
+            [hidden]="observationForm.controls.note?.valid"
+            class="error-message mt-1"
+          >
             A leírás 2-1400 karakter hosszú lehet!
           </div>
         </div>
-        <textarea name="note" [(ngModel)]="observation.note" type="textarea" class="form-control"
-          pattern="^.{2,1400}$"></textarea>
+        <textarea
+          name="note"
+          [(ngModel)]="observation.note"
+          type="textarea"
+          class="form-control"
+          pattern="^.{2,1400}$"
+        ></textarea>
       </div>
 
-      {{observation | json}}
+      {{ observation | json }}
 
-
-      <button class="btn btn-primary" [disabled]="observationForm.invalid" type="submit">Mentés</button>
-
+      <button
+        class="btn btn-primary"
+        [disabled]="observationForm.invalid"
+        type="submit"
+      >
+        Mentés
+      </button>
     </form>
   </div>
 </div>
 
-<div *ngIf="(allUser$ | async) as alluser" class="col-10 offset-1">
-
+<div *ngIf="allUser$ | async as alluser" class="col-10 offset-1">
   <table class="table">
     <thead>
       <tr>
@@ -216,38 +256,34 @@
     <tbody>
       <tr *ngFor="let user of alluser">
         <td>{{ user._id }}</td>
-        <td>{{ user.firstName }} </td>
+        <td>{{ user.firstName }}</td>
         <td>{{ user.lastName }}</td>
         <td>{{ user.email }}</td>
         <td>{{ user.password }}</td>
       </tr>
     </tbody>
   </table>
+</div>
 
-  </div>
-
-
-  <div *ngIf="(currentUser$ | async) as user" class="col-10 offset-1">
-
-    <table class="table">
-      <thead>
-        <tr>
-          <th>Id</th>
-          <th>First Name</th>
-          <th>Last Name</th>
-          <th>Email</th>
-          <th>Password</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>{{ user._id }}</td>
-          <td>{{ user.firstName }} </td>
-          <td>{{ user.lastName }}</td>
-          <td>{{ user.email }}</td>
-          <td>{{ user.password }}</td>
-        </tr>
-      </tbody>
-    </table>
-
-    </div>
+<div *ngIf="currentUser$ | async as user" class="col-10 offset-1">
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Id</th>
+        <th>First Name</th>
+        <th>Last Name</th>
+        <th>Email</th>
+        <th>Password</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>{{ user._id }}</td>
+        <td>{{ user.firstName }}</td>
+        <td>{{ user.lastName }}</td>
+        <td>{{ user.email }}</td>
+        <td>{{ user.password }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>

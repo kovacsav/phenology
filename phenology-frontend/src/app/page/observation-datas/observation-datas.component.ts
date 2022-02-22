@@ -21,6 +21,7 @@ import { User } from 'src/app/model/user';
 import { ObservationService } from 'src/app/service/observation.service';
 import { PlantService } from 'src/app/service/plant.service';
 import { UserService } from 'src/app/service/user.service';
+import { NgxImageCompressService } from 'ngx-image-compress';
 
 @Component({
   selector: 'app-observation-datas',
@@ -68,6 +69,19 @@ export class ObservationDatasComponent implements OnInit {
 
   userID: string = '';
 
+  imgResult: string = '';
+
+  resizedImage: File = {} as File;
+
+  file: any;
+  localUrl: any;
+  localCompressedUrl: any;
+  compressedFiles: any[] = [];
+  imgResultBeforeCompress: string = '';
+  imgResultAfterCompress: string = '';
+  sizeOfOriginalImage: number = 0;
+  sizeOFCompressedImage: number = 0;
+
   // user$: BehaviorSubject<User | null> = this.authService.currentUserSubject$
 
   // constructor(private datePipe : DatePipe) {
@@ -77,7 +91,8 @@ export class ObservationDatasComponent implements OnInit {
     private router: Router,
     private http: HttpClient,
     private formBuilder: FormBuilder,
-    private userService: UserService
+    private userService: UserService,
+    private imageCompress: NgxImageCompressService
   ) {
     // console.log('observation',this.user$)
     // this.observation.date = new Date().toISOString().split('T')[0];
@@ -95,14 +110,101 @@ export class ObservationDatasComponent implements OnInit {
     });
   }
 
+  // file upload and compress
+  // https://medium.com/swlh/compress-image-and-send-it-to-an-api-in-angular-bc48e6ed3835
+
+  selectFile(event: any) {
+    var fileName: any;
+    this.file = event.target.files[0];
+    fileName = this.file['name'];
+    if (event.target.files && event.target.files[0]) {
+      var reader = new FileReader();
+      reader.onload = (event: any) => {
+        this.localUrl = event.target.result;
+        this.compressFile(this.localUrl, fileName);
+      };
+      reader.readAsDataURL(event.target.files[0]);
+
+
+    }
+  }
+
+  compressFile(image: any, fileName: any) {
+    /*
+    https://docs.microsoft.com/en-us/uwp/api/windows.storage.fileproperties.photoorientation?view=winrt-22000
+    Orientation:
+    Normal - 1 - No rotation needed.
+    The photo can be displayed using its current orientation.
+
+    Unspecified - 0 - An orientation flag is not set.
+    */
+
+    var orientation = 1;
+    this.sizeOfOriginalImage =
+      this.imageCompress.byteCount(image) / (1024 * 1024);
+    console.warn('Size in bytes is now:', this.sizeOfOriginalImage);
+
+    this.imageCompress
+      .compressFile(image, orientation, 50, 50)
+      .then((result) => {
+        this.imgResultAfterCompress = result;
+        this.localCompressedUrl = result;
+        this.compressedFiles.push(result);
+        this.sizeOFCompressedImage =
+          this.imageCompress.byteCount(result) / (1024 * 1024);
+        console.warn(
+          'Size in bytes after compression:',
+          this.sizeOFCompressedImage
+        );
+
+        // create file from byte
+        const imageName = fileName;
+
+        // call method that creates a blob from dataUri
+        const imageBlob = this.dataURItoBlob(
+          this.imgResultAfterCompress.split(',')[1]
+        );
+
+        //imageFile created below is the new compressed file which can be send to API in form data
+        const imageFile = new File([imageBlob], imageName, { type: 'image/jpeg' });
+        this.fileUploadForm.get('uploadedImage')?.setValue(imageFile);
+        this.uploadArray.push(this.fileUploadForm.get('uploadedImage')?.value);
+      });
+  }
+
+  dataURItoBlob(dataURI: any) {
+    const byteString = window.atob(dataURI);
+    const arrayBuffer = new ArrayBuffer(byteString.length);
+    const int8Array = new Uint8Array(arrayBuffer);
+    for (let i = 0; i < byteString.length; i++) {
+      int8Array[i] = byteString.charCodeAt(i);
+    }
+    const blob = new Blob([int8Array], { type: 'image/jpeg' });
+    return blob;
+  }
+
   onFileSelect(event: any) {
+    //this.compressFile();
     const files = event.target.files;
-    console.log(files);
+    console.log('files:', files);
     // this.fileInputLabel = files.name;
     Array.from(files).forEach((file: any, index: number) => {
       if (this.fileUploadForm.get('uploadedImage')) {
         this.fileUploadForm.get('uploadedImage')?.setValue(file);
-        console.log('this.fileUploadForm', this.fileUploadForm.value);
+
+        console.log('file original:', file);
+
+        /*
+        this.imageCompress.compressFile(file, 1, 1, 1, 800, 800)
+          .then(
+            (compressedImage) => {
+              file = compressedImage;
+              console.log("compressedImage:", compressedImage);
+            });
+*/
+        console.log('file compressed:', file);
+
+        console.log('this.fileUploadForm:', this.fileUploadForm.value);
         this.uploadArray.push(this.fileUploadForm.get('uploadedImage')?.value);
         this.fileNames[index] = `${Date.now() + index}.jpg`;
         this.observation.photo?.push(this.fileNames[index]);
@@ -119,19 +221,28 @@ export class ObservationDatasComponent implements OnInit {
     //   alert('Please fill valid details!');
     //   return false;
     // }
+
     console.log('filenames', this.fileNames);
     console.log('this.uploadArray', this.uploadArray);
+
     this.uploadArray.forEach((file: any, index: number) => {
       if (file) {
         // alert('Please fill valid details!');
         // return false;
         const formData = new FormData();
         // this.pathEvent.emit(this.file);
+
         formData.append('uploadedImage', file, this.fileNames[index]);
         formData.append('agentId', '007');
+
+        console.log('formData:', formData);
+        this.fileNames[index] = `${Date.now() + index}.jpg`;
+        this.observation.photo?.push(this.fileNames[index]);
         this.observationService.uploadFile(formData);
       }
     });
+
+    console.log(this.observation);
 
     this.observationService
       .create(this.observation)
@@ -155,6 +266,42 @@ export class ObservationDatasComponent implements OnInit {
   }
 
   setImagePath(fileName: string): void {}
+
+  // resize image
+  // https://www.npmjs.com/package/ngx-image-compress
+
+  compressedFile() {
+    this.imageCompress.uploadFile().then(({ image, orientation }) => {
+      console.log('image:', image, orientation);
+
+      this.imageCompress
+        .compressFile(image, orientation, 50, 50) // 50% ratio, 50% quality
+        .then((compressedImage) => {
+          this.resizedImage = new File([compressedImage], 'akarmi');
+          console.log(
+            'compressedImage:',
+            compressedImage,
+            this.resizedImage.name
+          );
+        });
+    });
+  }
+
+  /*
+  compressFile() {
+    const MAX_MEGABYTE = 1;
+    this.imageCompress
+      .uploadAndGetImageWithMaxSize(MAX_MEGABYTE) // this function can provide debug information using (MAX_MEGABYTE,true) parameters
+      .then(
+        (result: string) => {
+          this.imgResult = result;
+        },
+        (result: string) => {
+          console.error('The compression algorithm didn\'t succed! The best size we can do is', this.imageCompress.byteCount(result), 'bytes')
+          this.imgResult = result;
+        });
+  }
+*/
 
   // handleImage(webcamImage: WebcamImage) {
   //   this.webcamImage = webcamImage;
