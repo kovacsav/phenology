@@ -27,7 +27,9 @@
     "json-server-auth": "^2.1.0",
     "ngx-file-drop": "^11.3.0",
     "ngx-image-compress": "^13.1.8",
+    "ngx-webcam": "^0.4.1",
     "rxjs": "^7.0.0",
+    "save": "^2.4.0",
     "tslib": "^2.0.0",
     "world-map": "0.0.9",
     "zone.js": "~0.11.4"

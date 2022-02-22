@@ -11,7 +11,7 @@ import {
 } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
-// import { WebcamImage } from 'ngx-webcam';
+import { WebcamImage } from 'ngx-webcam';
 import { Observable } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
 import { lastValueFrom } from 'rxjs';
@@ -22,12 +22,13 @@ import { ObservationService } from 'src/app/service/observation.service';
 import { PlantService } from 'src/app/service/plant.service';
 import { UserService } from 'src/app/service/user.service';
 import { NgxImageCompressService } from 'ngx-image-compress';
+import { CameraComponent } from 'src/app/common/camera/camera.component';
 
 @Component({
   selector: 'app-observation-datas',
   templateUrl: './observation-datas.component.html',
   styleUrls: ['./observation-datas.component.scss'],
-  // providers:[DatePipe]
+  providers:[CameraComponent]
 })
 export class ObservationDatasComponent implements OnInit {
   //  @Input() user: User = new User;
@@ -35,7 +36,7 @@ export class ObservationDatasComponent implements OnInit {
   selectedPlant: Plant = new Plant();
   plants$: Observable<Plant[]> = this.plantService.getAll();
 
-  // webcamImage: WebcamImage | null = null;
+  webcamImage: WebcamImage | null = null;
 
   observation: Observation = new Observation();
   observations$: Observable<Observation[]> = this.observationService.getAll();
@@ -82,6 +83,7 @@ export class ObservationDatasComponent implements OnInit {
   sizeOfOriginalImage: number = 0;
   sizeOFCompressedImage: number = 0;
 
+
   // user$: BehaviorSubject<User | null> = this.authService.currentUserSubject$
 
   // constructor(private datePipe : DatePipe) {
@@ -92,7 +94,8 @@ export class ObservationDatasComponent implements OnInit {
     private http: HttpClient,
     private formBuilder: FormBuilder,
     private userService: UserService,
-    private imageCompress: NgxImageCompressService
+    private imageCompress: NgxImageCompressService,
+    private cameraComponent: CameraComponent
   ) {
     // console.log('observation',this.user$)
     // this.observation.date = new Date().toISOString().split('T')[0];
@@ -107,6 +110,7 @@ export class ObservationDatasComponent implements OnInit {
   ngOnInit(): void {
     this.fileUploadForm = this.formBuilder.group({
       uploadedImage: [''],
+      webcamImage: ''
     });
   }
 
@@ -124,10 +128,10 @@ export class ObservationDatasComponent implements OnInit {
         this.compressFile(this.localUrl, fileName);
       };
       reader.readAsDataURL(event.target.files[0]);
-
-
     }
   }
+
+  // https://www.npmjs.com/package/ngx-image-compress
 
   compressFile(image: any, fileName: any) {
     /*
@@ -140,22 +144,26 @@ export class ObservationDatasComponent implements OnInit {
     */
 
     var orientation = 1;
+    /*
     this.sizeOfOriginalImage =
       this.imageCompress.byteCount(image) / (1024 * 1024);
     console.warn('Size in bytes is now:', this.sizeOfOriginalImage);
-
+    */
     this.imageCompress
-      .compressFile(image, orientation, 50, 50)
+      .compressFile(image, orientation, 90, 100, 800)
       .then((result) => {
         this.imgResultAfterCompress = result;
         this.localCompressedUrl = result;
         this.compressedFiles.push(result);
+
+        /*
         this.sizeOFCompressedImage =
           this.imageCompress.byteCount(result) / (1024 * 1024);
         console.warn(
           'Size in bytes after compression:',
           this.sizeOFCompressedImage
         );
+        */
 
         // create file from byte
         const imageName = fileName;
@@ -166,7 +174,9 @@ export class ObservationDatasComponent implements OnInit {
         );
 
         //imageFile created below is the new compressed file which can be send to API in form data
-        const imageFile = new File([imageBlob], imageName, { type: 'image/jpeg' });
+        const imageFile = new File([imageBlob], imageName, {
+          type: 'image/jpeg',
+        });
         this.fileUploadForm.get('uploadedImage')?.setValue(imageFile);
         this.uploadArray.push(this.fileUploadForm.get('uploadedImage')?.value);
       });
@@ -225,6 +235,8 @@ export class ObservationDatasComponent implements OnInit {
     console.log('filenames', this.fileNames);
     console.log('this.uploadArray', this.uploadArray);
 
+    // handle uploaded files
+
     this.uploadArray.forEach((file: any, index: number) => {
       if (file) {
         // alert('Please fill valid details!');
@@ -243,6 +255,7 @@ export class ObservationDatasComponent implements OnInit {
     });
 
     console.log(this.observation);
+    console.log("hello");
 
     this.observationService
       .create(this.observation)
@@ -267,51 +280,37 @@ export class ObservationDatasComponent implements OnInit {
 
   setImagePath(fileName: string): void {}
 
-  // resize image
-  // https://www.npmjs.com/package/ngx-image-compress
+  handleImage(webcamImage: WebcamImage) {
+    this.webcamImage = webcamImage;
+    const fileName: string = `${this.observation.date}-${this.observation.plant.name}.jpg`;
 
-  compressedFile() {
-    this.imageCompress.uploadFile().then(({ image, orientation }) => {
-      console.log('image:', image, orientation);
+    // create file from byte
+    const imageName = fileName;
+    // call method that creates a blob from dataUri
+    const imageBlob = this.dataURItoBlob(
+      this.webcamImage.imageAsDataUrl.split(',')[1]
+    );
 
-      this.imageCompress
-        .compressFile(image, orientation, 50, 50) // 50% ratio, 50% quality
-        .then((compressedImage) => {
-          this.resizedImage = new File([compressedImage], 'akarmi');
-          console.log(
-            'compressedImage:',
-            compressedImage,
-            this.resizedImage.name
-          );
-        });
-    });
+    //imageFile created below is the new compressed file which can be send to API in form data
+    const imageFile = new File([imageBlob], imageName, { type: 'image/jpeg' });
+    console.log("imageFile", imageFile);
+
+    this.fileUploadForm.get('webcamImage')?.setValue(imageFile);
+    this.uploadArray.push(this.fileUploadForm.get('webcamImage')?.value);
+    console.log("uploadArray:", this.uploadArray)
+    //const a = document.createElement('a');
+    //a.setAttribute('download', fileName);
+    //a.setAttribute('href', webcamImage.imageAsDataUrl);
+    //a.click();
+    //this.observation.photo?.push(fileName);
   }
 
-  /*
-  compressFile() {
-    const MAX_MEGABYTE = 1;
-    this.imageCompress
-      .uploadAndGetImageWithMaxSize(MAX_MEGABYTE) // this function can provide debug information using (MAX_MEGABYTE,true) parameters
-      .then(
-        (result: string) => {
-          this.imgResult = result;
-        },
-        (result: string) => {
-          console.error('The compression algorithm didn\'t succed! The best size we can do is', this.imageCompress.byteCount(result), 'bytes')
-          this.imgResult = result;
-        });
+  deletePhoto() {
+    this.uploadArray.pop();
+    this.webcamImage = null;
+    //this.cameraComponent.onOffWebCame();
+//https://stackoverflow.com/questions/37587732/how-to-call-another-components-function-in-angular2
   }
-*/
-
-  // handleImage(webcamImage: WebcamImage) {
-  //   this.webcamImage = webcamImage;
-  //   const fileName: string = `${this.observation.date}-${this.observation.plant.name}.png`
-  //   const a = document.createElement('a');
-  //   a.setAttribute('download', fileName);
-  //   a.setAttribute('href', webcamImage.imageAsDataUrl);
-  //   a.click();
-  //   this.observation.photo = fileName;
-  // }
 
   // onFileSelected(event: any) {
 

@@ -1,5 +1,5 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-// import { WebcamImage, WebcamInitError, WebcamUtil } from 'ngx-webcam';
+import { WebcamImage, WebcamInitError, WebcamUtil } from 'ngx-webcam';
 import { Subject, Observable } from 'rxjs';
 
 @Component({
@@ -9,54 +9,58 @@ import { Subject, Observable } from 'rxjs';
 })
 export class CameraComponent implements OnInit {
 
-  // @Output() getPicture = new EventEmitter<WebcamImage>();
-  // showWebcam = true;
-  // isCameraExist = true;
+  @Output() getPicture = new EventEmitter<WebcamImage>();
+  showWebcam = true;
+  isCameraExist = true;
 
-  // errors: WebcamInitError[] = [];
+  errors: WebcamInitError[] = [];
 
-  // // webcam snapshot trigger
-  // private trigger: Subject<void> = new Subject<void>();
-  // private nextWebcam: Subject<boolean | string> = new Subject<boolean | string>();
+  photoString: string = "Fénykép készítése";
+  newPhotoString: string = "Új fénykép készítése";
+
+  // webcam snapshot trigger
+  private trigger: Subject<void> = new Subject<void>();
+  private nextWebcam: Subject<boolean | string> = new Subject<boolean | string>();
 
   constructor() { }
 
 
   ngOnInit(): void {
-  //   WebcamUtil.getAvailableVideoInputs()
-  //     .then((mediaDevices: MediaDeviceInfo[]) => {
-  //       this.isCameraExist = mediaDevices && mediaDevices.length > 0;
-  //     });
+    WebcamUtil.getAvailableVideoInputs()
+      .then((mediaDevices: MediaDeviceInfo[]) => {
+        this.isCameraExist = mediaDevices && mediaDevices.length > 0;
+      });
   }
 
-  // takeSnapshot(): void {
-  //   this.trigger.next();
-  // }
+  takeSnapshot(): void {
+    //this.photoString = this.newPhotoString;
+    this.trigger.next();
+  }
 
-  // onOffWebCame() {
-  //   this.showWebcam = !this.showWebcam;
-  // }
+  public onOffWebCame() {
+    this.showWebcam = !this.showWebcam;
+  }
 
-  // handleInitError(error: WebcamInitError) {
-  //   this.errors.push(error);
-  // }
+  handleInitError(error: WebcamInitError) {
+    this.errors.push(error);
+  }
 
   // // changeWebCame(directionOrDeviceId: boolean | string) {
   // //   this.nextWebcam.next(directionOrDeviceId);
   // // }
 
-  // handleImage(webcamImage: WebcamImage) {
-  //   this.getPicture.emit(webcamImage);
-  //   this.showWebcam = false;
-  // }
+  handleImage(webcamImage: WebcamImage) {
+    this.getPicture.emit(webcamImage);
+    this.showWebcam = false;
+  }
 
-  // get triggerObservable(): Observable<void> {
-  //   return this.trigger.asObservable();
-  // }
+  get triggerObservable(): Observable<void> {
+    return this.trigger.asObservable();
+  }
 
-  // get nextWebcamObservable(): Observable<boolean | string> {
-  //   return this.nextWebcam.asObservable();
-  // }
+  get nextWebcamObservable(): Observable<boolean | string> {
+   return this.nextWebcam.asObservable();
+  }
 
 
 }

@@ -2,8 +2,6 @@
   <div class="row">
     <h3 class="py-2">Fenológiai adatok</h3>
     <form #observationForm="ngForm" (ngSubmit)="save()">
-      <!-- <h4 class="py-2">Megfigyelési adatok</h4> -->
-
       <div class="form-group mt-3">
         <label for="">Időpont</label>
         <input
@@ -45,52 +43,6 @@
         </div>
       </div>
 
-      <!-- <div class="row row-cols-2 row-cols-md-3 g-3 mt-3 text-dark">
-        <div class="card g-3 p-0" *ngFor="let plant of plants$ | async" style="max-width: 540px;"
-          (click)="setPlant(plant)">
-          <div class="row g-0">
-            <div class="col-md-5">
-              <img [src]="plant.image" class="img-fluid rounded" alt="...">
-            </div>
-            <div class="col-md-7">
-              <div class="card-body">
-                <h5 class="card-title">{{plant.name}}</h5>
-                <p class="card-text">{{plant.latin}}</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div> -->
-
-      <!-- <div class="form-group mt-3">
-        <div class="d-flex justify-content-between">
-          <label for="">Megfigyelt növény</label>
-        </div>
-        <select class="custom-select border col-12 mr-5 p-2 rounded" name="name" [(ngModel)]="observation.plant"
-          required>
-          <option [selected] disabled hidden>Növények listája</option>
-          <option *ngFor="let plant of plants$ | async" [ngValue]="plant" (click)="setPlant(plant)" [selected]="plant">
-            {{plant.name}} - {{plant.latin}}</option>
-        </select>
-      </div> -->
-
-      <!-- {{plants$ | async | slice :3:4 | json}} -->
-
-      <!-- <div *ngIf="observation.plant.name" class="mt-3">
-        <img [src]="observation.plant.image" alt="nem ok" width="300px">
-      </div> -->
-
-      <!-- <div *ngIf="observation.plant.name" class="form-group mt-3">
-        <div class="d-flex justify-content-between">
-          <label for="">Fenológiai fázis</label>
-        </div>
-        <select class="custom-select border col-12 mr-5 p-2 rounded" name="phase" [(ngModel)]="observation.phase"
-          required>
-          <option value="" selected disabled hidden>Fázisok listája</option>
-          <option *ngFor="let phase of observation.plant.phase" [value]="phase">{{phase}}</option>
-        </select>
-      </div> -->
-
       <div *ngIf="observation.plant._id" class="form-group mt-3">
         <!-- <div class="d-flex justify-content-between">
           <label for="">Fenológiai fázis</label>
@@ -125,12 +77,9 @@
         </div>
 
         <!-- Uplaod photo -->
-        <!-- <app-upload-image (pathEvent)="setImagePath($event)"></app-upload-image> -->
 
         <div class="container">
           <h3>Fénykép feltöltés</h3>
-
-          <!--  <button (click)="compressedFile()">Upload and compress Image</button> -->
 
           <form [formGroup]="fileUploadForm">
             <div class="row">
@@ -145,13 +94,12 @@
                 <div class="custom-file">
                   <label for="image-inpit" class="custom-file-upload">
                     Tallózás
-                </label>
+                  </label>
                   <input
                     type="file"
                     accept=".jpg, .png, .jpeg"
                     id="image-inpit"
                     class="custom-file-input"
-
                     name="uploadedImage"
                     (change)="selectFile($event)"
                     #UploadFileInput
@@ -165,50 +113,22 @@
                       <img [src]="selectedFile" width="150" />
                     </div>
                   </div>
-                  <!-- <label class="custom-file-label" for="customFile">{{fileInputLabel || 'Choose File'}}</label> -->
                 </div>
               </div>
+            </div>
 
-              <!-- <div class="col-sm-6"> <button class="btn btn-primary" type="submit">Upload</button> -->
-              <!-- </div> -->
+            <!-- --------------- webcam -->
+            <app-camera
+              (getPicture)="handleImage($event)"
+              name="webcamImage"
+            ></app-camera>
+            <div class="webcam-image" *ngIf="webcamImage">
+              <img [src]="webcamImage.imageAsDataUrl" />
+              <button (click)="deletePhoto()">Mégsem</button>
             </div>
           </form>
         </div>
-
-        <!--
-        <input type="file" class="file-input" (change)="onFileSelected($event)" #fileUpload>
-
-        <div class="file-upload">
-
-          {{fileName || "No file uploaded yet."}}
-
-          <button mat-mini-fab color="primary" class="upload-btn" (click)="fileUpload.click()">
-            <i class="fas fa-attach"></i>
-          </button>
-        </div> -->
       </div>
-
-      <!-- <img src="../../assets/image/rugyfakadas.png" alt=""> -->
-
-      <!-- <h1>Bootstrap v5.0 Styled Browse Button</h1>
-        <h4>Styled file browse button using Bootstrap v5.0 and Alpine.js</h4>
-        <div class="container">
-          <div class="form-group" x-data="{ fileName: '' }">
-            <div class="input-group shadow">
-              <span class="input-group-text px-3 text-muted"><i class="fas fa-image fa-lg"></i></span>
-              <input type="file" x-ref="file" name="img[]" class="d-none" multiple (change)="onFileSelect($event)">
-              <input type="text" class="form-control form-control-lg" placeholder="Upload Image" x-model="fileName">
-              <button class="browse btn btn-primary px-4" type="button" x-on:click.prevent="$refs.file.click()"><i
-                  class="fas fa-image"></i> Browse</button>
-            </div>
-          </div>
-        </div> -->
-
-      <!-- --------------- webcam -->
-      <!-- <app-camera (getPicture)="handleImage($event)"></app-camera>
-      <div class="webcam-image" *ngIf="webcamImage">
-        <img [src]="webcamImage.imageAsDataUrl" />
-      </div> -->
 
       <div class="form-group mt-3">
         <div class="d-flex justify-content-between">

@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-// import { WebcamModule } from 'ngx-webcam';
+import { WebcamModule } from 'ngx-webcam';
 import { NgxFileDropModule } from 'ngx-file-drop';
 import { GoogleMapsModule } from '@angular/google-maps';
 import { AgmCoreModule } from '@agm/core';
@@ -55,7 +55,7 @@ import { ChallengeComponent } from './page/challenge/challenge.component';
     AppRoutingModule,
     FormsModule,
     HttpClientModule,
-    // WebcamModule,
+    WebcamModule,
     NgxFileDropModule,
     ReactiveFormsModule,
     GoogleMapsModule,
