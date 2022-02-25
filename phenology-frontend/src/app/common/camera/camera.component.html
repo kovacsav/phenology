@@ -1,5 +1,10 @@
 <div *ngIf="isCameraExist; else noCameraExist">
   <div style="text-align: center">
+    <div>
+      <h6 class="head-title margin-top-8">
+        <span>Készíts új fényképet!</span>
+      </h6>
+    </div>
     <div class="btn-group">
       <div *ngIf="showWebcam">
         <button class="btn btn-outline-light" (click)="takeSnapshot()">
@@ -8,7 +13,7 @@
       </div>
       <div *ngIf="!showWebcam">
         <button class="btn btn-outline-light" (click)="onOffWebCame()">
-          Kamera bekapcsolása
+          Kép készítése
         </button>
       </div>
     </div>

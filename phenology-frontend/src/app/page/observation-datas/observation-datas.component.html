@@ -1,6 +1,6 @@
 <div class="container text-white p-3">
   <div class="row">
-    <h3 class="py-2">Fenológiai adatok</h3>
+    <h3 class="py-2">Új megfigyelés rögzítése</h3>
     <form #observationForm="ngForm" (ngSubmit)="save()">
       <div class="form-group mt-3">
         <label for="">Időpont</label>
@@ -26,13 +26,14 @@
       </div>
 
       <h4 class="mt-5">Megfigyelt növény</h4>
+
+      <h5>Fák</h5>
       <div class="row row-cols-3 row-cols-md-6 g-3 mt-3 text-dark">
-        <div class="col" *ngFor="let plant of plants$ | async">
-          <div class="card h-100" (click)="setPlant(plant)">
+        <div class="col" *ngFor="let plant of trees ">
+          <div class="card h-100 shadow hovered" (click)="setPlant(plant)">
             <img
               [src]="plant.image[0]"
               class="card-img-top"
-              height="100px"
               alt="..."
             />
             <div class="card-body">
@@ -42,6 +43,43 @@
           </div>
         </div>
       </div>
+
+      <h5>Cserjék</h5>
+      <div class="row row-cols-3 row-cols-md-6 g-3 mt-3 text-dark">
+        <div class="col" *ngFor="let plant of shrub ">
+          <div class="card h-100 shadow hovered" (click)="setPlant(plant)">
+            <img
+              [src]="plant.image[0]"
+              class="card-img-top"
+              alt="..."
+            />
+            <div class="card-body">
+              <h6 class="card-title fw-bold">{{ plant.name }}</h6>
+              <p class="card-text">{{ plant.latin }}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <h5>Lágyszárúak</h5>
+      <div class="row row-cols-3 row-cols-md-6 g-3 mt-3 text-dark">
+        <div class="col" *ngFor="let plant of herbaceous ">
+          <div class="card h-100 shadow hovered" (click)="setPlant(plant)">
+            <img
+              [src]="plant.image[0]"
+              class="card-img-top"
+              alt="..."
+            />
+            <div class="card-body">
+              <h6 class="card-title fw-bold">{{ plant.name }}</h6>
+              <p class="card-text">{{ plant.latin }}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <button class="m-5">Más növény</button>
+
 
       <div *ngIf="observation.plant._id" class="form-group mt-3">
         <!-- <div class="d-flex justify-content-between">
@@ -124,8 +162,21 @@
             ></app-camera>
             <div class="webcam-image" *ngIf="webcamImage">
               <img [src]="webcamImage.imageAsDataUrl" />
-              <button (click)="deletePhoto()">Mégsem</button>
+
             </div>
+
+            <br>
+
+            <div class="row">
+              <div
+                *ngFor="let selectedFile of compressedFiles; let indexOfelement=index"
+                class="col m-2"
+              >
+                <img [src]="selectedFile" width="150" />
+                <button (click)="onRemove(indexOfelement)" class="btn btn-danger">File eltávolítása</button>
+              </div>
+            </div>
+
           </form>
         </div>
       </div>
@@ -156,7 +207,7 @@
         [disabled]="observationForm.invalid"
         type="submit"
       >
-        Mentés
+        Megfigyelés elküldése
       </button>
     </form>
   </div>

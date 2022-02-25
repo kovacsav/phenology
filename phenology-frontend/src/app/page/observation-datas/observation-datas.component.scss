@@ -45,3 +45,8 @@
   padding: 6px 12px;
   cursor: pointer;
 }
+
+.hovered:hover {
+  //box-shadow: 10px 10px 5px grey;
+  border-color:rgb(1, 160, 1);
+}
