@@ -14,6 +14,8 @@ export class AuthService {
   currentUserSubject$: BehaviorSubject<User | null> = new BehaviorSubject<User | null>(null)
   lastToken: string = '';
   loginUrl: string = `${this.config.apiUrl}login`;
+  registerUrl: string = `${this.config.apiUrl}register`;
+  user: User = new User;
 
   constructor(
     private config: ConfigService,
@@ -51,6 +53,10 @@ export class AuthService {
     this.currentUserSubject$.next(null);
     localStorage.removeItem('currentUser');
     this.router.navigate(['/', 'login']);
+  }
+
+  register(user: User): Observable<User> {
+    return this.http.post<User>(`${this.config.apiUrl}${this.registerUrl}`, user);
   }
 
 }

@@ -12,6 +12,7 @@ import { HomeComponent } from './page/home/home.component';
 import { LoginComponent } from './page/login/login.component';
 import { ObservationDatasComponent } from './page/observation-datas/observation-datas.component';
 import { ObservedDatasComponent } from './page/observed-datas/observed-datas.component';
+import { RegisterComponent } from './page/register/register.component';
 
 
 const routes: Routes = [
@@ -26,6 +27,10 @@ const routes: Routes = [
   {
     path: 'login',
     component: LoginComponent,
+  },
+  {
+    path: 'register',
+    component: RegisterComponent,
   },
   {
     path: 'article',

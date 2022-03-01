@@ -3,8 +3,13 @@ const controller = require('./controller');
 
 const router = express.Router();
 
+// confirmation email
+router.post('/cofirm', (req, res, next) => {
+  return controller.sendConfirmationEmail(req, res, next);
+});
+
 // create
-router.post('/', (req, res, next) => {
+router.post('/register', (req, res, next) => {
   return controller.create(req, res, next);
 });
 

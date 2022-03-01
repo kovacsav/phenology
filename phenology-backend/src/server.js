@@ -143,6 +143,8 @@ app.use("/users",
 //authenticateJwt,
  require("./controllers/users/routes"));
 
+app.post("/register", require("./controllers/users/routes"));
+
 // error handling
 app.use((err, req, res, next) => {
   logger.error(`ERR ${err.statusCode}: ${err.message}`);

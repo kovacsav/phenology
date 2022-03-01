@@ -20,6 +20,20 @@ const checkModel = (model, body, next) => {
     return true;
 };
 
+
+// Send confirmation email
+module.exports.sendConfirmationEmail = (req, res, next) => {
+    if (!checkModel(currentModel, req.body, next)) {
+        return;
+    }
+
+    if (currentService.findOne(req.params.email)){
+        return (new createError.ServiceUnavailable("Ezzel az email címmel már regisztráltak."));
+    }
+    
+    return;
+};
+
 // Create.
 module.exports.create = (req, res, next) => {
     if (!checkModel(currentModel, req.body, next)) {

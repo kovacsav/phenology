@@ -28,6 +28,7 @@ import { DetailedPlantGuideComponent } from './page/guide/detailed-plant-guide/d
 import { IndividualPlantGuideComponent } from './page/guide/individual-plant-guide/individual-plant-guide.component';
 import { FullArticleComponent } from './page/full-article/full-article.component';
 import { ChallengeComponent } from './page/challenge/challenge.component';
+import { RegisterComponent } from './page/register/register.component';
 
 
 @NgModule({
@@ -49,6 +50,7 @@ import { ChallengeComponent } from './page/challenge/challenge.component';
     IndividualPlantGuideComponent,
     FullArticleComponent,
     ChallengeComponent,
+    RegisterComponent,
   ],
   imports: [
     BrowserModule,
