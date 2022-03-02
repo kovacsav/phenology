@@ -6,5 +6,6 @@ export class User {
   active?: boolean = true;
   password: string = '';
   accessToken?: string = '';
+  confirmationCode: string = '';
   role?: string = '';
 }

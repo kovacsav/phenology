@@ -156,3 +156,44 @@ app.use((err, req, res, next) => {
 });
 
 module.exports = app;
+
+
+/*
+
+// test nodemailer
+
+const nodemailer = require("nodemailer");
+
+const user = process.env.ADMIN_EMAIL;
+const pass = process.env.ADMIN_EMAIL_PASSWORD;
+
+const transport = nodemailer.createTransport({
+  /*
+  host: "smtp.gmail.com",
+  port: 465,
+  secure: true, // true for 465, false for other ports
+  auth: {
+    user: "mezbogyo@gmail.com",
+    pass: "kamcsatka",
+  },
+  
+  host: "zcs.met.hu",
+  port: 465,
+  secure: true, // true for 465, false for other ports
+  auth: {
+    user: user,
+    pass: pass,
+  },
+  
+});
+
+// verify connection configuration
+transport.verify(function (error, success) {
+    if (error) {
+      console.log(error);
+    } else {
+      console.log("Server is ready to take our messages");
+    }
+  });
+
+*/

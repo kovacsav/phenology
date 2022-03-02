@@ -29,6 +29,9 @@ const UserSchema = mongoose.Schema(
       type: String,
       required: false,
     },
+    confirmationCode: { 
+      type: String, 
+      unique: true },
   },
   {
     timeStamps: true,

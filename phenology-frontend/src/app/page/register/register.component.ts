@@ -4,7 +4,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { first } from 'rxjs/operators';
 
 import { AuthService } from 'src/app/service/auth.service';
-import { User } from 'src/app/model/user';
+//import { User } from 'src/app/model/user';
 
 @Component({ templateUrl: 'register.component.html' })
 
@@ -13,8 +13,24 @@ export class RegisterComponent implements OnInit {
   form: FormGroup = new FormGroup({});
   loading = false;
   submitted = false;
+  registrationOK = false;
 
-  user: User = new User();
+  //user: User = new User();
+
+  // a POST metódussal a usert _id nélkül kell átadni
+  // a form pedig más elemeket is tartalmaz
+  // ezért kell ez az új object
+
+  userObject = {
+    firstName: '',
+    lastName: '',
+    email: '',
+    active: false,
+    password:'',
+    accessToken: '',
+    role: ''
+  };
+
 
   constructor(
     private formBuilder: FormBuilder,
@@ -50,14 +66,14 @@ export class RegisterComponent implements OnInit {
   onSubmit() {
     this.submitted = true;
 
-    this.user.firstName = this.form.value.firstName;
-    this.user.lastName = this.form.value.lastName;
-    this.user.email = this.form.value.email;
-    this.user.password = this.form.value.password;
+    this.userObject.firstName = this.form.value.firstName;
+    this.userObject.lastName = this.form.value.lastName;
+    this.userObject.email = this.form.value.email;
+    this.userObject.password = this.form.value.password;
     // active will become true after confirmation email
-    this.user.active = false;
+    this.userObject.active = false;
 
-    console.log(this.user);
+    //console.log(this.user);
 
     // reset alerts on submit
     //this.alertService.clear();
@@ -69,13 +85,14 @@ export class RegisterComponent implements OnInit {
 
     this.loading = true;
     this.authService
-      .register(this.user)
+      .register(this.userObject)
       .pipe(first())
       .subscribe({
         next: () => {
+          this.registrationOK = true;
           //this.alertService.success('Registration successful', { keepAfterRouteChange: true });
-          alert("Sikeres regisztráció!");
-          this.router.navigate(['/login'], { relativeTo: this.route });
+          //alert("Sikeres regisztráció!");
+          //this.router.navigate(['/login'], { relativeTo: this.route });
         },
         error: (error) => {
           //this.alertService.error(error);

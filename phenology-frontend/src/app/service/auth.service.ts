@@ -15,7 +15,8 @@ export class AuthService {
   lastToken: string = '';
   loginUrl: string = `${this.config.apiUrl}login`;
   registerUrl: string = `${this.config.apiUrl}register`;
-  user: User = new User;
+  //user: User = new User;
+  userObject: Object = new Object;
 
   constructor(
     private config: ConfigService,
@@ -55,8 +56,9 @@ export class AuthService {
     this.router.navigate(['/', 'login']);
   }
 
-  register(user: User): Observable<User> {
-    return this.http.post<User>(`${this.config.apiUrl}${this.registerUrl}`, user);
+  register(userObject: Object): Observable<Object> {
+    console.log("küldöm a kérést:", `${this.registerUrl}`, userObject);
+    return this.http.post<User>(`${this.registerUrl}`, userObject);
   }
 
 }
