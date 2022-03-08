@@ -15,6 +15,7 @@ const confirmationCode = jwt.sign(
 
 const adminEmailUser = process.env.ADMIN_EMAIL;
 const adminUserPass = process.env.ADMIN_EMAIL_PASSWORD;
+const frontendURL = process.env.FRONTEND_PORT;
 
 const transport = nodemailer.createTransport({
   //service: "Gmail",
@@ -38,7 +39,7 @@ transport.verify(function (error, success) {
 });
 
 module.exports.sendEmail = (name, email, confirmationCode) => {
-  console.log("Check");
+  //console.log("Check");
   transport
     .sendMail({
       from: "admin",//adminEmailUser,
@@ -52,7 +53,7 @@ module.exports.sendEmail = (name, email, confirmationCode) => {
         Meteorológiai Szolgálat Növényfenológiai oldalán.
         A regisztráció véglegesítéséhez már csak egy lépés van hátra:
         ehhez kérjük kattintson az alábbi linkre: </p>
-        <a href=http://localhost:3000/confirm/${confirmationCode}> Regisztráció megerősítése</a>
+        <a href=http://localhost:${frontendURL}/confirm/${confirmationCode}> Regisztráció megerősítése</a>
         <br>
         <p>Kéréseivel, javaslataival kérjük bizalommal
         forduljon hozzánk elérhetőségeinken, kollégáink

@@ -28,6 +28,7 @@ export class RegisterComponent implements OnInit {
     active: false,
     password:'',
     accessToken: '',
+    confirmationCode: '',
     role: ''
   };
 
@@ -96,7 +97,8 @@ export class RegisterComponent implements OnInit {
         },
         error: (error) => {
           //this.alertService.error(error);
-          alert("Sikertelen regisztráció!")
+          alert("Sikertelen regisztráció! Ezzel az email címmel már regisztráltak. Amennyiben az email cím az Öné, kérhet új jelszót.");
+          alert(JSON.stringify(error));
           this.loading = false;
         },
       });

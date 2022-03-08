@@ -4,8 +4,9 @@ const controller = require('./controller');
 const router = express.Router();
 
 // confirmation email
-router.post('/confirm', (req, res, next) => {
-  //return controller.sendConfirmationEmail(req, res, next);
+router.get('/confirm/:confirmationCode', (req, res, next) => {
+  console.log(req.params.confirmationCode);
+  return controller.verifyUser(req, res, next);
 });
 
 // create registration

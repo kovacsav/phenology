@@ -13,6 +13,7 @@ import { LoginComponent } from './page/login/login.component';
 import { ObservationDatasComponent } from './page/observation-datas/observation-datas.component';
 import { ObservedDatasComponent } from './page/observed-datas/observed-datas.component';
 import { RegisterComponent } from './page/register/register.component';
+import { RegistrationConfirmationComponent } from './page/registration-confirmation/registration-confirmation.component';
 
 
 const routes: Routes = [
@@ -31,6 +32,10 @@ const routes: Routes = [
   {
     path: 'register',
     component: RegisterComponent,
+  },
+  {
+    path: 'confirm/:confirmationCode',
+    component: RegistrationConfirmationComponent,
   },
   {
     path: 'article',

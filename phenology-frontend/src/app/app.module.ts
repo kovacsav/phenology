@@ -29,6 +29,7 @@ import { IndividualPlantGuideComponent } from './page/guide/individual-plant-gui
 import { FullArticleComponent } from './page/full-article/full-article.component';
 import { ChallengeComponent } from './page/challenge/challenge.component';
 import { RegisterComponent } from './page/register/register.component';
+import { RegistrationConfirmationComponent } from './page/registration-confirmation/registration-confirmation.component';
 
 
 @NgModule({
@@ -51,6 +52,7 @@ import { RegisterComponent } from './page/register/register.component';
     FullArticleComponent,
     ChallengeComponent,
     RegisterComponent,
+    RegistrationConfirmationComponent,
   ],
   imports: [
     BrowserModule,
