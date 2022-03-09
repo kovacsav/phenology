@@ -30,6 +30,8 @@ import { FullArticleComponent } from './page/full-article/full-article.component
 import { ChallengeComponent } from './page/challenge/challenge.component';
 import { RegisterComponent } from './page/register/register.component';
 import { RegistrationConfirmationComponent } from './page/registration-confirmation/registration-confirmation.component';
+import { ForgotPasswordComponent } from './page/forgot-password/forgot-password.component';
+import { ResetPasswordComponent } from './page/reset-password/reset-password.component';
 
 
 @NgModule({
@@ -53,6 +55,8 @@ import { RegistrationConfirmationComponent } from './page/registration-confirmat
     ChallengeComponent,
     RegisterComponent,
     RegistrationConfirmationComponent,
+    ForgotPasswordComponent,
+    ResetPasswordComponent,
   ],
   imports: [
     BrowserModule,

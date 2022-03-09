@@ -2,11 +2,17 @@ const express = require("express");
 const createError = require("http-errors");
 const jwt = require("jsonwebtoken");
 
+
 const currentModel = require("../../models/user.model");
+//const Token = require("../../models/token.model");
 const currentService = require("./service");
-const register = require("../../auth/register");
+//const register = require("../../auth/register");
 const req = require("express/lib/request");
 const { Console } = require("console");
+
+
+
+user = new currentModel();
 
 const checkModel = (model, body, next) => {
   const validationErrors = new model(body).validateSync();
@@ -50,9 +56,10 @@ const checkEmailExist = async (email) => {
 // confirmations code
 
 module.exports.verifyUser = (req, res, next) => {
-  currentModel.findOne({
-    confirmationCode: req.params.confirmationCode,
-  })
+  currentModel
+    .findOne({
+      confirmationCode: req.params.confirmationCode,
+    })
     .then((user) => {
       if (!user) {
         return res.status(404).send({ message: "User Not found." });
@@ -67,21 +74,10 @@ module.exports.verifyUser = (req, res, next) => {
       });
     })
     .catch((e) => console.log("error", e))
-    .then((cp) => {
-      res.status(201).send({message: 'Confirmation success'});
-      //res.json(cp);
-    })
+    .then(() => {
+      res.status(201).send({ message: "Confirmation success" });
+    });
 };
-  
-  /*
-  return currentService
-    .findOneByConfirmationcode(req.params.confirmationCode)
-    .then( () => {
-      res.status(201);
-    })
-    .catch((err) => next(new createError.InternalServerError(err.message)))
-  };
-  */
 
 // Create.
 
@@ -117,7 +113,7 @@ module.exports.create = (req, res, next) => {
         })
         // Send confirmation email
         .then(
-          register.sendEmail(
+          currentService.sendRegistrationConfirmationEmail(
             req.body.firstName + " " + req.body.lastName,
             req.body.email,
             confirmationCode
@@ -127,6 +123,34 @@ module.exports.create = (req, res, next) => {
     );
   });
 };
+
+// https://blog.logrocket.com/implementing-a-secure-password-reset-in-node-js/
+// send new password link
+module.exports.sendNewPasswordLink = (req, res, next) => {
+  return (currentService.requestPasswordReset(req.params.email)
+  .then(
+    res.status(201).send({ message: "Confirmation success" }))
+  .catch((err) => next(new createError.InternalServerError(err.message)))
+  );
+};
+
+
+/*
+  email = req.params.email;
+  currentModel.findOne({ email }).then((user) => {
+    if (!user) {
+      throw new Error("User does not exist");
+    };
+    Token.findOne({ userId: user._id }).then((token) => {
+      if (token) {
+        token.deleteOne();
+      }
+    });
+  });
+*/
+//return currentService.findAll().then((items) => {
+//  res.json(items);
+//});
 
 // Read.
 module.exports.findAll = (req, res, next) => {
@@ -143,6 +167,18 @@ module.exports.findOne = (req, res, next) => {
     }
     return res.json(item);
   });
+};
+
+// Set new password
+module.exports.setNewPassword = (req, res, next) => {
+  return currentService
+    .update(req.params.id, req.body)
+    .then((item) => {
+      res.json(item);
+    })
+    .catch((err) => {
+      next(new createError.InternalServerError(err.message));
+    });
 };
 
 // Update.

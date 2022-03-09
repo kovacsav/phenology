@@ -14,6 +14,18 @@ router.post('/register', (req, res, next) => {
   return controller.create(req, res, next);
 });
 
+// new password request
+router.get('/newpassword/:email', (req, res, next) => {
+  console.log(req.params.email);
+  return controller.sendNewPasswordLink(req, res, next);
+});
+
+// set new password
+router.post('/setnewpassword', (req, res, next) => {
+  console.log(req.body);
+  return controller.resetP(req, res, next);
+});
+
 // read
 router.get('/', (req, res, next) => {
   return controller.findAll(req, res, next);

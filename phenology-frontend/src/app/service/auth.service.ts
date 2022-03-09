@@ -16,6 +16,10 @@ export class AuthService {
   loginUrl: string = `${this.config.apiUrl}login`;
   registerUrl: string = `${this.config.apiUrl}register`;
   confirmUrl: string = `${this.config.apiUrl}confirm`;
+  newPasswordUrl: string = `${this.config.apiUrl}newpassword`;
+  setNewPassword: string = `${this.config.apiUrl}setnewpassword`;
+
+
   //user: User = new User;
   userObject: Object = new Object();
   confirmationIsOk = false;
@@ -65,23 +69,15 @@ export class AuthService {
 
   verifyUser(code: string): Observable<Object> {
     return this.http.get(this.confirmUrl + '/'+ code);
-    /*
-    .pipe()
-      .subscribe({
-        next: () => {
-          this.confirmationIsOk = true;
-          console.log(this.confirmationIsOk);
-          //this.router.navigate(['/', 'login']);
-        },
-        error: (error) => {
-          //this.alertService.error(error);
-          alert(
-            'Sikertelen regisztráció!'
-          );
-          alert(JSON.stringify(error));
-          //this.router.navigate(['/', 'register']);
-        },
-      });
-      */
+  }
+
+  sendNewPasswordRequest(email: string): Observable<Object> {
+    console.log('küldöm a kérést:', `${this.newPasswordUrl}`, email);
+    return this.http.get(this.newPasswordUrl + '/'+ email);
+  }
+
+  sendNewPassword(object: Object): Observable<Object> {
+    console.log('küldöm a kérést:', `${this.setNewPassword}`, object);
+    return this.http.put<object>(`${this.setNewPassword}`, object);
   }
 }

@@ -2,6 +2,8 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { ArticleComponent } from './page/article/article.component';
 import { ChallengeComponent } from './page/challenge/challenge.component';
+import { ResetPasswordComponent } from './page/reset-password/reset-password.component';
+import { ForgotPasswordComponent } from './page/forgot-password/forgot-password.component';
 import { FullArticleComponent } from './page/full-article/full-article.component';
 import { DetailedPlantGuideComponent } from './page/guide/detailed-plant-guide/detailed-plant-guide.component';
 import { GuideComponent } from './page/guide/guide.component';
@@ -36,6 +38,14 @@ const routes: Routes = [
   {
     path: 'confirm/:confirmationCode',
     component: RegistrationConfirmationComponent,
+  },
+  {
+    path: 'forgotPassword',
+    component: ForgotPasswordComponent,
+  },
+  {
+    path: 'passwordReset/:token/:id',
+    component: ResetPasswordComponent,
   },
   {
     path: 'article',

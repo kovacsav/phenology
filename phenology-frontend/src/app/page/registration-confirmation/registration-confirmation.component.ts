@@ -15,7 +15,7 @@ import { first } from 'rxjs';
 })
 export class RegistrationConfirmationComponent implements OnInit {
   confirmationCode: string = '';
-  confirmationIsOk: boolean = false;
+  confirmationStatus: string = '';
 
   constructor(
     private authService: AuthService,
@@ -36,10 +36,11 @@ export class RegistrationConfirmationComponent implements OnInit {
       .pipe(first())
       .subscribe({
         next: () => {
-          this.confirmationIsOk = true;
-          console.log(this.confirmationIsOk);
+          this.confirmationStatus = 'success';
+          console.log(this.confirmationStatus);
         },
         error: (error) => {
+          this.confirmationStatus = 'failed';
           //this.alertService.error(error);
           alert('Sikertelen regisztráció!');
           alert(JSON.stringify(error));

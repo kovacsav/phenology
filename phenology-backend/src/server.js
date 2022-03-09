@@ -132,19 +132,15 @@ app.use("/observations", require("./controllers/observations/routes"));
 // app.use('/plants', authenticateJwt, require('./controllers/plants/routes'));
 app.use("/plants", require("./controllers/plants/routes"));
 app.use("/articles", require("./controllers/articles/routes"));
-/*
-app.use(
-  "/newObservation",
-//  authenticateJwt,
-  require("./controllers/newObservation/routes")
-);
-*/
+
 app.use("/users",
 //authenticateJwt,
- require("./controllers/users/routes"));
+  require("./controllers/users/routes"));
 
 app.post("/register", require("./controllers/users/routes"));
 app.get("/confirm/:confirmationCode", require("./controllers/users/routes"));
+app.get("/newpassword/:email", require("./controllers/users/routes"));
+app.post("/setnewpassword", require("./controllers/users/routes"));
 
 // error handling
 app.use((err, req, res, next) => {

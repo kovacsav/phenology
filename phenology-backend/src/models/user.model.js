@@ -1,5 +1,7 @@
 const mongoose = require("mongoose");
 const idValidator = require("mongoose-id-validator");
+const bcrypt = require("bcrypt");
+const bcryptSalt = process.env.BCRYPT_SALT;
 
 // timestamps: https://mongoosejs.com/docs/guide.html#timestamps
 const UserSchema = mongoose.Schema(
@@ -39,6 +41,19 @@ const UserSchema = mongoose.Schema(
 );
 
 UserSchema.plugin(idValidator);
+
+// https://blog.logrocket.com/implementing-a-secure-password-reset-in-node-js/
+// Before the password is saved,
+// we use the pre-save MongoDB hook to hash the password
+
+UserSchema.pre("save", async function (next) {
+  if (!this.isModified("password")) {
+    return next();
+  }
+  const hash = await bcrypt.hash(this.password, Number(bcryptSalt));
+  this.password = hash;
+  next();
+});
 
 module.exports = mongoose.model("User", UserSchema);
 
