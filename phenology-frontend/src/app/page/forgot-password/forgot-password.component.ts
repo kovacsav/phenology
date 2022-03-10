@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/service/auth.service';
 import { first } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-forgot-password',
@@ -11,7 +12,10 @@ export class ForgotPasswordComponent implements OnInit {
   email: string = '';
   forgotPasswordStatus: string = '';
 
-  constructor(private authService: AuthService) {}
+  constructor(
+    private authService: AuthService,
+    private router: Router
+    ) {}
 
   ngOnInit(): void {}
 
@@ -32,5 +36,9 @@ export class ForgotPasswordComponent implements OnInit {
           //this.router.navigate(['/', 'register']);
         },
       });
+  }
+
+  onCancel(): void {
+    this.router.navigate(['/login']);
   }
 }

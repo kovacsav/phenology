@@ -129,7 +129,7 @@ module.exports.create = (req, res, next) => {
 module.exports.sendNewPasswordLink = (req, res, next) => {
   return (currentService.requestPasswordReset(req.params.email)
   .then(
-    res.status(201).send({ message: "Confirmation success" }))
+    res.status(201).send({ message: "New password link sent." }))
   .catch((err) => next(new createError.InternalServerError(err.message)))
   );
 };
@@ -172,7 +172,7 @@ module.exports.findOne = (req, res, next) => {
 // Set new password
 module.exports.setNewPassword = (req, res, next) => {
   return currentService
-    .update(req.params.id, req.body)
+    .resetPassword(req.body.token, req.body.userID, req.body.newPassword)
     .then((item) => {
       res.json(item);
     })

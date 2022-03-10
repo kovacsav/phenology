@@ -57,14 +57,15 @@ const confirmationCode = jwt.sign(
 );
 */
 
-const adminEmailUser = process.env.ADMIN_EMAIL;
+const adminEmailUser = process.env.ADMIN_EMAIL_USER;
 const adminUserPass = process.env.ADMIN_EMAIL_PASSWORD;
+const adminEmail = process.env.ADMIN_EMAIL;
 
 const transport = nodemailer.createTransport({
   //service: "Gmail",
 
-  host: "zcs.met.hu",
-  port: 465,
+  host: "zcs.met.hu", //terra.met.hu
+  port: 465, //25,
   secure: true, // true for 465, false for other ports
   auth: {
     user: adminEmailUser,
@@ -89,7 +90,7 @@ module.exports.sendRegistrationConfirmationEmail = (
   //console.log("Check");
   transport
     .sendMail({
-      from: "admin", //adminEmailUser,
+      from: adminEmail, //adminEmailUser,
       to: email,
       subject: "Regisztráció megerősítés - növényfenológia",
       html: `<h1>Regisztráció megerősítés</h1>
@@ -119,11 +120,11 @@ module.exports.sendRegistrationConfirmationEmail = (
     .catch((err) => console.log(err));
 };
 
-module.exports.sendNewPasswordEmail = (name, email, link) => {
+const sendNewPasswordEmail = (name, email, link) => {
   //console.log("Check");
   transport
     .sendMail({
-      from: "admin", //adminEmailUser,
+      from: adminEmail, //adminEmailUser,
       to: email,
       subject: "Új jelszó igénylése - növényfenológia",
       html: `<h1>Új jelszó igénylése a Növényfenológiai oldalra 
@@ -156,6 +157,8 @@ module.exports.sendNewPasswordEmail = (name, email, link) => {
     .catch((err) => console.log(err));
 };
 
+// https://blog.logrocket.com/implementing-a-secure-password-reset-in-node-js/
+
 module.exports.requestPasswordReset = async (email) => {
   const user = await User.findOne({ email });
   if (!user) throw new Error("Email does not exist");
@@ -174,12 +177,13 @@ module.exports.requestPasswordReset = async (email) => {
 
   const link = `${frontendURL}/passwordReset/${resetToken}/${user._id}`;
 
-  currentService.sendNewPasswordEmail(user.lastName, user.email, link)
+  sendNewPasswordEmail(user.lastName, user.email, link)
   return;
 };
 
 
-module.exports.resetPassword = async (userId, token, password) => {
+module.exports.resetPassword = async (token, userId, password) => {
+  console.log(token, userId, password);
   let passwordResetToken = await Token.findOne({ userId });
   if (!passwordResetToken) {
     throw new Error("Invalid or expired password reset token");

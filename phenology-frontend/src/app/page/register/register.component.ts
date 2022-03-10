@@ -84,6 +84,10 @@ export class RegisterComponent implements OnInit {
       return;
     }
 
+    if (this.form.value.password !== this.form.value.confirmPassword){
+      return
+    }
+
     this.loading = true;
     this.authService
       .register(this.userObject)
@@ -102,5 +106,9 @@ export class RegisterComponent implements OnInit {
           this.loading = false;
         },
       });
+  }
+
+  onCancel(): void {
+    this.router.navigate(['/login']);
   }
 }

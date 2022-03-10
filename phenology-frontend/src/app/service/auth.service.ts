@@ -78,6 +78,6 @@ export class AuthService {
 
   sendNewPassword(object: Object): Observable<Object> {
     console.log('küldöm a kérést:', `${this.setNewPassword}`, object);
-    return this.http.put<object>(`${this.setNewPassword}`, object);
+    return this.http.post<object>(`${this.setNewPassword}`, object);
   }
 }

@@ -23,7 +23,7 @@ router.get('/newpassword/:email', (req, res, next) => {
 // set new password
 router.post('/setnewpassword', (req, res, next) => {
   console.log(req.body);
-  return controller.resetP(req, res, next);
+  return controller.setNewPassword(req, res, next);
 });
 
 // read

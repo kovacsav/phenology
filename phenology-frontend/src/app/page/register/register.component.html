@@ -3,6 +3,7 @@
   <div *ngIf="!registrationOK">
     <div class="card-body">
       <form [formGroup]="form" (ngSubmit)="onSubmit()">
+
         <div class="form-group">
           <label for="firstName">Vezetéknév</label>
           <input
@@ -130,7 +131,7 @@
             ></span>
             Regisztráció
           </button>
-          <a routerLink="'/'" class="btn btn-link">Mégsem</a>
+          <button type="button" class="btn btn-primary m-2" (click)="onCancel()">Mégsem</button>
         </div>
       </form>
     </div>

@@ -9,6 +9,7 @@ import {
 import { first } from 'rxjs';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
+
 @Component({
   selector: 'app-reset-password',
   templateUrl: './reset-password.component.html',
@@ -23,14 +24,17 @@ export class ResetPasswordComponent implements OnInit {
   userID: string = '';
   token: string = '';
   newPassword: string = '';
+  serverResponse: string = '';
 
   constructor(
     private authService: AuthService,
     private activatedRoute: ActivatedRoute,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private router: Router
+    //private customValidator: CustomValidatorService
   ) {}
 
-  ngOnInit(): void {
+  ngOnInit() {
     this.form = this.formBuilder.group({
       password: [
         '',
@@ -41,8 +45,10 @@ export class ResetPasswordComponent implements OnInit {
           ),
         ],
       ],
-      confirmPassword: ['', Validators.required]
-    })
+      confirmPassword: ['', Validators.required],
+    });
+    //{validator: this.checkPassword('password', 'confirmPassword') }
+    //CustomValidatorService.mustMatch('password', 'confirmPassword')
   }
 
   // convenience getter for easy access to form fields
@@ -52,12 +58,31 @@ export class ResetPasswordComponent implements OnInit {
 
   onSubmit() {
     console.log('password reset starts');
+    this.submitted = true;
     this.token = this.activatedRoute.snapshot.params.token;
     this.userID = this.activatedRoute.snapshot.params.id;
     console.log(this.token, this.userID);
     this.newPassword = this.form.value.password;
+
+    console.log(this.form.invalid);
+
+    // stop here if form is invalid
+    if (this.form.invalid) {
+      return;
+    }
+
+    if (this.form.value.password !== this.form.value.confirmPassword){
+      return
+    }
+
+    this.loading = true;
+
     this.authService
-      .sendNewPassword({this.token, this.userID, this.newPassword})
+      .sendNewPassword({
+        token: this.token,
+        userID: this.userID,
+        newPassword: this.newPassword,
+      })
       .pipe(first())
       .subscribe({
         next: () => {
@@ -67,10 +92,16 @@ export class ResetPasswordComponent implements OnInit {
         error: (error) => {
           this.resetPasswordStatus = 'failed';
           //this.alertService.error(error);
+          this.serverResponse = JSON.stringify(error);
           alert('Sikertelen regisztráció!');
           alert(JSON.stringify(error));
           //this.router.navigate(['/', 'register']);
         },
       });
   }
+
+  onCancel(): void {
+    this.router.navigate(['/login']);
+  }
+
 }
