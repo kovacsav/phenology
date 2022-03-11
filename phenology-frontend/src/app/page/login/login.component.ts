@@ -1,5 +1,6 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { Router } from '@angular/router';
+import { first } from 'rxjs';
 import { User } from 'src/app/model/user';
 import { AuthService } from 'src/app/service/auth.service';
 import { UserService } from 'src/app/service/user.service';
@@ -27,18 +28,25 @@ export class LoginComponent implements OnInit {
   onLogin(): void {
     this.currentUser.emit(this.user);
     console.log(this.user)
-    this.auth.login(this.user).subscribe(
+    this.auth.login(this.user).pipe(first()).subscribe({
+      next: (user) => {
+        if (user) {
+          this.router.navigate(['/observation']);
+        }
+      },
+      error: (error) => {
+        alert("Sikertelen bejelentkezés.");
+        alert(JSON.stringify(error));
+      },
+      /*
       user => {
         if (user) {
           this.router.navigate(['/observation']);
         }
-      }
-    );
+        else alert("nem sikerült a bejelentkezés")
+      },
+      */
+    });
   }
-
-  // setPassword(): void {
-  //   this.userService.update({_id: 'uuuuuuuuuu', password: 'user_pw'})
-  //     .subscribe( response => console.log(response) );
-  // }
 
 }

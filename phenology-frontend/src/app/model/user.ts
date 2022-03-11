@@ -3,7 +3,7 @@ export class User {
   firstName?: string = '';
   lastName?: string = '';
   email?: string = '';
-  active?: boolean = true;
+  active?: boolean = false;
   password: string = '';
   accessToken?: string = '';
   confirmationCode: string = '';
