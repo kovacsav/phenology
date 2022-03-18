@@ -3,9 +3,11 @@ const controller = require('./controller');
 
 const router = express.Router();
 
+// Authenctication.
+const authenticateJwt = require("../../auth/authenticate");
 
 // create
-router.post('/', (req, res, next) => {
+router.post('/',authenticateJwt, (req, res, next) => {
   return controller.create(req, res, next);
 });
 

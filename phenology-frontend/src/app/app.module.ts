@@ -8,6 +8,7 @@ import { NgxFileDropModule } from 'ngx-file-drop';
 import { GoogleMapsModule } from '@angular/google-maps';
 import { AgmCoreModule } from '@agm/core';
 import { MapsModule } from '@syncfusion/ej2-angular-maps';
+import { CookieService } from 'ngx-cookie-service';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -32,7 +33,6 @@ import { RegisterComponent } from './page/register/register.component';
 import { RegistrationConfirmationComponent } from './page/registration-confirmation/registration-confirmation.component';
 import { ForgotPasswordComponent } from './page/forgot-password/forgot-password.component';
 import { ResetPasswordComponent } from './page/reset-password/reset-password.component';
-
 
 @NgModule({
   declarations: [
@@ -68,15 +68,18 @@ import { ResetPasswordComponent } from './page/reset-password/reset-password.com
     ReactiveFormsModule,
     GoogleMapsModule,
     AgmCoreModule.forRoot({
-      apiKey: 'AIzaSyCg8fF_7JOUEWLbbHKpZ1_vjsiQTTk6e5Q'
+      apiKey: 'AIzaSyCg8fF_7JOUEWLbbHKpZ1_vjsiQTTk6e5Q',
     }),
-    MapsModule
+    MapsModule,
   ],
-  providers: [{
-    provide: HTTP_INTERCEPTORS,
-    useClass: JwtInterceptorService,
-    multi: true
-  },],
-  bootstrap: [AppComponent]
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: JwtInterceptorService,
+      multi: true,
+    },
+    CookieService,
+  ],
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

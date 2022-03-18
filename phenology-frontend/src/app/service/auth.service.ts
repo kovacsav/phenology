@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { User } from '../model/user';
 import { ConfigService } from './config.service';
+import { CookieService } from 'ngx-cookie-service';
 
 @Injectable({
   providedIn: 'root',
@@ -19,7 +20,6 @@ export class AuthService {
   newPasswordUrl: string = `${this.config.apiUrl}newpassword`;
   setNewPassword: string = `${this.config.apiUrl}setnewpassword`;
 
-
   //user: User = new User;
   userObject: Object = new Object();
   confirmationIsOk = false;
@@ -27,10 +27,18 @@ export class AuthService {
   constructor(
     private config: ConfigService,
     private http: HttpClient,
-    private router: Router
+    private router: Router,
+    private cookieService: CookieService
   ) {
+    /*
     if (localStorage.currentUser) {
       const user: User = JSON.parse(localStorage.currentUser);
+      this.lastToken = user.accessToken || '';
+      this.currentUserSubject$.next(user);
+    }
+  */
+    if (this.cookieService.get('currentUser')) {
+      const user: User = JSON.parse(this.cookieService.get('currentUser'));
       this.lastToken = user.accessToken || '';
       this.currentUserSubject$.next(user);
     }
@@ -42,12 +50,29 @@ export class AuthService {
       .pipe(
         map((response) => {
           response.user = loginData;
-          console.log('authservice', loginData);
+          //console.log('authservice', loginData);
+          console.log('response', response);
           if (response.user && response.accessToken) {
             this.lastToken = response.accessToken;
             response.user.accessToken = response.accessToken;
             this.currentUserSubject$.next(response.user);
-            localStorage.currentUser = JSON.stringify(response.user);
+            this.cookieService.set(
+              'currentUserEmail',
+              JSON.stringify(response.user.email)
+            );
+            this.cookieService.set(
+              'currentUserFirstName',
+              JSON.stringify(response.user.firstName)
+            );
+            this.cookieService.set(
+              'currentUserLastName',
+              JSON.stringify(response.user.lastName)
+            );
+            this.cookieService.set(
+              'accessToken',
+              JSON.stringify(response.accessToken)
+            );
+            //localStorage.currentUser = JSON.stringify(response.user);
             return response.user;
           }
           return null;
@@ -58,7 +83,9 @@ export class AuthService {
   logout(): void {
     this.lastToken = '';
     this.currentUserSubject$.next(null);
-    localStorage.removeItem('currentUser');
+    this.cookieService.delete('currentUser');
+    this.cookieService.delete('accessToken');
+    //localStorage.removeItem('currentUser');
     this.router.navigate(['/', 'login']);
   }
 
@@ -68,12 +95,12 @@ export class AuthService {
   }
 
   verifyUser(code: string): Observable<Object> {
-    return this.http.get(this.confirmUrl + '/'+ code);
+    return this.http.get(this.confirmUrl + '/' + code);
   }
 
   sendNewPasswordRequest(email: string): Observable<Object> {
     console.log('küldöm a kérést:', `${this.newPasswordUrl}`, email);
-    return this.http.get(this.newPasswordUrl + '/'+ email);
+    return this.http.get(this.newPasswordUrl + '/' + email);
   }
 
   sendNewPassword(object: Object): Observable<Object> {

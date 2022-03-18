@@ -1,19 +1,22 @@
 const jwt = require("jsonwebtoken");
-const crypto = require("crypto");
+//const crypto = require("crypto");
 const bcrypt = require("bcrypt");
+//const bcryptSalt = process.env.BCRYPT_SALT;
 
 // Biztonságosabb megoldás, az adatbázis használata.
 // Példa: https://www.npmjs.com/package/mongoose-bcrypt
 
 const User = require("../models/user.model");
-const user = new User();
+let user = new User();
 
 const refreshTokens = [];
 
 module.exports.login = async (req, res) => {
   const { email, password } = req.body;
 
-  user = await User.findOne(email);
+  //console.log(email, password);
+
+  user = await User.findOne({email});
   // console.log(usersFromDatabase)
 
   /*
@@ -42,9 +45,12 @@ module.exports.login = async (req, res) => {
     */
 
   if (user) {
+    //console.log(user.password);
+    
     bcrypt.compare(req.body.password, user.password, function (err, results) {
       if (err) {
-        throw new Error(err);
+        return res.status(401).json({ msg: "Email or password incorrect." });
+        //throw new Error(err);
       }
       if (results) {
         const accessToken = jwt.sign(
@@ -72,7 +78,7 @@ module.exports.login = async (req, res) => {
           refreshToken,
           user,
         });
-        return res.status(200).json({ msg: "Login success" });
+        //return res.status(200).json({ msg: "Login success" });
       } else {
         return res.status(401).json({ msg: "Email or password incorrect." });
         //res.send('Email or password incorrect.');

@@ -32,7 +32,7 @@ const { username, password, host } = config.get("database");
 mongoose
   // .connect(`mongodb+srv://${username}:${password}@${host}`, {
   .connect(
-   `mongodb://phenology_u:ph55logy@127.0.0.1:27017/phenology?authSource=admin`,
+    `mongodb://phenology_u:ph55logy@127.0.0.1:27017/phenology?authSource=admin`,
     //`mongodb+srv://User:Phenology2022@cluster0.r2fm3.mongodb.net/phenology?retryWrites=true&w=majority`,
     //` mongodb+srv://User:35Nx0t65aNmizeLQ@cluster0.r2fm3.mongodb.net/phenology?retryWrites=true&w=majority`,
     {
@@ -125,17 +125,23 @@ app.post("/refresh", authHandler.refresh);
 app.post("/logout", authHandler.logout);
 
 app.use("/observations", require("./controllers/observations/routes"));
+/*
+app.route("/observations")
+  .get(require("./controllers/observations/routes"))
+  .post(authenticateJwt, require("./controllers/observations/routes"));
+/*
+app.get("/observations", require("./controllers/observations/routes"));
+app.post(
+  "/observations",
+  authenticateJwt,
+  require("./controllers/observations/routes")
+);
+*/
 
-//app.get("/users", require("./controllers/user/routes"));
-
-
-// app.use('/plants', authenticateJwt, require('./controllers/plants/routes'));
 app.use("/plants", require("./controllers/plants/routes"));
 app.use("/articles", require("./controllers/articles/routes"));
 
-app.use("/users",
-//authenticateJwt,
-  require("./controllers/users/routes"));
+app.use("/users", authenticateJwt, require("./controllers/users/routes"));
 
 app.post("/register", require("./controllers/users/routes"));
 app.get("/confirm/:confirmationCode", require("./controllers/users/routes"));
@@ -153,44 +159,3 @@ app.use((err, req, res, next) => {
 });
 
 module.exports = app;
-
-
-/*
-
-// test nodemailer
-
-const nodemailer = require("nodemailer");
-
-const user = process.env.ADMIN_EMAIL;
-const pass = process.env.ADMIN_EMAIL_PASSWORD;
-
-const transport = nodemailer.createTransport({
-  /*
-  host: "smtp.gmail.com",
-  port: 465,
-  secure: true, // true for 465, false for other ports
-  auth: {
-    user: "mezbogyo@gmail.com",
-    pass: "kamcsatka",
-  },
-  
-  host: "zcs.met.hu",
-  port: 465,
-  secure: true, // true for 465, false for other ports
-  auth: {
-    user: user,
-    pass: pass,
-  },
-  
-});
-
-// verify connection configuration
-transport.verify(function (error, success) {
-    if (error) {
-      console.log(error);
-    } else {
-      console.log("Server is ready to take our messages");
-    }
-  });
-
-*/
