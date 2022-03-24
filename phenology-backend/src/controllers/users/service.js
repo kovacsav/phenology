@@ -23,13 +23,15 @@ exports.findOne = (id) => User.findById(id).populate();
 
 exports.findOneParam = (param) => User.findOne(param);
 
-exports.update = (id, updateData) =>
+exports.update = (updateData) => {
+  id = User.findOne(updateData.email)._id;
   User.findByIdAndUpdate(id, updateData, { new: true });
+}
 
 exports.delete = (id) => User.findByIdAndRemove(id);
 
 exports.findOneByConfirmationcode = (confirmationCode) => {
-  console.log("find one start");
+  //console.log("find one start");
   User.findOne({ confirmationCode: confirmationCode })
     .then((user) => {
       if (!user) {

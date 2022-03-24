@@ -183,12 +183,12 @@ module.exports.setNewPassword = (req, res, next) => {
 
 // Update.
 module.exports.update = (req, res, next) => {
-  if (!checkModel(currentModel, req.body, next)) {
+  /*if (!checkModel(currentModel, req.body, next)) {
     return;
   }
-
+*/
   return currentService
-    .update(req.params.id, req.body)
+    .update(req.body)
     .then((item) => {
       res.json(item);
     })

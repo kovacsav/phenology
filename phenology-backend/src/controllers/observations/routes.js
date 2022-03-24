@@ -7,7 +7,8 @@ const router = express.Router();
 const authenticateJwt = require("../../auth/authenticate");
 
 // create
-router.post('/',authenticateJwt, (req, res, next) => {
+router.post('/', authenticateJwt, (req, res, next) => {
+  //console.log(req.headers.authorization);
   return controller.create(req, res, next);
 });
 

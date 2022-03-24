@@ -5,7 +5,7 @@ const router = express.Router();
 
 // confirmation email
 router.get('/confirm/:confirmationCode', (req, res, next) => {
-  console.log(req.params.confirmationCode);
+  //console.log(req.params.confirmationCode);
   return controller.verifyUser(req, res, next);
 });
 
@@ -16,13 +16,13 @@ router.post('/register', (req, res, next) => {
 
 // new password request
 router.get('/newpassword/:email', (req, res, next) => {
-  console.log(req.params.email);
+  //console.log(req.params.email);
   return controller.sendNewPasswordLink(req, res, next);
 });
 
 // set new password
 router.post('/setnewpassword', (req, res, next) => {
-  console.log(req.body);
+  //console.log(req.body);
   return controller.setNewPassword(req, res, next);
 });
 
@@ -36,7 +36,7 @@ router.get('/:id', (req, res, next) => {
 });
 
 // update
-router.put('/:id', (req, res, next) => {
+router.post('/profileupdate', (req, res, next) => {
   return controller.update(req, res, next);
 });
 

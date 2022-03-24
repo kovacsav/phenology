@@ -1,0 +1,132 @@
+<div *ngIf="signedin">
+  <div class="card my-2 shadow">
+    <h4 class="card-header">Regisztráció</h4>
+    <div *ngIf="!registrationOK">
+      <div class="card-body">
+        <form [formGroup]="form" (ngSubmit)="onSubmit()">
+
+          <div class="form-group">
+            <label for="firstName">Vezetéknév</label>
+            <input
+              type="text"
+              formControlName="firstName"
+              class="form-control my-2"
+              [ngClass]="{ 'is-invalid': submitted && f.firstName.errors }"
+              [(ngModel)]="user.firstName"
+            />
+            <div
+              *ngIf="submitted && f.firstName.errors"
+              class="invalid-feedback"
+            >
+              <div *ngIf="f.firstName.errors.required">
+                Vezetéknév megadása kötelező
+              </div>
+              <div *ngIf="f.firstName.errors.minlength">Hibás vezetéknév</div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="lastName">Keresztnév</label>
+            <input
+              type="text"
+              formControlName="lastName"
+              class="form-control my-2"
+              [ngClass]="{ 'is-invalid': submitted && f.lastName.errors }"
+              [(ngModel)]="user.lastName"
+            />
+            <div
+              *ngIf="submitted && f.lastName.errors"
+              class="invalid-feedback"
+            >
+              <div *ngIf="f.lastName.errors.required">
+                Keresztnév megadása kötelező
+              </div>
+              <div *ngIf="f.lastName.errors.minlength">Hibás keresztnév</div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="password">Jelszó</label>
+            <input
+              type="password"
+              formControlName="password"
+              class="form-control my-2"
+              [ngClass]="{ 'is-invalid': submitted && f.password.errors }"
+              [(ngModel)]="user.password"
+            />
+            <div
+              *ngIf="submitted && f.password.errors"
+              class="invalid-feedback"
+            >
+              <div *ngIf="f.password.errors.required">
+                Jelszó megadása kötelező
+              </div>
+              <div *ngIf="f.password.errors.pattern">
+                A jelszó nem elég biztonságos: 9-15 karakter hosszú legyen,
+                legyen benne legalább egy kisbetű, egy nagybetű, egy szám és egy
+                speciális karakter (@!%*?&)
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="confirmPassword">A jelszó megerősítése</label>
+            <input
+              type="password"
+              formControlName="confirmPassword"
+              class="form-control my-2"
+              [ngClass]="{
+                'is-invalid':
+                  submitted && f.password.value !== f.confirmPassword.value
+              }"
+              [(ngModel)]="user.password"
+            />
+            <div
+              *ngIf="submitted && f.confirmPassword.errors"
+              class="invalid-feedback"
+            >
+              <div *ngIf="f.confirmPassword.errors.required">
+                A jelszó megerősítése kötelező
+              </div>
+            </div>
+            <div
+              *ngIf="submitted && f.password.value !== f.confirmPassword.value"
+              class="invalid-feedback"
+            >
+              <div *ngIf="f.password.value !== f.confirmPassword.value">
+                A jelszó nem egyezik
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group m-2">
+            <button [disabled]="loading" class="btn btn-primary">
+              <span
+                *ngIf="loading"
+                class="spinner-border spinner-border-sm mr-1"
+              ></span>
+              Megerősítés
+            </button>
+
+            <button
+              type="button"
+              class="btn btn-primary m-2"
+              (click)="onCancel()"
+            >
+              Mégsem
+            </button>
+
+            <button
+              type="button"
+              class="btn btn-primary m-2"
+              (click)="onDelete()"
+            >
+              Profil törlése
+            </button>
+
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

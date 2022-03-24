@@ -1,4 +1,5 @@
 const jwt = require('jsonwebtoken');
+const authHandler = require('./authHandler');
 
 module.exports = (req, res, next) => {
     const authHeader = req.headers.authorization;
@@ -8,10 +9,12 @@ module.exports = (req, res, next) => {
         const token = authHeader.split(' ')[1];
         jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, (err, user) => {
             if (err) {
-                return res.sendStatus(403);
+                console.log('A felhasználó azonosítása nem sikerült. Kérjük jelentkezzen be újra.')
+                return res.status(403).json({ msg: "A felhasználó azonosítása nem sikerült. Kérjük jelentkezzen be újra. "});
             }
 
             req.user = user;
+            authHandler.refresh();
             next();
         });
     } else {

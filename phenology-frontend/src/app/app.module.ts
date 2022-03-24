@@ -33,6 +33,7 @@ import { RegisterComponent } from './page/register/register.component';
 import { RegistrationConfirmationComponent } from './page/registration-confirmation/registration-confirmation.component';
 import { ForgotPasswordComponent } from './page/forgot-password/forgot-password.component';
 import { ResetPasswordComponent } from './page/reset-password/reset-password.component';
+import { ProfileComponent } from './page/profile/profile.component';
 
 @NgModule({
   declarations: [
@@ -57,6 +58,7 @@ import { ResetPasswordComponent } from './page/reset-password/reset-password.com
     RegistrationConfirmationComponent,
     ForgotPasswordComponent,
     ResetPasswordComponent,
+    ProfileComponent,
   ],
   imports: [
     BrowserModule,

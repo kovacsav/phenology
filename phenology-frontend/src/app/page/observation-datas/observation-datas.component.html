@@ -1,92 +1,79 @@
-<div class="container text-white p-3">
-  <div class="row">
-    <h3 class="py-2">Új megfigyelés rögzítése</h3>
-    <form #observationForm="ngForm" (ngSubmit)="save()">
-      <div class="form-group mt-3">
-        <label for="">Időpont</label>
-        <input
-          name="date"
-          [(ngModel)]="observation.date"
-          type="date"
-          class="form-control"
-          required
-        />
-        {{ observation.date }}
-      </div>
+<div *ngIf="signedin">
+  <div class="container text-white p-3">
+    <div class="row">
+      <h3 class="py-2">Új megfigyelés rögzítése</h3>
+      <form #observationForm="ngForm" (ngSubmit)="save()">
+        <div class="form-group mt-3">
+          <label for="">Időpont</label>
+          <input
+            name="date"
+            [(ngModel)]="observation.date"
+            type="date"
+            class="form-control"
+            required
+          />
+        </div>
 
-      <div class="form-group mt-3">
-        <label for="">Hely</label>
-        <input
-          name="location"
-          [(ngModel)]="observation.location"
-          type="text"
-          class="form-control"
-          required
-        />
-      </div>
+        <div class="form-group mt-3">
+          <label for="">Hely</label>
+          <input
+            name="location"
+            [(ngModel)]="observation.location"
+            type="text"
+            class="form-control"
+            required
+          />
+        </div>
 
-      <h4 class="mt-5">Megfigyelt növény</h4>
+        <h4 class="mt-5">Megfigyelt növény</h4>
 
-      <h5>Fák</h5>
-      <div class="row row-cols-3 row-cols-md-6 g-3 mt-3 text-dark">
-        <div class="col" *ngFor="let plant of trees ">
-          <div class="card h-100 shadow hovered" (click)="setPlant(plant)">
-            <img
-              [src]="plant.image[0]"
-              class="card-img-top"
-              alt="..."
-            />
-            <div class="card-body">
-              <h6 class="card-title fw-bold">{{ plant.name }}</h6>
-              <p class="card-text">{{ plant.latin }}</p>
+        <h5>Fák</h5>
+        <div class="row row-cols-3 row-cols-md-6 g-3 mt-3 text-dark">
+          <div class="col" *ngFor="let plant of trees">
+            <div class="card h-100 shadow hovered" (click)="setPlant(plant)">
+              <img [src]="plant.image[0]" class="card-img-top" alt="..." />
+              <div class="card-body">
+                <h6 class="card-title fw-bold">{{ plant.name }}</h6>
+                <p class="card-text">{{ plant.latin }}</p>
+              </div>
             </div>
           </div>
         </div>
-      </div>
 
-      <h5>Cserjék</h5>
-      <div class="row row-cols-3 row-cols-md-6 g-3 mt-3 text-dark">
-        <div class="col" *ngFor="let plant of shrub ">
-          <div class="card h-100 shadow hovered" (click)="setPlant(plant)">
-            <img
-              [src]="plant.image[0]"
-              class="card-img-top"
-              alt="..."
-            />
-            <div class="card-body">
-              <h6 class="card-title fw-bold">{{ plant.name }}</h6>
-              <p class="card-text">{{ plant.latin }}</p>
+        <h5>Cserjék</h5>
+        <div class="row row-cols-3 row-cols-md-6 g-3 mt-3 text-dark">
+          <div class="col" *ngFor="let plant of shrub">
+            <div class="card h-100 shadow hovered" (click)="setPlant(plant)">
+              <img [src]="plant.image[0]" class="card-img-top" alt="..." />
+              <div class="card-body">
+                <h6 class="card-title fw-bold">{{ plant.name }}</h6>
+                <p class="card-text">{{ plant.latin }}</p>
+              </div>
             </div>
           </div>
         </div>
-      </div>
 
-      <h5>Lágyszárúak</h5>
-      <div class="row row-cols-3 row-cols-md-6 g-3 mt-3 text-dark">
-        <div class="col" *ngFor="let plant of herbaceous ">
-          <div class="card h-100 shadow hovered" (click)="setPlant(plant)">
-            <img
-              [src]="plant.image[0]"
-              class="card-img-top"
-              alt="..."
-            />
-            <div class="card-body">
-              <h6 class="card-title fw-bold">{{ plant.name }}</h6>
-              <p class="card-text">{{ plant.latin }}</p>
+        <h5>Lágyszárúak</h5>
+        <div class="row row-cols-3 row-cols-md-6 g-3 mt-3 text-dark">
+          <div class="col" *ngFor="let plant of herbaceous">
+            <div class="card h-100 shadow hovered" (click)="setPlant(plant)">
+              <img [src]="plant.image[0]" class="card-img-top" alt="..." />
+              <div class="card-body">
+                <h6 class="card-title fw-bold">{{ plant.name }}</h6>
+                <p class="card-text">{{ plant.latin }}</p>
+              </div>
             </div>
           </div>
         </div>
-      </div>
 
-      <!--<button class="m-5">Más növény</button>-->
+        <!--<button class="m-5">Más növény</button>-->
 
-
-      <div *ngIf="observation.plant._id" class="form-group mt-3">
-        <!-- <div class="d-flex justify-content-between">
+        <div *ngIf="observation.plant._id" class="form-group mt-3">
+          <!-- <div class="d-flex justify-content-between">
           <label for="">Fenológiai fázis</label>
         </div> -->
-        <h4 class="mt-5 mb-3">Fenológiai fázis</h4>
-        <!-- <div *ngFor="let phase of observation.plant.phase">
+          <h4 class="mt-5 mb-3">Fenológiai fázis</h4>
+          <!-- <div *ngFor="let phase of observation.plant.phase">
           <div class="form-check form-check-inline">
             <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1">
             <label class="form-check-label" for="inlineRadio1">{{phase}}</label>
@@ -97,122 +84,141 @@
           </div>
         </div> -->
 
-        <div
-          *ngFor="let phase of selectedPlant.phase"
-          class="btn-group m-2 mb-5"
-          (click)="setPhase(phase)"
-          role="group"
-          aria-label=""
-        >
-          <input
-            type="radio"
-            class="btn-check"
-            name="btnradio"
-            [id]="phase"
-            autocomplete="off"
-          />
-          <label class="btn btn-outline-light" [for]="phase">{{ phase }}</label>
-        </div>
+          <div
+            *ngFor="let phase of selectedPlant.phase"
+            class="btn-group m-2 mb-5"
+            (click)="setPhase(phase)"
+            role="group"
+            aria-label=""
+          >
+            <input
+              type="radio"
+              class="btn-check"
+              name="btnradio"
+              [id]="phase"
+              autocomplete="off"
+              required
+            />
+            <label class="btn btn-outline-light" [for]="phase">{{
+              phase
+            }}</label>
+          </div>
 
-        <!-- Uplaod photo -->
+          <!-- Uplaod photo -->
 
-        <div class="container">
-          <h3>Fénykép feltöltés</h3>
+          <div class="container">
+            <h3>Fénykép feltöltés</h3>
 
-          <form [formGroup]="fileUploadForm">
-            <div class="row">
-              <div class="col-sm-12">
-                <div>
-                  <h6 class="head-title margin-top-8">
-                    <span>Válassz fényképet!</span>
-                  </h6>
+            <form [formGroup]="fileUploadForm">
+              <div class="row">
+                <div class="col-sm-12">
+                  <div>
+                    <h6 class="head-title margin-top-8">
+                      <span>Válassz fényképet!</span>
+                    </h6>
+                  </div>
                 </div>
-              </div>
-              <div class="col-sm-6">
-                <div class="custom-file">
-                  <label for="image-inpit" class="custom-file-upload">
-                    Tallózás
-                  </label>
-                  <input
-                    type="file"
-                    accept=".jpg, .png, .jpeg"
-                    id="image-inpit"
-                    class="custom-file-input"
-                    name="uploadedImage"
-                    (change)="selectFile($event)"
-                    #UploadFileInput
-                    multiple
-                  />
-                  <div class="row">
-                    <div
-                      *ngFor="let selectedFile of compressedFiles"
-                      class="col m-2"
-                    >
-                      <img [src]="selectedFile" width="150" />
+                <div class="col-sm-6">
+                  <div class="custom-file">
+                    <label for="image-inpit" class="custom-file-upload">
+                      Tallózás
+                    </label>
+                    <input
+                      type="file"
+                      accept=".jpg, .png, .jpeg"
+                      id="image-inpit"
+                      class="custom-file-input"
+                      name="uploadedImage"
+                      (change)="selectFile($event)"
+                      #UploadFileInput
+                      multiple
+                    />
+                    <div class="row">
+                      <div
+                        *ngFor="let selectedFile of compressedFiles"
+                        class="col m-2"
+                      >
+                        <img [src]="selectedFile" width="150" />
+                      </div>
                     </div>
                   </div>
                 </div>
               </div>
-            </div>
 
-            <!-- --------------- webcam -->
-            <app-camera
-              (getPicture)="handleImage($event)"
-              name="webcamImage"
-            ></app-camera>
-            <div class="webcam-image" *ngIf="webcamImage">
-              <img [src]="webcamImage.imageAsDataUrl" />
-
-            </div>
-
-            <br>
-
-            <div class="row">
-              <div
-                *ngFor="let selectedFile of compressedFiles; let indexOfelement=index"
-                class="col m-2"
-              >
-                <img [src]="selectedFile" width="150" />
-                <button (click)="onRemove(indexOfelement)" class="btn btn-danger">File eltávolítása</button>
+              <!-- --------------- webcam -->
+              <app-camera
+                (getPicture)="handleImage($event)"
+                name="webcamImage"
+              ></app-camera>
+              <div class="webcam-image" *ngIf="webcamImage">
+                <img [src]="webcamImage.imageAsDataUrl" />
               </div>
-            </div>
 
-          </form>
-        </div>
-      </div>
+              <br />
 
-      <div class="form-group mt-3">
-        <div class="d-flex justify-content-between">
-          <label for="">Megjegyzés</label>
-          <div
-            [hidden]="observationForm.controls.note?.valid"
-            class="error-message mt-1"
-          >
-            A leírás 2-1400 karakter hosszú lehet!
+              <div class="row">
+                <div
+                  *ngFor="
+                    let selectedFile of compressedFiles;
+                    let indexOfelement = index
+                  "
+                  class="col m-2"
+                >
+                  <img [src]="selectedFile" width="150" />
+                  <button
+                    (click)="onRemove(indexOfelement)"
+                    class="btn btn-danger"
+                  >
+                    File eltávolítása
+                  </button>
+                </div>
+              </div>
+            </form>
           </div>
         </div>
-        <textarea
-          name="note"
-          [(ngModel)]="observation.note"
-          type="textarea"
-          class="form-control"
-          pattern="^.{2,1400}$"
-        ></textarea>
-      </div>
 
-      {{ observation | json }}
+        <div class="form-group mt-3">
+          <div class="d-flex justify-content-between">
+            <label for="">Megjegyzés</label>
+            <div
+              [hidden]="observationForm.controls.note?.valid"
+              class="error-message mt-1"
+            >
+              A leírás 2-1400 karakter hosszú lehet!
+            </div>
+          </div>
+          <textarea
+            name="note"
+            [(ngModel)]="observation.note"
+            type="textarea"
+            class="form-control"
+            pattern="^.{2,1400}$"
+          ></textarea>
+        </div>
 
-      <button
-        class="btn btn-primary"
-        [disabled]="observationForm.invalid"
-        type="submit"
-      >
-        Megfigyelés elküldése
-      </button>
-    </form>
+        <!-- {{ observation | json }} -->
+
+        <button
+          class="btn btn-primary"
+          [disabled]="observationForm.invalid || observation.phase==='' "
+          type="submit"
+        >
+          Megfigyelés elküldése
+        </button>
+        <p *ngIf="observationForm.invalid || observation.phase==='' ">Valami hiányzik a beviteli mezőkben: dátum, helyszín, növény, fenológiai fázis.</p>
+      </form>
+    </div>
   </div>
 </div>
 
+<div *ngIf="!signedin">
+  <h5>
+    Új megfigyelés rögzítéséhez be kell
+    <a routerLink="../login" class="btn btn-link">jelentkeznie</a>. Köszönjük.
+  </h5>
+</div>
+
+<!--
 <div *ngIf="allUser$ | async as alluser" class="col-10 offset-1">
   <table class="table">
     <thead>
@@ -258,3 +264,4 @@
     </tbody>
   </table>
 </div>
+-->

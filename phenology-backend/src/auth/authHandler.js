@@ -45,7 +45,7 @@ module.exports.login = async (req, res) => {
     */
 
   if (user) {
-    //console.log(user.password);
+    //console.log(user);
     
     bcrypt.compare(req.body.password, user.password, function (err, results) {
       if (err) {

@@ -1,14 +1,6 @@
 import { DatePipe } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
-import {
-  Component,
-  ElementRef,
-  EventEmitter,
-  Input,
-  OnInit,
-  Output,
-  ViewChild,
-} from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { WebcamImage } from 'ngx-webcam';
@@ -23,6 +15,8 @@ import { PlantService } from 'src/app/service/plant.service';
 import { UserService } from 'src/app/service/user.service';
 import { NgxImageCompressService } from 'ngx-image-compress';
 import { CameraComponent } from 'src/app/common/camera/camera.component';
+import { CookieService } from 'ngx-cookie-service';
+import { AuthService } from 'src/app/service/auth.service';
 
 @Component({
   selector: 'app-observation-datas',
@@ -31,28 +25,25 @@ import { CameraComponent } from 'src/app/common/camera/camera.component';
   providers: [CameraComponent],
 })
 export class ObservationDatasComponent implements OnInit {
-
-
+  signedin: boolean = false;
   observation: Observation = new Observation();
   observations$: Observable<Observation[]> = this.observationService.getAll();
 
   // USER
   // set the signed in user's data
-  userString: string = localStorage.getItem('currentUser') || '';
+  userEmail: string = this.cookieService.get('currentUserEmail') || '';
 
   allUser$: Observable<User[]> = this.userService.getAll();
-  currentUser$: Observable<User> = this.userService
-    .getAll()
-    .pipe(
-      switchMap((users) =>
-        users.filter((user) => user.email === JSON.parse(this.userString).email)
-      )
-    );
+  currentUser$: Observable<User> = this.userService.getAll().pipe(
+    switchMap(
+      (users) => users.filter((user) => user.email === this.userEmail) //JSON.parse(this.userString).email)
+    )
+  );
 
   currentUser: User = new User();
   userID: string = '';
 
-// PLANTS
+  // PLANTS
 
   selectedPlant: Plant = new Plant();
   plants$: Observable<Plant[]> = this.plantService.getAll();
@@ -87,7 +78,6 @@ export class ObservationDatasComponent implements OnInit {
   sizeOfOriginalImage: number = 0;
   sizeOFCompressedImage: number = 0;
 
-
   constructor(
     private observationService: ObservationService,
     private plantService: PlantService,
@@ -96,19 +86,29 @@ export class ObservationDatasComponent implements OnInit {
     private formBuilder: FormBuilder,
     private userService: UserService,
     private imageCompress: NgxImageCompressService,
-    private cameraComponent: CameraComponent
+    private cameraComponent: CameraComponent,
+    private cookieService: CookieService,
+    private auth: AuthService
   ) {
     // console.log('observation',this.user$)
     // this.observation.date = new Date().toISOString().split('T')[0];
-    this.observation.date = new Date().toISOString();
+    //this.observation.date = new Date().toISOString();
     // console.log(new Date().toISOString())
-
     // this.observation.date = this.datePipe.transform(new Date(), 'yyyy-MM-dd');
-
     // this.plants$.subscribe(plants => plants.forEach(plant=>console.log(plant)))
   }
 
   ngOnInit(): void {
+    // authorization
+    this.auth.currentUserSubject$.subscribe({
+      next: (user) => {
+        this.signedin = user?.firstName ? true : false;
+      },
+      error: () => {
+        this.signedin = false;
+      },
+    });
+
     this.fileUploadForm = this.formBuilder.group({
       uploadedImage: [''],
       //webcamImage: ''
@@ -134,7 +134,7 @@ export class ObservationDatasComponent implements OnInit {
   async setCurrentUser(): Promise<any> {
     this.currentUser = await lastValueFrom(this.currentUser$);
     this.observation.user._id = this.currentUser._id;
-    //console.log(this.currentUser);
+    console.log('current user:', this.currentUser);
   }
 
   setPlant(plant: Plant): void {
@@ -190,14 +190,22 @@ export class ObservationDatasComponent implements OnInit {
     });
 
     console.log(this.observation);
-    console.log('hello');
+    //console.log('hello');
 
-    this.observationService
-      .create(this.observation)
-      .subscribe(() => this.router.navigate(['/']));
-      alert("Köszönjük! Megfigyelését rögzítettük.")
+    this.observationService.create(this.observation).subscribe({
+      next: () => {
+        alert('Köszönjük! Megfigyelését rögzítettük.');
+        this.router.navigate(['/']);
+      },
+      error: () => {
+        alert(
+          'A felhasználó azonosítása nem sikerült, lehetséges, hogy a rendszer biztonsági okokból a hosszú inaktivitás miatt kiléptette. Kérjük jelentkezzen be újra.'
+        );
+        this.auth.logout();
+        this.router.navigate(['/login']);
+      },
+    });
   }
-
 
   // https://www.npmjs.com/package/ngx-image-compress
 
@@ -251,12 +259,10 @@ export class ObservationDatasComponent implements OnInit {
   setImagePath(fileName: string): void {}
 
   handleImage(webcamImage: WebcamImage) {
-
     this.webcamImage = webcamImage;
     const fileName: string = `${this.observation.date}-${this.observation.plant.name}.jpg`;
 
     this.compressFile(webcamImage.imageAsDataUrl, fileName);
-
   }
 
   onRemove(index: any): void {
@@ -265,4 +271,3 @@ export class ObservationDatasComponent implements OnInit {
     this.compressedFiles.splice(index, 1);
   }
 }
-

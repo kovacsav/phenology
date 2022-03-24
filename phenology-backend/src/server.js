@@ -147,6 +147,7 @@ app.post("/register", require("./controllers/users/routes"));
 app.get("/confirm/:confirmationCode", require("./controllers/users/routes"));
 app.get("/newpassword/:email", require("./controllers/users/routes"));
 app.post("/setnewpassword", require("./controllers/users/routes"));
+app.post("/profileupdate", authenticateJwt, require("./controllers/users/routes"));
 
 // error handling
 app.use((err, req, res, next) => {
