@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { first } from 'rxjs/operators';
@@ -6,28 +6,32 @@ import { AuthService } from 'src/app/service/auth.service';
 import { CookieService } from 'ngx-cookie-service';
 import { User } from 'src/app/model/user';
 
+
 @Component({
   selector: 'app-profil',
   templateUrl: './profile.component.html',
-  styleUrls: ['./profile.component.scss']
+  styleUrls: ['./profile.component.scss'],
 })
 export class ProfileComponent implements OnInit {
+
+  @Output() currentUser: EventEmitter<User> = new EventEmitter<User>();
 
   form: FormGroup = new FormGroup({});
   loading = false;
   submitted = false;
-  registrationOK = false;
+  profileUpdateOK = false;
   signedin: boolean = false;
   user: User = new User();
+  confirmPassword: string = '';
 
-// a POST metódussal a usert _id nélkül kell átadni
-// ezért kell ez az új object
+  // a POST metódussal a usert _id nélkül kell átadni
+  // ezért kell ez az új object
 
   userObject = {
     email: '',
     firstName: '',
     lastName: '',
-    password:''
+    password: '',
   };
 
   constructor(
@@ -35,7 +39,7 @@ export class ProfileComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private authService: AuthService,
-    private cookieService: CookieService,
+    private cookieService: CookieService
   ) {}
 
   ngOnInit() {
@@ -51,8 +55,8 @@ export class ProfileComponent implements OnInit {
           ),
         ],
       ],
-      confirmPassword: ['', Validators.required]
-    })
+      confirmPassword: ['', Validators.required],
+    });
 
     // set user
     //this.user.firstName = this.cookieService.get('currentUserFirstName');
@@ -63,16 +67,18 @@ export class ProfileComponent implements OnInit {
       next: (user) => {
         this.user.firstName = user?.firstName;
         this.user.lastName = user?.lastName;
-        this.user.password = user?.password || '';
+        this.user.password = this.cookieService.get('password').slice(1, -1);
+        this.confirmPassword = this.user.password;
+        //this.user.password = user?.password || '';
         this.user.email = user?.email;
       },
       error: () => {
-        this.user.firstName = ''
+        this.user.firstName = '';
       },
     });
 
-    this.signedin = this.user.firstName? true : false;
-/*
+    this.signedin = this.user.firstName ? true : false;
+    /*
   // authorization
     this.authService.currentUserSubject$.subscribe({
       next: (user) => {
@@ -83,8 +89,7 @@ export class ProfileComponent implements OnInit {
       },
     });
     */
-  };
-
+  }
 
   // convenience getter for easy access to form fields
   get f() {
@@ -92,6 +97,7 @@ export class ProfileComponent implements OnInit {
   }
 
   onSubmit() {
+    this.currentUser.emit(this.user);
     this.submitted = true;
 
     this.userObject.firstName = this.form.value.firstName;
@@ -109,24 +115,40 @@ export class ProfileComponent implements OnInit {
       return;
     }
 
-    if (this.form.value.password !== this.form.value.confirmPassword){
-      return
+    if (this.form.value.password !== this.form.value.confirmPassword) {
+      return;
     }
 
     this.loading = true;
     this.authService
-      .register(this.userObject)
+      .profileUpdate(this.userObject)
       .pipe(first())
       .subscribe({
-        next: () => {
-          this.registrationOK = true;
-          //this.alertService.success('Registration successful', { keepAfterRouteChange: true });
-          //alert("Sikeres regisztráció!");
-          //this.router.navigate(['/login'], { relativeTo: this.route });
+        next: (user) => {
+          if (user) {
+            this.profileUpdateOK = true;
+            this.cookieService.set(
+              'currentUserFirstName',
+              JSON.stringify(this.userObject.firstName)
+            );
+            this.cookieService.set(
+              'currentUserLastName',
+              JSON.stringify(this.userObject.lastName)
+            );
+            this.cookieService.set(
+              'password',
+              JSON.stringify(this.userObject.password)
+            );
+            //this.alertService.success('Registration successful', { keepAfterRouteChange: true });
+            //alert("Sikeres regisztráció!");
+            //this.router.navigate(['/login'], { relativeTo: this.route });
+          }
         },
         error: (error) => {
           //this.alertService.error(error);
-          alert("Sikertelen regisztráció! Ezzel az email címmel már regisztráltak. Amennyiben az email cím az Öné, kérhet új jelszót.");
+          alert(
+            'Sikertelen regisztráció! Ezzel az email címmel már regisztráltak. Amennyiben az email cím az Öné, kérhet új jelszót.'
+          );
           alert(JSON.stringify(error));
           this.loading = false;
         },
@@ -134,10 +156,48 @@ export class ProfileComponent implements OnInit {
   }
 
   onCancel(): void {
-    this.router.navigate(['/login']);
+    this.router.navigate(['/']);
   }
 
   onDelete(): void {
+    this.currentUser.emit(this.user);
+    this.submitted = true;
+
+    this.userObject.firstName = this.form.value.firstName;
+    this.userObject.lastName = this.form.value.lastName;
+    this.userObject.password = this.form.value.password;
+    this.userObject.email = this.user.email || '';
+
+    //console.log(this.user);
+
+    // stop here if form is invalid
+    if (this.form.invalid) {
+      return;
+    }
+
+    if (this.form.value.password !== this.form.value.confirmPassword) {
+      return;
+    }
+
+    this.loading = true;
+    this.authService
+      .profileDelete(this.userObject)
+      .pipe(first())
+      .subscribe({
+        next: (user) => {
+          if (user) {
+            alert("A profil törlése sikeres.");
+          }
+        },
+        error: (error) => {
+          //this.alertService.error(error);
+          alert(
+            'A profil törlése sikertelen.'
+          );
+          alert(JSON.stringify(error));
+          this.loading = false;
+        },
+      });
     this.router.navigate(['/']);
   }
 }

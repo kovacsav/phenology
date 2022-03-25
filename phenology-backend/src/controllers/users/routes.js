@@ -37,15 +37,18 @@ router.get('/:id', (req, res, next) => {
 
 // update
 router.post('/profileupdate', (req, res, next) => {
+  //console.log("routes");
   return controller.update(req, res, next);
 });
 
+/*
 router.patch('/:id', (req, res, next) => {
   return controller.update(req, res, next);
 });
+*/
 
 // delete
-router.delete('/:id', (req, res, next) => {
+router.post('/profiledelete', (req, res, next) => {
   return controller.delete(req, res, next);
 });
 

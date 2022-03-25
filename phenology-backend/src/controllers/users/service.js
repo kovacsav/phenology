@@ -23,12 +23,40 @@ exports.findOne = (id) => User.findById(id).populate();
 
 exports.findOneParam = (param) => User.findOne(param);
 
-exports.update = (updateData) => {
-  id = User.findOne(updateData.email)._id;
-  User.findByIdAndUpdate(id, updateData, { new: true });
+exports.update = async (updateData) => {
+  let userId = await User.findOne({ email: updateData.email });
+  if (!userId) {
+    throw new Error("Nincs ilyen felhasználó");
+  }
+  const hash = await bcrypt.hash(updateData.password, Number(bcryptSalt));
+  await User.updateOne(
+    { _id: userId },
+    { $set: { firstName: updateData.firstName, lastName: updateData.lastName, password: hash } },
+    { new: true }
+  );
+
+  const user = await User.findById(userId);
+
+  return user;
 }
 
-exports.delete = (id) => User.findByIdAndRemove(id);
+exports.delete = async (userData) => {
+  let userId = await User.findOne({ email: userData.email });
+  
+  if (!userId) {
+    throw new Error("Nincs ilyen felhasználó");
+  }
+  
+  await User.updateOne(
+    { _id: userId },
+    { $set: { email: 'deletedProfile', password: '', active: false, accessToken: '', confirmationCode: '' } },
+    { new: true }
+  );
+
+  const user = await User.findById(userId);
+
+  return user;
+}
 
 exports.findOneByConfirmationcode = (confirmationCode) => {
   //console.log("find one start");

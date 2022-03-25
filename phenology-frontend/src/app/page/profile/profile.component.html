@@ -1,7 +1,7 @@
 <div *ngIf="signedin">
   <div class="card my-2 shadow">
-    <h4 class="card-header">Regisztráció</h4>
-    <div *ngIf="!registrationOK">
+    <h4 class="card-header">Profil szerkesztése</h4>
+    <div *ngIf="!profileUpdateOK">
       <div class="card-body">
         <form [formGroup]="form" (ngSubmit)="onSubmit()">
 
@@ -79,7 +79,7 @@
                 'is-invalid':
                   submitted && f.password.value !== f.confirmPassword.value
               }"
-              [(ngModel)]="user.password"
+              [(ngModel)]="confirmPassword"
             />
             <div
               *ngIf="submitted && f.confirmPassword.errors"
@@ -128,5 +128,11 @@
         </form>
       </div>
     </div>
+
+    <div *ngIf="profileUpdateOK">
+      <h3>A profil szerkesztése sikerült.</h3>
+    </div>
+
   </div>
 </div>
+

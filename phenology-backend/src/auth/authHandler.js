@@ -12,7 +12,7 @@ let user = new User();
 const refreshTokens = [];
 
 module.exports.login = async (req, res) => {
-  const { email, password } = req.body;
+  const email = req.body.email;
 
   //console.log(email, password);
 
@@ -45,7 +45,7 @@ module.exports.login = async (req, res) => {
     */
 
   if (user) {
-    //console.log(user);
+    console.log(user);
     
     bcrypt.compare(req.body.password, user.password, function (err, results) {
       if (err) {
@@ -80,10 +80,14 @@ module.exports.login = async (req, res) => {
         });
         //return res.status(200).json({ msg: "Login success" });
       } else {
+        console.log("login failure");
         return res.status(401).json({ msg: "Email or password incorrect." });
         //res.send('Email or password incorrect.');
       }
     });
+  }
+  else {
+    return res.status(401).json({msg: "Ezzel az email címmel nincs regisztrált felhasználó."})
   }
 };
 

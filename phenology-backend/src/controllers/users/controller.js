@@ -183,15 +183,9 @@ module.exports.setNewPassword = (req, res, next) => {
 
 // Update.
 module.exports.update = (req, res, next) => {
-  /*if (!checkModel(currentModel, req.body, next)) {
-    return;
-  }
-*/
   return currentService
     .update(req.body)
-    .then((item) => {
-      res.json(item);
-    })
+    .then((user) => res.json({user}))
     .catch((err) => {
       next(new createError.InternalServerError(err.message));
     });
@@ -200,8 +194,8 @@ module.exports.update = (req, res, next) => {
 // Delete.
 module.exports.delete = (req, res, next) => {
   return currentService
-    .delete(req.params.id)
-    .then(() => res.json({}))
+    .delete(req.body)
+    .then((user) => res.json({user}))
     .catch((err) => {
       next(new createError.InternalServerError(err.message));
     });
