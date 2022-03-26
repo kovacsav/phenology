@@ -12,6 +12,8 @@ export class JwtInterceptorService implements HttpInterceptor {
     private auth: AuthService,
   ) { }
 
+// https://blog.angular-university.io/angular-jwt-authentication/
+
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
     const token = this.auth.lastToken;
     if (token) {

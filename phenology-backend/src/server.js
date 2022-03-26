@@ -141,14 +141,14 @@ app.post(
 app.use("/plants", require("./controllers/plants/routes"));
 app.use("/articles", require("./controllers/articles/routes"));
 
-app.use("/users", authenticateJwt, require("./controllers/users/routes"));
+//app.use("/users", authenticateJwt, require("./controllers/users/routes"));
 
 app.post("/register", require("./controllers/users/routes"));
 app.get("/confirm/:confirmationCode", require("./controllers/users/routes"));
 app.get("/newpassword/:email", require("./controllers/users/routes"));
 app.post("/setnewpassword", require("./controllers/users/routes"));
-app.post("/profileupdate", require("./controllers/users/routes"));
-app.post("/profiledelete", require("./controllers/users/routes"));
+app.post("/profileupdate", authenticateJwt, require("./controllers/users/routes"));
+app.post("/profiledelete", authenticateJwt, require("./controllers/users/routes"));
 
 
 // error handling

@@ -9,6 +9,7 @@ const currentService = require("./service");
 //const register = require("../../auth/register");
 const req = require("express/lib/request");
 const { Console } = require("console");
+const authHandler = require("../../auth/authHandler");
 
 
 
@@ -182,13 +183,31 @@ module.exports.setNewPassword = (req, res, next) => {
 };
 
 // Update.
-module.exports.update = (req, res, next) => {
-  return currentService
-    .update(req.body)
-    .then((user) => res.json({user}))
-    .catch((err) => {
-      next(new createError.InternalServerError(err.message));
+module.exports.update = async (req, res, next) => {
+  try {
+    const user = await currentService
+      .update(req.body);
+    // send a new access token after every authenticated event
+    const accessToken = authHandler.refresh(user);
+    /*
+    jwt.sign(
+      {
+        email: user.email,
+        role: user.role,
+      },
+      process.env.ACCESS_TOKEN_SECRET,
+      {
+        expiresIn: process.env.TOKEN_EXPIRY,
+      }
+    );
+*/
+    res.json({
+      accessToken,
+      user
     });
+  } catch (err) {
+    next(new createError.InternalServerError(err.message));
+  }
 };
 
 // Delete.

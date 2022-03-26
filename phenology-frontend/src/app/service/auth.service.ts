@@ -121,7 +121,7 @@ export class AuthService {
   profileUpdate(userObject: Object): Observable<User | null> {
     console.log('küldöm a kérést:', `${this.profileUpdateURL}`, userObject);
     return this.http
-      .post<{ user: User }>(`${this.profileUpdateURL}`, userObject)
+      .post<{ user: User; accessToken: string }>(`${this.profileUpdateURL}`, userObject)
       .pipe(
         map((response) => {
           //console.log('authservice', loginData);
@@ -129,6 +129,12 @@ export class AuthService {
           console.log('user name:', JSON.stringify(response.user.email));
           if (response.user) {
             this.currentUserSubject$.next(response.user);
+            // set updated access token
+            this.cookieService.set(
+              'accessToken',
+              JSON.stringify(response.accessToken)
+            );
+
             return response.user;
           }
           return null;

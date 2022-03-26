@@ -16,7 +16,7 @@ module.exports.login = async (req, res) => {
 
   //console.log(email, password);
 
-  user = await User.findOne({email});
+  user = await User.findOne({ email });
   // console.log(usersFromDatabase)
 
   /*
@@ -46,7 +46,7 @@ module.exports.login = async (req, res) => {
 
   if (user) {
     console.log(user);
-    
+
     bcrypt.compare(req.body.password, user.password, function (err, results) {
       if (err) {
         return res.status(401).json({ msg: "Email or password incorrect." });
@@ -75,7 +75,7 @@ module.exports.login = async (req, res) => {
 
         res.json({
           accessToken,
-          refreshToken,
+          //refreshToken,
           user,
         });
         //return res.status(200).json({ msg: "Login success" });
@@ -85,13 +85,42 @@ module.exports.login = async (req, res) => {
         //res.send('Email or password incorrect.');
       }
     });
-  }
-  else {
-    return res.status(401).json({msg: "Ezzel az email címmel nincs regisztrált felhasználó."})
+  } else {
+    return res
+      .status(401)
+      .json({ msg: "Ezzel az email címmel nincs regisztrált felhasználó." });
   }
 };
 
-module.exports.refresh = (req, res, next) => {
+module.exports.refresh = (user) => {
+  const accessToken = jwt.sign(
+    {
+      email: user.email,
+      role: user.role,
+    },
+    process.env.ACCESS_TOKEN_SECRET,
+    {
+      expiresIn: process.env.TOKEN_EXPIRY,
+    }
+  );
+  return accessToken;
+};
+
+module.exports.logout = (req, res) => {
+  const { token } = req.body;
+
+  if (!refreshTokens.includes(token)) {
+    res.sendStatus(403);
+  }
+
+  const tokenIndex = refreshTokens.indexOf(token);
+  refreshTokens.splice(tokenIndex, 1);
+
+  res.sendStatus(200);
+};
+
+/*
+module.exports.refreshOld = (req, res, next) => {
   const { token } = req.body;
 
   if (!token) {
@@ -124,16 +153,4 @@ module.exports.refresh = (req, res, next) => {
     });
   });
 };
-
-module.exports.logout = (req, res) => {
-  const { token } = req.body;
-
-  if (!refreshTokens.includes(token)) {
-    res.sendStatus(403);
-  }
-
-  const tokenIndex = refreshTokens.indexOf(token);
-  refreshTokens.splice(tokenIndex, 1);
-
-  res.sendStatus(200);
-};
+*/
