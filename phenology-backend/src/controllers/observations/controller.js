@@ -4,6 +4,7 @@ const createError = require("http-errors");
 
 const currentModel = require('../../models/observation.model');
 const currentService = require('./service');
+const authHandler = require('../../auth/authHandler')
 
 // Read.
 exports.findAll = (req, res, next) => {
@@ -54,8 +55,15 @@ module.exports.create = (req, res, next) => {
 
   return currentService.create(req.body)
       .then(cp => {
+        const accessToken = authHandler.refresh(req.body.user.email);
+        // not to save users email in database
+        // we need it for the new access token
+        req.body.user.email = '';
           res.status(201);
-          res.json(cp);
+          res.json({
+            accessToken,
+            cp,
+          });
       })
       .catch(err => next(new createError.InternalServerError(err.message)));
 };

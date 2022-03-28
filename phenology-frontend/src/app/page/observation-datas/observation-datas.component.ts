@@ -31,6 +31,7 @@ export class ObservationDatasComponent implements OnInit {
 
   // USER
   // set the signed in user's data
+  /*
   userEmail: string = this.cookieService.get('currentUserEmail') || '';
 
   allUser$: Observable<User[]> = this.userService.getAll();
@@ -39,7 +40,7 @@ export class ObservationDatasComponent implements OnInit {
       (users) => users.filter((user) => user.email === this.userEmail) //JSON.parse(this.userString).email)
     )
   );
-
+*/
   currentUser: User = new User();
   userID: string = '';
 
@@ -99,10 +100,12 @@ export class ObservationDatasComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    // authorization
+    // authorization and set current user
     this.auth.currentUserSubject$.subscribe({
       next: (user) => {
         this.signedin = user?.firstName ? true : false;
+        this.observation.user._id = user?._id || '';
+        this.observation.user.email = user?.email || '';
       },
       error: () => {
         this.signedin = false;
@@ -131,15 +134,17 @@ export class ObservationDatasComponent implements OnInit {
   // file upload and compress
   // https://medium.com/swlh/compress-image-and-send-it-to-an-api-in-angular-bc48e6ed3835
 
+  /*
   async setCurrentUser(): Promise<any> {
     this.currentUser = await lastValueFrom(this.currentUser$);
-    this.observation.user._id = this.currentUser._id;
+    this.observation.user._id =  this.currentUser._id;
     console.log('current user:', this.currentUser);
   }
+*/
 
   setPlant(plant: Plant): void {
     this.observation.plant._id = plant._id;
-    this.setCurrentUser();
+    //this.setCurrentUser();
     this.selectedPlant = plant;
   }
 

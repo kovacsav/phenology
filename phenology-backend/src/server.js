@@ -56,8 +56,13 @@ app.use(cors());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json()); // To parse the incoming requests with JSON payloads
 
-// static files
-app.use(express.static("public"));
+// static files: uploaded images
+// app.use('/static', express.static('public'))
+// frontend:
+// http://localhost:3000/static/images/kitten.jpg
+const path = require('path');
+app.use('/image', express.static(path.join(__dirname, "../phenology_uploaded_files")));
+console.log("path:", path.join(__dirname, "../phenology_uploaded_files"));
 
 // request logging
 app.use(morgan("combined", { stream: logger.stream }));
@@ -125,6 +130,7 @@ app.post("/refresh", authHandler.refresh);
 app.post("/logout", authHandler.logout);
 
 app.use("/observations", require("./controllers/observations/routes"));
+//app.post("/observations", authenticateJwt, require("./controllers/observations/routes"));
 /*
 app.route("/observations")
   .get(require("./controllers/observations/routes"))

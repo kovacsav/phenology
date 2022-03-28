@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { ObservationService } from 'src/app/service/observation.service';
 import { Observable } from 'rxjs';
 import { Observation } from 'src/app/model/observation';
+import { ConfigService } from '../../service/config.service';
 
 @Component({
   selector: 'app-observed-datas',
@@ -12,11 +13,16 @@ import { Observation } from 'src/app/model/observation';
 export class ObservedDatasComponent implements OnInit {
 
   observedData$: Observable<Observation[]> = this.observationService.getAll();
+  backendImageURL: string = '';
 
-  constructor(private observationService : ObservationService) { }
+  constructor(
+    private observationService : ObservationService,
+    public configService: ConfigService
+    ) {}
 
   ngOnInit(): void {
-    //console.log(this.observation$);
+    //console.log(this.observedData$);
+    this.backendImageURL = `${this.configService.apiUrl}image/uploadedImage-`;
   }
 
 }

@@ -2,7 +2,6 @@ const express = require("express");
 const createError = require("http-errors");
 const jwt = require("jsonwebtoken");
 
-
 const currentModel = require("../../models/user.model");
 //const Token = require("../../models/token.model");
 const currentService = require("./service");
@@ -10,8 +9,6 @@ const currentService = require("./service");
 const req = require("express/lib/request");
 const { Console } = require("console");
 const authHandler = require("../../auth/authHandler");
-
-
 
 user = new currentModel();
 
@@ -128,13 +125,11 @@ module.exports.create = (req, res, next) => {
 // https://blog.logrocket.com/implementing-a-secure-password-reset-in-node-js/
 // send new password link
 module.exports.sendNewPasswordLink = (req, res, next) => {
-  return (currentService.requestPasswordReset(req.params.email)
-  .then(
-    res.status(201).send({ message: "New password link sent." }))
-  .catch((err) => next(new createError.InternalServerError(err.message)))
-  );
+  return currentService
+    .requestPasswordReset(req.params.email)
+    .then(res.status(201).send({ message: "New password link sent." }))
+    .catch((err) => next(new createError.InternalServerError(err.message)));
 };
-
 
 /*
   email = req.params.email;
@@ -185,10 +180,9 @@ module.exports.setNewPassword = (req, res, next) => {
 // Update.
 module.exports.update = async (req, res, next) => {
   try {
-    const user = await currentService
-      .update(req.body);
+    const user = await currentService.update(req.body);
     // send a new access token after every authenticated event
-    const accessToken = authHandler.refresh(user);
+    const accessToken = authHandler.refresh(user.email);
     /*
     jwt.sign(
       {
@@ -203,7 +197,7 @@ module.exports.update = async (req, res, next) => {
 */
     res.json({
       accessToken,
-      user
+      user,
     });
   } catch (err) {
     next(new createError.InternalServerError(err.message));
@@ -214,7 +208,7 @@ module.exports.update = async (req, res, next) => {
 module.exports.delete = (req, res, next) => {
   return currentService
     .delete(req.body)
-    .then((user) => res.json({user}))
+    .then((user) => res.json({ user }))
     .catch((err) => {
       next(new createError.InternalServerError(err.message));
     });

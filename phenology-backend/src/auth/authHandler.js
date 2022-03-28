@@ -56,7 +56,7 @@ module.exports.login = async (req, res) => {
         const accessToken = jwt.sign(
           {
             email: user.email,
-            role: user.role,
+            //role: user.role,
           },
           process.env.ACCESS_TOKEN_SECRET,
           {
@@ -67,7 +67,7 @@ module.exports.login = async (req, res) => {
         const refreshToken = jwt.sign(
           {
             email: user.email,
-            role: user.role,
+            //role: user.role,
           },
           process.env.REFRESH_TOKEN_SECRET
         );
@@ -92,11 +92,11 @@ module.exports.login = async (req, res) => {
   }
 };
 
-module.exports.refresh = (user) => {
+module.exports.refresh = (userEmail) => {
   const accessToken = jwt.sign(
     {
-      email: user.email,
-      role: user.role,
+      email: userEmail,
+      //role: user.role,
     },
     process.env.ACCESS_TOKEN_SECRET,
     {
