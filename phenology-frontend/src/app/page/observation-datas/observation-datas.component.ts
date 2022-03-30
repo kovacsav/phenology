@@ -184,11 +184,12 @@ export class ObservationDatasComponent implements OnInit {
         const formData = new FormData();
         // this.pathEvent.emit(this.file);
 
+        this.fileNames[index] = `${Date.now() + index}.jpg`;
         formData.append('uploadedImage', file, this.fileNames[index]);
         formData.append('agentId', '007');
 
         console.log('formData:', formData);
-        this.fileNames[index] = `${Date.now() + index}.jpg`;
+        //formData.append('filename', this.fileNames[index]);
         this.observation.photo?.push(this.fileNames[index]);
         this.observationService.uploadFile(formData);
       }

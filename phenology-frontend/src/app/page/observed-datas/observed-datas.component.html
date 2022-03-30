@@ -7,6 +7,7 @@
         <th>Helyszín</th>
         <th>Növény</th>
         <th>Fenofázis</th>
+        <th>Fényképek</th>
       </tr>
     </thead>
     <tbody>
@@ -18,21 +19,19 @@
         <td>{{ observation.location }}</td>
         <td>{{ observation.plant.name }}</td>
         <td>{{ observation.phase }}</td>
-        <td *ngIf="observation.photo">
-          "{{ backendImageURL }}{{observation.photo[0]}}"
-          <img
-            src="{{ backendImageURL }}{{observation.photo[0]}}"
-            class=""
-            alt="nincs meg a kép"
-          />
+        <td *ngIf="observation.photo as photos">
+          <div>
+            <td *ngFor="let photo of photos">
+              <img
+                src="{{ backendImageURL }}{{ photo }}"
+                class=""
+                alt="nincs meg a kép"
+                style="width: 128px"
+              />
+            </td>
+          </div>
         </td>
       </tr>
     </tbody>
   </table>
-
-  <img
-            src="{{ backendImageURL }}1648454401758.jpg"
-            class=""
-            alt="nincs meg a kép"
-          />
 </div>

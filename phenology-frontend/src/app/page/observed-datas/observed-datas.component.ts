@@ -22,7 +22,7 @@ export class ObservedDatasComponent implements OnInit {
 
   ngOnInit(): void {
     //console.log(this.observedData$);
-    this.backendImageURL = `${this.configService.apiUrl}image/uploadedImage-`;
+    this.backendImageURL = `${this.configService.apiUrl}image/`;
   }
 
 }
