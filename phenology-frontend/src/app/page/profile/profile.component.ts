@@ -59,9 +59,6 @@ export class ProfileComponent implements OnInit {
     });
 
     // set user
-    //this.user.firstName = this.cookieService.get('currentUserFirstName');
-    //this.user.lastName = this.cookieService.get('currentUserLastName');
-    //this.user.password = this.cookieService.get('password');
 
     this.authService.currentUserSubject$.subscribe({
       next: (user) => {
@@ -78,17 +75,7 @@ export class ProfileComponent implements OnInit {
     });
 
     this.signedin = this.user.firstName ? true : false;
-    /*
-  // authorization
-    this.authService.currentUserSubject$.subscribe({
-      next: (user) => {
-        this.signedin = user?.firstName ? true : false;
-      },
-      error: () => {
-        this.signedin = false;
-      },
-    });
-    */
+
   }
 
   // convenience getter for easy access to form fields
@@ -104,11 +91,6 @@ export class ProfileComponent implements OnInit {
     this.userObject.lastName = this.form.value.lastName;
     this.userObject.password = this.form.value.password;
     this.userObject.email = this.user.email || '';
-
-    //console.log(this.user);
-
-    // reset alerts on submit
-    //this.alertService.clear();
 
     // stop here if form is invalid
     if (this.form.invalid) {

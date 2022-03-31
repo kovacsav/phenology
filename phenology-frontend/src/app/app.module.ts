@@ -9,6 +9,7 @@ import { GoogleMapsModule } from '@angular/google-maps';
 import { AgmCoreModule } from '@agm/core';
 import { MapsModule } from '@syncfusion/ej2-angular-maps';
 import { CookieService } from 'ngx-cookie-service';
+import { JwtInterceptorService } from './service/jwt-interceptor.service';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -17,7 +18,6 @@ import { HomeComponent } from './page/home/home.component';
 import { CameraComponent } from './common/camera/camera.component';
 import { UploadImageComponent } from './page/upload-image/upload-image.component';
 import { LoginComponent } from './page/login/login.component';
-import { JwtInterceptorService } from './service/jwt-interceptor.service';
 import { NavigationComponent } from './common/navigation/navigation.component';
 import { MapComponent } from './common/map/map.component';
 import { FooterComponent } from './common/footer/footer.component';
@@ -72,7 +72,7 @@ import { ProfileComponent } from './page/profile/profile.component';
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyCg8fF_7JOUEWLbbHKpZ1_vjsiQTTk6e5Q',
     }),
-    MapsModule,
+    MapsModule
   ],
   providers: [
     {

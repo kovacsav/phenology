@@ -4,7 +4,6 @@
     <div *ngIf="!profileUpdateOK">
       <div class="card-body">
         <form [formGroup]="form" (ngSubmit)="onSubmit()">
-
           <div class="form-group">
             <label for="firstName">Vezetéknév</label>
             <input
@@ -119,20 +118,62 @@
             <button
               type="button"
               class="btn btn-primary m-2"
-              (click)="onDelete()"
+              data-bs-toggle="modal"
+              data-bs-target="#staticBackdrop"
             >
               Profil törlése
             </button>
-
           </div>
         </form>
+      </div>
+    </div>
+
+    <!-- Bootstarp modal -->
+    <div
+      class="modal"
+      id="staticBackdrop"
+      tabindex="-1"
+      aria-labelledby="staticBackdropLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h4 class="modal-title" id="staticBackdropLabel">
+              Biztos hogy törölni szeretné a profilját?
+            </h4>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body">
+            <p>
+              A profil törlése után nem fog tudni bejelentkezni az oldalra, nem
+              fog tudni új megfigyelést rögzíteni, csak újbóli regisztráció
+              után.
+            </p>
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-bs-dismiss="modal"
+            >
+              Mégsem
+            </button>
+            <button type="button" class="btn btn-primary" (click)="onDelete()">
+              Törlés megerősítése
+            </button>
+          </div>
+        </div>
       </div>
     </div>
 
     <div *ngIf="profileUpdateOK">
       <h3>A profil szerkesztése sikerült.</h3>
     </div>
-
   </div>
 </div>
-

@@ -24,10 +24,27 @@
             <td *ngFor="let photo of photos">
               <img
                 src="{{ backendImageURL }}{{ photo }}"
-                class=""
+                class="myImg"
                 alt="nincs meg a kép"
-                style="width: 128px"
+                style="width: 100%"
+                (click)="photoEnlarge(backendImageURL + photo)"
               />
+
+              <!-- Modal -->
+              <div
+                id="myModal"
+                class="modal"
+                [style.display]="modalStyleDisplay"
+              >
+                <span class="close" (click)="closePhoto()">&times;</span>
+                <img
+                  class="modal-content"
+                  id="img01"
+                  [src]="modalImgageSource"
+                />
+                <div id="caption"></div>
+              </div>
+
             </td>
           </div>
         </td>
