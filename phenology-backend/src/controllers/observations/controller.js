@@ -2,9 +2,9 @@ const service = require("./service");
 const createError = require("http-errors");
 //const observation = require("../../models/observation.model");
 
-const currentModel = require('../../models/observation.model');
-const currentService = require('./service');
-const authHandler = require('../../auth/authHandler')
+const currentModel = require("../../models/observation.model");
+const currentService = require("./service");
+const authHandler = require("../../auth/authHandler");
 
 // Read.
 exports.findAll = (req, res, next) => {
@@ -16,7 +16,8 @@ exports.findAll = (req, res, next) => {
 
 // Get one.
 exports.findOne = (req, res, next) => {
-  return service.findOne(req.params.id)
+  return service
+    .findOne(req.params.id)
     .then((observation) => {
       if (!observation) {
         return next(new createError.NotFound("Observation is not found"));
@@ -26,23 +27,48 @@ exports.findOne = (req, res, next) => {
     .catch((err) => {
       return next(new createError.InternalServerError(err.message));
     });
-  };
+};
 
+// Get paginated items
+exports.findPaginatedItems = (req, res, next) => {
+  console.log("body:", req.body);
+  return service
+    .findAll()
+    .then((observation) => {
+      if (!observation) {
+        return next(new createError.NotFound("Observation is not found"));
+      }
+      filteredObservation = observation.filter((item) => {
+        if (req.body.plant) {
+          item.plant.name = req.body.plant;
+        }
+      });
+      totalNumberOfObservations = filteredObservation.length;
+      filteredObservation = filteredObservation.slice(
+        req.body.startIndex,
+        req.body.endIndex + 1
+      );
+      res.json({totalNumberOfObservations, filteredObservation});
+    })
+    .catch((err) => {
+      return next(new createError.InternalServerError(err.message));
+    });
+};
 
 // Create.
 
 const checkModel = (model, body, next) => {
   const validationErrors = new model(body).validateSync();
   if (validationErrors) {
-      next(
-          new createError.BadRequest(
-              JSON.stringify({
-                  message: 'Scmema validation error',
-                  error: validationErrors
-              })
-          )
-      );
-      return false;
+    next(
+      new createError.BadRequest(
+        JSON.stringify({
+          message: "Scmema validation error",
+          error: validationErrors,
+        })
+      )
+    );
+    return false;
   }
   return true;
 };
@@ -50,22 +76,23 @@ const checkModel = (model, body, next) => {
 module.exports.create = (req, res, next) => {
   console.log(req.body);
   if (!checkModel(currentModel, req.body, next)) {
-      return;
+    return;
   }
 
-  return currentService.create(req.body)
-      .then(cp => {
-        const accessToken = authHandler.refresh(req.body.user.email);
-        // not to save users email in database
-        // we need it for the new access token
-        req.body.user.email = '';
-          res.status(201);
-          res.json({
-            accessToken,
-            cp,
-          });
-      })
-      .catch(err => next(new createError.InternalServerError(err.message)));
+  return currentService
+    .create(req.body)
+    .then((cp) => {
+      const accessToken = authHandler.refresh(req.body.user.email);
+      // not to save users email in database
+      // we need it for the new access token
+      req.body.user.email = "";
+      res.status(201);
+      res.json({
+        accessToken,
+        cp,
+      });
+    })
+    .catch((err) => next(new createError.InternalServerError(err.message)));
 };
 
 /*

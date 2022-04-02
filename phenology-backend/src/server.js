@@ -130,6 +130,8 @@ app.post("/refresh", authHandler.refresh);
 app.post("/logout", authHandler.logout);
 
 app.use("/observations", require("./controllers/observations/routes"));
+//app.post("/observations/page", require("./controllers/observations/routes"));
+
 //app.post("/observations", authenticateJwt, require("./controllers/observations/routes"));
 /*
 app.route("/observations")

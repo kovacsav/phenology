@@ -5,8 +5,8 @@ import { FormBuilder, FormControl, FormGroup, NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { WebcamImage } from 'ngx-webcam';
 import { Observable } from 'rxjs';
-import { switchMap } from 'rxjs/operators';
-import { lastValueFrom } from 'rxjs';
+//import { switchMap } from 'rxjs/operators';
+//import { lastValueFrom } from 'rxjs';
 import { Observation } from 'src/app/model/observation';
 import { Plant } from 'src/app/model/plant';
 import { User } from 'src/app/model/user';
@@ -29,18 +29,6 @@ export class ObservationDatasComponent implements OnInit {
   observation: Observation = new Observation();
   observations$: Observable<Observation[]> = this.observationService.getAll();
 
-  // USER
-  // set the signed in user's data
-  /*
-  userEmail: string = this.cookieService.get('currentUserEmail') || '';
-
-  allUser$: Observable<User[]> = this.userService.getAll();
-  currentUser$: Observable<User> = this.userService.getAll().pipe(
-    switchMap(
-      (users) => users.filter((user) => user.email === this.userEmail) //JSON.parse(this.userString).email)
-    )
-  );
-*/
   currentUser: User = new User();
   userID: string = '';
 
@@ -94,7 +82,8 @@ export class ObservationDatasComponent implements OnInit {
     // console.log('observation',this.user$)
     // this.observation.date = new Date().toISOString().split('T')[0];
     //this.observation.date = new Date().toISOString();
-    // console.log(new Date().toISOString())
+    //console.log('ISOString:', new Date())//.toISOString())
+    //console.log('String:', new Date().toString());
     // this.observation.date = this.datePipe.transform(new Date(), 'yyyy-MM-dd');
     // this.plants$.subscribe(plants => plants.forEach(plant=>console.log(plant)))
   }
@@ -134,13 +123,6 @@ export class ObservationDatasComponent implements OnInit {
   // file upload and compress
   // https://medium.com/swlh/compress-image-and-send-it-to-an-api-in-angular-bc48e6ed3835
 
-  /*
-  async setCurrentUser(): Promise<any> {
-    this.currentUser = await lastValueFrom(this.currentUser$);
-    this.observation.user._id =  this.currentUser._id;
-    console.log('current user:', this.currentUser);
-  }
-*/
 
   setPlant(plant: Plant): void {
     this.observation.plant._id = plant._id;
@@ -167,10 +149,6 @@ export class ObservationDatasComponent implements OnInit {
   }
 
   save(): any {
-    // if (!this.fileUploadForm.get('uploadedImage')?.value) {
-    //   alert('Please fill valid details!');
-    //   return false;
-    // }
 
     console.log('filenames', this.fileNames);
     console.log('this.uploadArray', this.uploadArray);

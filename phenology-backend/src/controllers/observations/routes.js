@@ -17,10 +17,16 @@ router.get('/', (req, res, next) => {
   return controller.findAll(req, res, next);
 });
 
+/*
 router.get('/:id', (req, res, next) => {
   return controller.findOne(req, res, next);
 });
-
+*/
+/*
+router.post('/page', (req, res, next) => {
+  return controller.findPaginatedItems(req, res, next);
+});
+*/
 /*
 // update
 router.put('/:id', (req, res, next) => {

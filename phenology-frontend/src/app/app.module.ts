@@ -10,6 +10,7 @@ import { AgmCoreModule } from '@agm/core';
 import { MapsModule } from '@syncfusion/ej2-angular-maps';
 import { CookieService } from 'ngx-cookie-service';
 import { JwtInterceptorService } from './service/jwt-interceptor.service';
+import {NgxPaginationModule} from 'ngx-pagination';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -72,7 +73,8 @@ import { ProfileComponent } from './page/profile/profile.component';
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyCg8fF_7JOUEWLbbHKpZ1_vjsiQTTk6e5Q',
     }),
-    MapsModule
+    MapsModule,
+    NgxPaginationModule
   ],
   providers: [
     {
