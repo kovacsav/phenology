@@ -35,6 +35,7 @@ import { RegistrationConfirmationComponent } from './page/registration-confirmat
 import { ForgotPasswordComponent } from './page/forgot-password/forgot-password.component';
 import { ResetPasswordComponent } from './page/reset-password/reset-password.component';
 import { ProfileComponent } from './page/profile/profile.component';
+import { FilterPipe } from './pipe/filter.pipe';
 
 @NgModule({
   declarations: [
@@ -60,6 +61,7 @@ import { ProfileComponent } from './page/profile/profile.component';
     ForgotPasswordComponent,
     ResetPasswordComponent,
     ProfileComponent,
+    FilterPipe
   ],
   imports: [
     BrowserModule,
