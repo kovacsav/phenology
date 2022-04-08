@@ -1,11 +1,21 @@
-<div *ngIf="observedData$ | async as observations" class="col-10 offset-1">
-  <div *ngIf="plantData$ | async as plants">
+<div *ngIf="plantData$ | async as plants">
+  <div *ngIf="observedData$ | async as observations" class="col-10 offset-1">
 
-    <select name="plantSelection" id="" [(ngModel)]="selectedPlant">
+
+    <label for="">Szűrés</label>
+    <select name="plantSelection" id="" [(ngModel)]="selectedPlant" class="m-5">
       <option *ngFor="let plant of plants" [value]="plant.name">
         {{ plant.name }}
       </option>
     </select>
+
+    <select name="yearSelection" id="" [(ngModel)]="selectedYear">
+    <option *ngFor="let year of observedYears " [value]="year">
+      {{ year }}
+    </option>
+  </select>
+
+  <div > {{selectedPlant}}</div>
 
     <table class="table table-striped">
       <thead>
@@ -21,11 +31,11 @@
       <tbody>
         <tr
           *ngFor="
-            let observation of observations
+            let observation of observations | filter:selectedPlant:selectedYear
               | paginate: { itemsPerPage: 10, currentPage: p }
           "
         >
-          <td>{{ observation.date | date:"yyyy. MM. dd." }}</td>
+          <td>{{ observation.date | date: "yyyy. MM. dd." }}</td>
           <td>
             {{ observation.user.firstName }} {{ observation.user.lastName }}
           </td>

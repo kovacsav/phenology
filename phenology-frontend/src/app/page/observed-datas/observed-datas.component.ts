@@ -1,12 +1,19 @@
 import { Component, OnInit } from '@angular/core';
 import { ObservationService } from 'src/app/service/observation.service';
 import { PlantService } from 'src/app/service/plant.service';
-import { BehaviorSubject, Observable } from 'rxjs';
+import {
+  BehaviorSubject,
+  firstValueFrom,
+  lastValueFrom,
+  Observable,
+  Subscription,
+} from 'rxjs';
 import { map, tap, first } from 'rxjs/operators';
 import { Observation } from 'src/app/model/observation';
 import { Plant } from 'src/app/model/plant';
 import { ConfigService } from '../../service/config.service';
-import { analyzeAndValidateNgModules } from '@angular/compiler';
+//import { ObservedData } from 'src/app/model/observed-data';
+//import { analyzeAndValidateNgModules } from '@angular/compiler';
 
 @Component({
   selector: 'app-observed-datas',
@@ -26,14 +33,15 @@ export class ObservedDatasComponent implements OnInit {
   p: number = 1;
   perPage: number = 10;
   totalNumberOfObservations: number = 0;
+  selectedPlant: string = '';
 
-  selectedPlant: Plant = new Plant();
-  selectedPlant$: BehaviorSubject<Plant | null> =
-    new BehaviorSubject<Plant | null>(null);
+  //selectedPlant: Plant = new Plant();
+  //selectedPlant$: BehaviorSubject<Plant | null> =
+  //  new BehaviorSubject<Plant | null>(null);
 
   plantData$: Observable<Plant[]> = this.plantService.getAll().pipe(
     map((item) =>
-      item.sort((a: any, b: any) => {
+      [new Plant(), ...item.sort((a: any, b: any) => {
         a = a.name.toUpperCase(); // ignore upper and lowercase
         b = b.name.toUpperCase(); // ignore upper and lowercase
         if (a < b) {
@@ -44,10 +52,9 @@ export class ObservedDatasComponent implements OnInit {
         }
         // names must be equal
         return 0;
-      })
+      })]
     )
   );
-  //(a: any, b: any) => b.name - a.name)));
 
   observedData$: Observable<Observation[]> = this.observationService
     .getAll()
@@ -58,8 +65,50 @@ export class ObservedDatasComponent implements OnInit {
             new Date(b.date).getTime() - new Date(a.date).getTime()
         )
       )
+      //tap(res => this.observedYears = res)
     );
 
+  // observedYears$: Observable<any> = this.observedData$.pipe(
+  //   map((item) => {
+  //     item.map((a: any) => {
+  //       a.date;
+  //     });
+  //   })
+  // );
+
+  // observedYears$: Observable<any> = this.observedData$.pipe(
+  //   tap((item) => {
+  //     item.map(o=> console.log(o.date));
+
+  //   })
+  // );
+
+  firstObservedYear: string = '';
+  lastObservedYear: string = '';
+  selectedYear: string = '';
+
+  //observedYears: any;
+
+  // observedYears: string[] = [
+  //   '',
+  //   '2017',
+  //   '2018',
+  //   '2019',
+  //   '2020',
+  //   '2021',
+  //   '2022',
+  // ];
+
+  observedYears: (string | null)[] | null = [];
+
+  /*
+    map((item) => {
+      item.map((a: any) => {
+        a.date
+      })
+    })
+  );
+*/
   paginatedData$: Observation[] = [];
 
   //paginatedData$: Observable<Observation[]> = this.observationService
@@ -78,9 +127,19 @@ export class ObservedDatasComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    console.log('selectedPlant:', this.selectedPlant);
     this.backendImageURL = `${this.configService.apiUrl}image/`;
-    //this.getPage(1);
+    this.observedData$.subscribe((item) => {
+      this.observedYears = [
+        '',
+        ...[
+          ...new Set(
+            item.map((o) => {
+              return o.date ? o.date.slice(0, 4) : o.date;
+            })
+          ),
+        ],
+      ];
+    });
   }
 
   getPage(page: number): void {
@@ -104,10 +163,10 @@ export class ObservedDatasComponent implements OnInit {
     );
 
     /*
-        first())
-        .subscribe({
-          next: (res) => {
-            this.p = page;
+      first())
+      .subscribe({
+        next: (res) => {
+          this.p = page;
             this.loading = false;
             this.totalNumberOfObservations = res.total;
             this.paginatedData$ = res.observations;
@@ -130,4 +189,16 @@ export class ObservedDatasComponent implements OnInit {
   closePhoto(): void {
     this.modalStyleDisplay = 'none';
   }
+
+  /*
+  getFirstAndLastObservationYears(): void {
+    this.observedYears = this.observedData$.pipe(
+      map(item => {
+        item.map((a:any) => {
+          a.date
+        })
+      })
+    )
+  }
+  */
 }
