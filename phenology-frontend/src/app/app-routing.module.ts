@@ -17,6 +17,7 @@ import { ObservedDatasComponent } from './page/observed-datas/observed-datas.com
 import { RegisterComponent } from './page/register/register.component';
 import { RegistrationConfirmationComponent } from './page/registration-confirmation/registration-confirmation.component';
 import { ProfileComponent } from './page/profile/profile.component';
+import { PersonalObservedDatasComponent } from './page/personal-observed-datas/personal-observed-datas.component';
 
 
 const routes: Routes = [
@@ -71,6 +72,10 @@ const routes: Routes = [
   {
     path: 'data',
     component: ObservedDatasComponent,
+  },
+  {
+    path: 'myobservations',
+    component: PersonalObservedDatasComponent,
   },
   {
     path: 'guide',

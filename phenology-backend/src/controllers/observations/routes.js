@@ -17,11 +17,11 @@ router.get('/', (req, res, next) => {
   return controller.findAll(req, res, next);
 });
 
-/*
-router.get('/:id', (req, res, next) => {
-  return controller.findOne(req, res, next);
+
+router.get('/:id', authenticateJwt, (req, res, next) => {
+  return controller.findPersonalItems(req, res, next);
 });
-*/
+
 /*
 router.post('/page', (req, res, next) => {
   return controller.findPaginatedItems(req, res, next);

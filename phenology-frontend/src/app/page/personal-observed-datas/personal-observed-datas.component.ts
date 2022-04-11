@@ -1,26 +1,24 @@
 import { Component, OnInit } from '@angular/core';
 import { ObservationService } from 'src/app/service/observation.service';
 import { PlantService } from 'src/app/service/plant.service';
-import {
-  BehaviorSubject,
-  firstValueFrom,
-  lastValueFrom,
-  Observable,
-  Subscription,
-} from 'rxjs';
+import { observable, Observable } from 'rxjs';
 import { map, tap, first } from 'rxjs/operators';
 import { Observation } from 'src/app/model/observation';
 import { Plant } from 'src/app/model/plant';
 import { ConfigService } from '../../service/config.service';
-//import { ObservedData } from 'src/app/model/observed-data';
-//import { analyzeAndValidateNgModules } from '@angular/compiler';
+import { AuthService } from 'src/app/service/auth.service';
+import { User } from 'src/app/model/user';
 
 @Component({
-  selector: 'app-observed-datas',
-  templateUrl: './observed-datas.component.html',
-  styleUrls: ['./observed-datas.component.scss'],
+  selector: 'app-personal-observed-datas',
+  templateUrl: './personal-observed-datas.component.html',
+  styleUrls: ['./personal-observed-datas.component.scss'],
 })
-export class ObservedDatasComponent implements OnInit {
+export class PersonalObservedDatasComponent implements OnInit {
+  user: User = new User();
+  signedin: boolean = false;
+
+  /* server side pagination
   paginationObject = {
     userId: '',
     location: '',
@@ -29,10 +27,12 @@ export class ObservedDatasComponent implements OnInit {
     endIndex: 10,
   };
 
+  totalNumberOfObservations: number = 0;
   loading: boolean = false;
+  */
+
   p: number = 1;
   perPage: number = 10;
-  totalNumberOfObservations: number = 0;
   selectedPlant: string = '';
 
   //selectedPlant: Plant = new Plant();
@@ -40,8 +40,9 @@ export class ObservedDatasComponent implements OnInit {
   //  new BehaviorSubject<Plant | null>(null);
 
   plantData$: Observable<Plant[]> = this.plantService.getAll().pipe(
-    map((item) =>
-      [new Plant(), ...item.sort((a: any, b: any) => {
+    map((item) => [
+      new Plant(),
+      ...item.sort((a: any, b: any) => {
         a = a.name.toUpperCase(); // ignore upper and lowercase
         b = b.name.toUpperCase(); // ignore upper and lowercase
         if (a < b) {
@@ -52,30 +53,14 @@ export class ObservedDatasComponent implements OnInit {
         }
         // names must be equal
         return 0;
-      })]
-    )
+      }),
+    ])
   );
 
-  observedData$: Observable<Observation[]> = this.observationService
-    .getAll()
-    .pipe(
-      map((item) =>
-        item.sort(
-          (a: any, b: any) =>
-            new Date(b.date).getTime() - new Date(a.date).getTime()
-        )
-      )
-    );
+  observedData$!: Observable<Observation[]>;
 
-
-
-  firstObservedYear: string = '';
-  lastObservedYear: string = '';
   selectedYear: string = '';
-
-
   observedYears: (string | null)[] | null = [];
-
 
   paginatedData$: Observation[] = [];
 
@@ -88,14 +73,43 @@ export class ObservedDatasComponent implements OnInit {
   modalImgageSource: string = '';
   captionText: string = '';
 
+  selectedObservationID: string = '';
+
   constructor(
     private observationService: ObservationService,
     private plantService: PlantService,
-    public configService: ConfigService
+    public configService: ConfigService,
+    private authService: AuthService
   ) {}
 
   ngOnInit(): void {
     this.backendImageURL = `${this.configService.apiUrl}image/`;
+
+    // set user
+
+    this.authService.currentUserSubject$.subscribe({
+      next: (user) => {
+        this.user.firstName = user?.firstName;
+        if (user) {
+          this.observedData$ = this.observationService
+            .getPersonalObservations(user._id)
+            .pipe(
+              map((item) =>
+                item.sort(
+                  (a: any, b: any) =>
+                    new Date(b.date).getTime() - new Date(a.date).getTime()
+                )
+              )
+            );
+        }
+      },
+      error: () => {
+        this.user.firstName = '';
+      },
+    });
+
+    this.signedin = this.user.firstName ? true : false;
+
     this.observedData$.subscribe((item) => {
       this.observedYears = [
         '',
@@ -110,8 +124,9 @@ export class ObservedDatasComponent implements OnInit {
     });
   }
 
-  getPage(page: number): void {
-    this.loading = true;
+  /*
+      getPage(page: number): void {
+        this.loading = true;
     this.paginationObject.userId = '';
     this.paginationObject.location = '';
     this.paginationObject.plant = '';
@@ -129,8 +144,9 @@ export class ObservedDatasComponent implements OnInit {
         console.log('response:', res);
       })
     );
+      */
 
-    /*
+  /*
       first())
       .subscribe({
         next: (res) => {
@@ -145,8 +161,8 @@ export class ObservedDatasComponent implements OnInit {
             //this.router.navigate(['/', 'register']);
           },
         });
-        */
-  }
+      }
+      */
 
   photoEnlarge(path: string): void {
     this.modalStyleDisplay = 'block';
@@ -158,15 +174,22 @@ export class ObservedDatasComponent implements OnInit {
     this.modalStyleDisplay = 'none';
   }
 
-  /*
-  getFirstAndLastObservationYears(): void {
-    this.observedYears = this.observedData$.pipe(
-      map(item => {
-        item.map((a:any) => {
-          a.date
-        })
-      })
-    )
+  onDelete(selectedObservationID: string): void {
+    this.observationService
+      .deleteObservation(selectedObservationID, this.user._id)
+      .pipe(first())
+      .subscribe({
+        next: (res) => {
+          if (res) {
+            alert("A megigyelése törlése sikeres.");
+          }
+        },
+        error: (error) => {
+          alert(
+            'A megfigyelés törlése sikertelen.'
+          );
+          alert(JSON.stringify(error));
+        },
+      });
   }
-  */
 }

@@ -29,6 +29,24 @@ exports.findOne = (req, res, next) => {
     });
 };
 
+// Get personal observations
+exports.findPersonalItems = (req, res, next) => {
+  console.log("req.params.id:", req.params.id);
+  return service
+    .findAllByUserId(req.params.id)
+    .then((observation) => {
+      if (!observation) {
+        return next(new createError.NotFound("Observation is not found"));
+      }
+      
+     res.json(observation);
+    })
+    .catch((err) => {
+      return next(new createError.InternalServerError(err.message));
+    });
+};
+
+
 // Get paginated items
 exports.findPaginatedItems = (req, res, next) => {
   console.log("body:", req.body);

@@ -21,12 +21,20 @@ export class BaseService<T> {
     return this.http.get<T>(`${this.config.apiUrl}${this.entity}/${_id}`);
   }
 
+  getPersonalObservations(_id: string): Observable<T[]> {
+    return this.http.get<T[]>(`${this.config.apiUrl}${this.entity}/${_id}`);
+  }
+
   getPaginatedData(paginatedObject: Object): Observable<Object> {
-    console.log(`${this.config.apiUrl}${this.entity}/page`);
+    //console.log(`${this.config.apiUrl}${this.entity}/page`);
     return this.http.post<Object>(`${this.config.apiUrl}${this.entity}/page`, paginatedObject);
   }
 
   create(entity: T): Observable<T> {
     return this.http.post<T>(`${this.config.apiUrl}${this.entity}`, entity);
+  }
+
+  deleteObservation(_id: string, userId: string): Observable<object> {
+    return this.http.post<object>(`${this.config.apiUrl}${this.entity}/delete${_id}`, userId);
   }
 }

@@ -36,6 +36,7 @@ import { ForgotPasswordComponent } from './page/forgot-password/forgot-password.
 import { ResetPasswordComponent } from './page/reset-password/reset-password.component';
 import { ProfileComponent } from './page/profile/profile.component';
 import { FilterPipe } from './pipe/filter.pipe';
+import { PersonalObservedDatasComponent } from './page/personal-observed-datas/personal-observed-datas.component';
 
 @NgModule({
   declarations: [
@@ -61,7 +62,8 @@ import { FilterPipe } from './pipe/filter.pipe';
     ForgotPasswordComponent,
     ResetPasswordComponent,
     ProfileComponent,
-    FilterPipe
+    FilterPipe,
+    PersonalObservedDatasComponent
   ],
   imports: [
     BrowserModule,

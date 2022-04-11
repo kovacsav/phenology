@@ -46,6 +46,8 @@ ObservationSchema.plugin(idValidator);
 
 module.exports = mongoose.model("Observation", ObservationSchema);
 
+module.exports = mongoose.model("deletedObservationsByUser", ObservationSchema);
+
 /*
 const ObservationSchema = mongoose.Schema(
   {
