@@ -1,0 +1,157 @@
+<div *ngIf="signedin">
+  <h1>Saját megfigyeléseim</h1>
+
+  <div *ngIf="plantData$ | async as plants">
+    <div *ngIf="observedData$ | async as observations" class="col-10 offset-1">
+      <label for="">Szűrés</label>
+      <select
+        name="plantSelection"
+        id=""
+        [(ngModel)]="selectedPlant"
+        class="m-5"
+      >
+        <option *ngFor="let plant of plants" [value]="plant.name">
+          {{ plant.name }}
+        </option>
+      </select>
+
+      <select name="yearSelection" id="" [(ngModel)]="selectedYear">
+        <option *ngFor="let year of observedYears" [value]="year">
+          {{ year }}
+        </option>
+      </select>
+
+      <div>{{ selectedPlant }}</div>
+
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>Dátum</th>
+            <th>Megfigyelő</th>
+            <th>Helyszín</th>
+            <th>Növény</th>
+            <th>Fenofázis</th>
+            <th>Fényképek</th>
+            <th>Törlés</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr
+            *ngFor="
+              let observation of observations
+                | filter: selectedPlant:selectedYear
+                | paginate: { itemsPerPage: 10, currentPage: p }
+            "
+          >
+            <td>{{ observation.date | date: "yyyy. MM. dd." }}</td>
+            <td>
+              {{ observation.user.firstName }} {{ observation.user.lastName }}
+            </td>
+            <td>{{ observation.location }}</td>
+            <td>{{ observation.plant.name }}</td>
+            <td>{{ observation.phase }}</td>
+            <td *ngIf="observation.photo as photos">
+              <div>
+                <td *ngFor="let photo of photos">
+                  <img
+                    src="{{ backendImageURL }}{{ photo }}"
+                    class="myImg"
+                    alt="nincs meg a kép"
+                    style="width: 100px"
+                    (click)="photoEnlarge(backendImageURL + photo)"
+                  />
+
+                  <!-- Modal -->
+                  <div
+                    id="myModal"
+                    class="myModal"
+                    [style.display]="modalStyleDisplay"
+                  >
+                    <span class="close" (click)="closePhoto()">&times;</span>
+                    <img
+                      class="myModal-content"
+                      id="img01"
+                      [src]="modalImgageSource"
+                    />
+                    <div id="caption"></div>
+                  </div>
+                </td>
+              </div>
+            </td>
+            <td>
+              <button
+                type="button"
+                class="btn btn-danger m-2"
+                data-bs-toggle="modal"
+                data-bs-target="#staticBackdrop"
+                [(ngModel)]="selectedObservationID"
+              >
+                <i class="fa fa-trash"></i>
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="mx-auto">
+        <style>
+          .my-pagination /deep/ .ngx-pagination .current {
+            background: darkgreen;
+          }
+        </style>
+        <pagination-controls
+          class="my-pagination"
+          (pageChange)="p = $event"
+          previousLabel="Előző"
+          nextLabel="Következő"
+        ></pagination-controls>
+      </div>
+
+      <!-- Bootstarp modal -->
+      <div
+        class="modal"
+        id="staticBackdrop"
+        tabindex="-1"
+        aria-labelledby="staticBackdropLabel"
+        aria-hidden="true"
+      >
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h4 class="modal-title" id="staticBackdropLabel">
+                Biztos, hogy törölni szeretné a megfigyelését?
+              </h4>
+              <button
+                type="button"
+                class="btn-close"
+                data-bs-dismiss="modal"
+                aria-label="Close"
+              ></button>
+            </div>
+            <div class="modal-body">
+              <p>
+                Amennyiben hibásan rögzítette megfigyelését, semmi gond, kérjük,
+                hogy törölje a rosszat és küldjön újat! Köszönjük!
+              </p>
+            </div>
+            <div class="modal-footer">
+              <button
+                type="button"
+                class="btn btn-secondary"
+                data-bs-dismiss="modal"
+              >
+                Mégsem
+              </button>
+              <button
+                type="button"
+                class="btn btn-primary"
+                (click)="onDelete(selectedObservationID)"
+              >
+                Törlés megerősítése
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
