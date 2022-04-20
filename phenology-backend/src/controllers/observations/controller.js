@@ -99,18 +99,30 @@ module.exports.create = (req, res, next) => {
 
   return currentService
     .create(req.body)
-    .then((cp) => {
+    .then(() => {
       const accessToken = authHandler.refresh(req.body.user.email);
       // not to save users email in database
       // we need it for the new access token
       req.body.user.email = "";
       res.status(201);
       res.json({
-        accessToken,
-        cp,
+        accessToken
       });
     })
     .catch((err) => next(new createError.InternalServerError(err.message)));
+};
+
+// Delete.
+exports.moveOne = (req, res, next) => {
+  return service
+    .moveOne(req.params.id)
+    .then(() => {
+      const accessToken = authHandler.refresh(req.body.email);
+      res.json({accessToken})
+    })
+    .catch((err) => {
+      next(new createError.InternalServerError(err.message));
+    });
 };
 
 /*
@@ -161,13 +173,5 @@ exports.update = (req, res, next) => {
     });
 };
 
-// Delete.
-exports.delete = (req, res, next) => {
-  return service
-    .delete(req.params.id)
-    .then(() => res.json({}))
-    .catch((err) => {
-      next(new createError.InternalServerError(err.message));
-    });
-};
+
 */

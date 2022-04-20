@@ -17,9 +17,13 @@ router.get('/', (req, res, next) => {
   return controller.findAll(req, res, next);
 });
 
-
 router.get('/:id', authenticateJwt, (req, res, next) => {
   return controller.findPersonalItems(req, res, next);
+});
+
+// move one to deleted collection
+router.post('/delete/:id', authenticateJwt, (req, res, next) => {
+  return controller.moveOne(req, res, next);
 });
 
 /*

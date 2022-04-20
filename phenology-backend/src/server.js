@@ -7,6 +7,8 @@ const config = require("config");
 const express = require("express");
 const fileExtension = require("file-extension");
 const multer = require("multer");
+const Jimp = require('jimp');
+const logoPath = "../images/alap_logo_200px.png";
 // const serviceAccount = require('../config/phenology-af2ec-firebase-adminsdk-fb5ti-973100cbd5.json');
 // console.log(serviceAccount.type)
 
@@ -25,7 +27,7 @@ mongoose.Promise = global.Promise;
 
 // Authenctication.
 const authenticateJwt = require("./auth/authenticate");
-const adminOnly = require("./auth/adminOnly");
+//const adminOnly = require("./auth/adminOnly");
 const authHandler = require("./auth/authHandler");
 
 const { username, password, host } = config.get("database");
@@ -100,6 +102,10 @@ const upload = multer({
   },
 });
 
+fileUploadAndWatermark = (uploadedFile) => {
+  Jimp.read()
+}
+
 app.post(
   "/uploadfile",
   upload.single("uploadedImage"),
@@ -130,6 +136,7 @@ app.post("/refresh", authHandler.refresh);
 app.post("/logout", authHandler.logout);
 
 app.use("/observations", require("./controllers/observations/routes"));
+
 //app.post("/observations/page", require("./controllers/observations/routes"));
 
 //app.post("/observations", authenticateJwt, require("./controllers/observations/routes"));

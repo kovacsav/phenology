@@ -123,7 +123,6 @@ export class ObservationDatasComponent implements OnInit {
   // file upload and compress
   // https://medium.com/swlh/compress-image-and-send-it-to-an-api-in-angular-bc48e6ed3835
 
-
   setPlant(plant: Plant): void {
     this.observation.plant._id = plant._id;
     //this.setCurrentUser();
@@ -149,7 +148,6 @@ export class ObservationDatasComponent implements OnInit {
   }
 
   save(): any {
-
     console.log('filenames', this.fileNames);
     console.log('this.uploadArray', this.uploadArray);
 
@@ -177,9 +175,18 @@ export class ObservationDatasComponent implements OnInit {
     //console.log('hello');
 
     this.observationService.create(this.observation).subscribe({
-      next: () => {
-        alert('Köszönjük! Megfigyelését rögzítettük.');
-        this.router.navigate(['/']);
+      next: (response) => {
+        if (response) {
+          // set new accessToken
+          console.log('response:', response);
+
+          this.cookieService.set(
+            'accessToken',
+            JSON.stringify(response));
+
+          alert('Köszönjük! Megfigyelését rögzítettük.');
+          this.router.navigate(['/']);
+        }
       },
       error: () => {
         alert(

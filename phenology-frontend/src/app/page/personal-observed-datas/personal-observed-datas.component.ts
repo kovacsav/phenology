@@ -6,6 +6,7 @@ import { map, tap, first } from 'rxjs/operators';
 import { Observation } from 'src/app/model/observation';
 import { Plant } from 'src/app/model/plant';
 import { ConfigService } from '../../service/config.service';
+import { CookieService } from 'ngx-cookie-service';
 import { AuthService } from 'src/app/service/auth.service';
 import { User } from 'src/app/model/user';
 
@@ -79,34 +80,14 @@ export class PersonalObservedDatasComponent implements OnInit {
     private observationService: ObservationService,
     private plantService: PlantService,
     public configService: ConfigService,
-    private authService: AuthService
+    private authService: AuthService,
+    private cookieService: CookieService
   ) {}
 
   ngOnInit(): void {
     this.backendImageURL = `${this.configService.apiUrl}image/`;
 
-    // set user
-
-    this.authService.currentUserSubject$.subscribe({
-      next: (user) => {
-        this.user.firstName = user?.firstName;
-        if (user) {
-          this.observedData$ = this.observationService
-            .getPersonalObservations(user._id)
-            .pipe(
-              map((item) =>
-                item.sort(
-                  (a: any, b: any) =>
-                    new Date(b.date).getTime() - new Date(a.date).getTime()
-                )
-              )
-            );
-        }
-      },
-      error: () => {
-        this.user.firstName = '';
-      },
-    });
+    this.getObservations();
 
     this.signedin = this.user.firstName ? true : false;
 
@@ -164,6 +145,34 @@ export class PersonalObservedDatasComponent implements OnInit {
       }
       */
 
+  getObservations(): void {
+
+    // set user
+
+    this.authService.currentUserSubject$.subscribe({
+      next: (user) => {
+        this.user.firstName = user?.firstName;
+        this.user.email = user?.email;
+        if (user) {
+          this.observedData$ = this.observationService
+            .getPersonalObservations(user._id)
+            .pipe(
+              map((item) =>
+                item.sort(
+                  (a: any, b: any) =>
+                    new Date(b.date).getTime() - new Date(a.date).getTime()
+                )
+              )
+            );
+        }
+      },
+      error: () => {
+        this.user.firstName = '';
+        this.authService.logout();
+      },
+    });
+  }
+
   photoEnlarge(path: string): void {
     this.modalStyleDisplay = 'block';
     this.modalImgageSource = path;
@@ -174,20 +183,31 @@ export class PersonalObservedDatasComponent implements OnInit {
     this.modalStyleDisplay = 'none';
   }
 
-  onDelete(selectedObservationID: string): void {
+  selectObservation(id: string): void {
+    this.selectedObservationID = id;
+  }
+
+  onDelete(): void {
+    console.log(
+      'selectedObservationID:',
+      this.selectedObservationID,
+      this.user.email
+    );
     this.observationService
-      .deleteObservation(selectedObservationID, this.user._id)
+      .deleteObservation(this.selectedObservationID, this.user.email)
       .pipe(first())
       .subscribe({
-        next: (res) => {
-          if (res) {
-            alert("A megigyelése törlése sikeres.");
+        next: (response) => {
+          if (response) {
+            // set new accessToken
+            //console.log("response:", Object.values(response));
+            this.cookieService.set('accessToken', JSON.stringify(response));
+            alert('A megfigyelés törlése sikeres.');
+            this.getObservations();
           }
         },
         error: (error) => {
-          alert(
-            'A megfigyelés törlése sikertelen.'
-          );
+          alert('A megfigyelés törlése sikertelen.');
           alert(JSON.stringify(error));
         },
       });

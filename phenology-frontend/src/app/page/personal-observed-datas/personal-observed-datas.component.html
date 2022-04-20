@@ -84,7 +84,7 @@
                 class="btn btn-danger m-2"
                 data-bs-toggle="modal"
                 data-bs-target="#staticBackdrop"
-                [(ngModel)]="selectedObservationID"
+                (click)="selectObservation(observation._id)"
               >
                 <i class="fa fa-trash"></i>
               </button>
@@ -144,7 +144,8 @@
               <button
                 type="button"
                 class="btn btn-primary"
-                (click)="onDelete(selectedObservationID)"
+                data-bs-dismiss="modal"
+                (click)="onDelete()"
               >
                 Törlés megerősítése
               </button>

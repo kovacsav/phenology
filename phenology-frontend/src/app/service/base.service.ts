@@ -34,7 +34,7 @@ export class BaseService<T> {
     return this.http.post<T>(`${this.config.apiUrl}${this.entity}`, entity);
   }
 
-  deleteObservation(_id: string, userId: string): Observable<object> {
-    return this.http.post<object>(`${this.config.apiUrl}${this.entity}/delete${_id}`, userId);
+  deleteObservation(_id: string, userEmail: any): Observable<object> {
+    return this.http.post<{accessToken: string}>(`${this.config.apiUrl}${this.entity}/delete/${_id}`, userEmail);
   }
 }
