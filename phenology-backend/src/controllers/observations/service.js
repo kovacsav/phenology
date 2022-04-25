@@ -4,7 +4,7 @@ const DeletedObservation = require("../../models/deletedObservation.model");
 const Plant = require("../../models/plant.model");
 const User = require("../../models/user.model");
 const Jimp = require("jimp");
-const logoPath = "./images/alap_logo_200px.png";
+const logoPath = "./images/logo_x.png";
 const uploadedFilesPath = "./phenology_uploaded_files/";
 
 //const record = new Observation();
@@ -17,34 +17,43 @@ exports.create = (observationData) => {
 */
 exports.create = (observationData) => {
   const observation = new Observation(observationData);
-  observation.save();
-  if (observation.photo) {
-    // https://www.codedrome.com/processing-uploaded-images-with-node-and-jimp/
-    Jimp.read(logoPath)
-      .then((logo) => {
-        console.log("observation.photo.array:", observation.photo)
-        observation.photo.forEach((element) => {
-          Jimp.read(uploadedFilesPath + element)
-            .then((image) => {
-              console.log("composite starts");
-              image.composite(logo, 30, 30, { opacitySource: 0.5 });
-              image
-                .writeAsync(element)
-                .then(() => console.log("image saved"))
-                .catch((err) => {
-                  console.error(err);
-                });
-            })
-            .catch((err) => {
-              console.error(err);
+  return observation.save().then(() => {
+    if (observation.photo) {
+      // logo on uploaded image
+      // https://www.codedrome.com/processing-uploaded-images-with-node-and-jimp/
+    
+      Jimp.read(logoPath)
+        .then((logo) => {
+          console.log("observation.photo.array:", observation.photo);
+          observation.photo.forEach((element) =>
+            logoOnImage(logo, element, 0)
+            /*(element) => {
+            Jimp.read(uploadedFilesPath + element)
+              .then((image) => {
+                console.log("composite starts");
+                const x = 10;
+                const y = image.bitmap.height - 10 - logo.bitmap.height;
+                image.composite(logo, x, y, { opacitySource: 1 });
+                image
+                  .writeAsync(uploadedFilesPath + element)
+                  .then(() => console.log("image saved"))
+                  .catch((err) => {
+                    console.error(err);
+                  });
+              })
+              .catch((err) => {
+                console.error(err);
+              });
+              
             });
+            */
+          )
+        })
+        .catch((err) => {
+          console.error(err);
         });
-      })
-      .catch((err) => {
-        console.error(err);
-      });
-  }
-  return;
+    }
+  });
 };
 
 exports.findAll = () =>
@@ -91,6 +100,49 @@ exports.moveOne = (id) =>
         console.log("save error:", error);
       });
   });
+
+async function logoOnImage(logo, uploadedImage, retries = 0) {
+  let maxRetries = 5;
+  try {
+    image = await Jimp.read(uploadedFilesPath + uploadedImage);
+    console.log("composite starts");
+    const x = 10;
+    const y = (await image.bitmap.height) - 10 - logo.bitmap.height;
+    await image.composite(logo, x, y, { opacitySource: 1 });
+    await image.writeAsync(uploadedFilesPath + uploadedImage);
+    //console.log("image saved");
+  } catch (error) {
+    if (retries >= maxRetries) {
+      throw error;
+    }
+    image = await logoOnImage(logo, uploadedImage, retries++);
+  }
+}
+
+/*
+Error: marker was not found
+https://github.com/oliver-moran/jimp/issues/102
+
+async function retryResize(options, retries = 0) {
+    let { imagePath, size, quality = 60, maxRetries = 5 } = options;
+
+    let image = null;
+    try {
+        image = await Jimp.read(imagePath);
+        await image.resize(size, Jimp.AUTO);
+        await image.quality(quality);
+    } catch (e) {
+        if (retries >= maxRetries) {
+            throw e;
+        }
+
+        image = await retryResize(options, retries++);
+    }
+
+    return image;
+}
+
+*/
 
 //exports.delete = (id) => Observation.findByIdAndRemove(id);
 

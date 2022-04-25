@@ -176,9 +176,9 @@ export class ObservationDatasComponent implements OnInit {
 
     this.observationService.create(this.observation).subscribe({
       next: (response) => {
+        console.log('response:', response);
         if (response) {
           // set new accessToken
-          console.log('response:', response);
 
           this.cookieService.set(
             'accessToken',
@@ -189,6 +189,7 @@ export class ObservationDatasComponent implements OnInit {
         }
       },
       error: () => {
+        console.log("response error:", Error);
         alert(
           'A felhasználó azonosítása nem sikerült, lehetséges, hogy a rendszer biztonsági okokból a hosszú inaktivitás miatt kiléptette. Kérjük jelentkezzen be újra.'
         );
