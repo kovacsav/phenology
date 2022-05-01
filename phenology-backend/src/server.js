@@ -7,8 +7,7 @@ const config = require("config");
 const express = require("express");
 const fileExtension = require("file-extension");
 const multer = require("multer");
-const Jimp = require('jimp');
-const logoPath = "../images/alap_logo_200px.png";
+
 // const serviceAccount = require('../config/phenology-af2ec-firebase-adminsdk-fb5ti-973100cbd5.json');
 // console.log(serviceAccount.type)
 
@@ -102,9 +101,7 @@ const upload = multer({
   },
 });
 
-fileUploadAndWatermark = (uploadedFile) => {
-  Jimp.read()
-}
+
 
 app.post(
   "/uploadfile",
