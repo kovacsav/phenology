@@ -1,4 +1,4 @@
-import { DatePipe } from '@angular/common';
+//import { DatePipe } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, NgForm } from '@angular/forms';
@@ -31,6 +31,9 @@ export class ObservationDatasComponent implements OnInit {
 
   currentUser: User = new User();
   userID: string = '';
+
+  maxDate: string = new Date().toISOString().split("T")[0];
+  highlightedPlant: string = '';
 
   // PLANTS
 
@@ -89,6 +92,7 @@ export class ObservationDatasComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    console.log("maxdate:", this.maxDate);
     // authorization and set current user
     this.auth.currentUserSubject$.subscribe({
       next: (user) => {
@@ -127,6 +131,7 @@ export class ObservationDatasComponent implements OnInit {
     this.observation.plant._id = plant._id;
     //this.setCurrentUser();
     this.selectedPlant = plant;
+    this.highlightedPlant = "highlighted";
   }
 
   setPhase(phase: string): void {

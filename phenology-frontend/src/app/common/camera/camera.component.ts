@@ -15,7 +15,7 @@ export class CameraComponent implements OnInit {
 
   errors: WebcamInitError[] = [];
 
-  photoString: string = "Fénykép készítése";
+  photoString: string = "Fénykép exponálása";
   newPhotoString: string = "Új fénykép készítése";
 
   // webcam snapshot trigger
@@ -37,7 +37,7 @@ export class CameraComponent implements OnInit {
     this.trigger.next();
   }
 
-  public onOffWebCame() {
+  public onOffWebCam() {
     this.showWebcam = !this.showWebcam;
   }
 

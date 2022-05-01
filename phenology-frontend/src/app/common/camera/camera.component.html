@@ -1,26 +1,25 @@
 <div *ngIf="isCameraExist; else noCameraExist">
-  <div style="text-align: center">
+  <div class="mt-5 ms-5">
     <div>
       <h6 class="head-title margin-top-8">
-        <span>Készíts új fényképet!</span>
+        <span>Készíts és küldj fényképet eszközöd kamerájával!</span>
       </h6>
     </div>
     <div class="btn-group">
       <div *ngIf="showWebcam">
-        <button class="btn btn-outline-light" (click)="takeSnapshot()">
+        <button class="btn btn-outline-success" (click)="takeSnapshot()">
           {{ photoString }}
         </button>
       </div>
       <div *ngIf="!showWebcam">
-        <button class="btn btn-outline-light" (click)="onOffWebCame()">
+        <button class="btn btn-outline-success" (click)="onOffWebCam()">
           Kép készítése
         </button>
       </div>
     </div>
     <br />
     <webcam
-      [height]="500"
-      [width]="1000"
+      [width]="800"
       [trigger]="triggerObservable"
       (imageCapture)="handleImage($event)"
       *ngIf="showWebcam"

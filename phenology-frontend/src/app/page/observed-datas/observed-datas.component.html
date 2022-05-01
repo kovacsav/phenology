@@ -1,8 +1,9 @@
 <div *ngIf="plantData$ | async as plants">
   <div *ngIf="observedData$ | async as observations" class="col-10 offset-1">
 
+    <h1 class="text-center my-4">Beérkezett megfigyelések</h1>
 
-    <label for="">Szűrés</label>
+    <label class="fw-bold" for="">Megfigyelések szűrése</label>
     <select name="plantSelection" id="" [(ngModel)]="selectedPlant" class="m-5">
       <option *ngFor="let plant of plants" [value]="plant.name">
         {{ plant.name }}

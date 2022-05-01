@@ -1,5 +1,5 @@
 .container {
-  background: linear-gradient(120deg, rgb(44, 128, 10), rgb(41, 184, 148));
+  //background: linear-gradient(120deg, rgb(44, 128, 10), rgb(41, 184, 148));
 }
 
 .error-message {
@@ -49,4 +49,14 @@
 .hovered:hover {
   //box-shadow: 10px 10px 5px grey;
   border-color:rgb(1, 160, 1);
+}
+
+.highlighted {
+  border-color:rgb(1, 160, 1);
+  border-width: 5px;
+}
+
+.subtitle {
+  font-size: 25px;
+  background-color: opacity(0);
 }
