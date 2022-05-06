@@ -26,6 +26,8 @@ export class ArticleComponent implements OnInit {
       )
     );
 
+    p: number = 1;
+
   // Paginator.
 
   productsProperties: { count: number } = {

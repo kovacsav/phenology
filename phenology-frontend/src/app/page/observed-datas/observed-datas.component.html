@@ -1,5 +1,5 @@
-<div *ngIf="plantData$ | async as plants">
-  <div *ngIf="observedData$ | async as observations" class="col-10 offset-1">
+<div class="container" *ngIf="plantData$ | async as plants">
+  <div *ngIf="observedData$ | async as observations" class="">
 
     <h1 class="text-center my-4">Beérkezett megfigyelések</h1>
 
@@ -74,7 +74,7 @@
         </tr>
       </tbody>
     </table>
-    <div class="mx-auto">
+    <div class="d-flex justify-content-center">
       <style>
         .my-pagination /deep/ .ngx-pagination .current {
           background: darkgreen;

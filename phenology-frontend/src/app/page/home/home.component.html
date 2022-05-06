@@ -1,14 +1,12 @@
-
-
-<div class="container d-flex justify-content-center my-5">
+<div class="container-fluid d-flex justify-content-center mainTitle my-10">
   <div>
-    <h6 class="header"><b>Megfigyelési portál</b></h6>
+    <h6 class="header mt-5"><b>Megfigyelési portál</b></h6>
     <h1 class="main_header"><b>Növényfenológia</b></h1>
   </div>
 </div>
 
-<div class="row row-cols-1 row-cols-md-3 g-4">
-  <div class="col">
+<div class="row row-cols-1 row-cols-md-3 g-4 mx-5 mt-5">
+  <div class="col ps-4">
     <div class="card h-100" class="shadow bg-body rounded">
       <img
         src="../../../assets/image/bimbó.jpg"
@@ -34,7 +32,7 @@
       </div>
     </div>
   </div>
-  <div class="col">
+  <div class="col px-4">
     <div class="card h-100" class="shadow bg-body rounded">
       <img
         src="../../../assets/image/virag.jpg"
@@ -61,23 +59,172 @@
       </div>
     </div>
   </div>
-  <div class="col">
+  <div class="col pe-4">
     <div class="card h-100" class="shadow bg-body rounded">
       <img
         src="../../../assets/image/termes.jpg"
         class="card-img-top"
         alt="..."
       />
-      <div class="card-body" *ngIf="(article$ | async) as article">
+      <div class="card-body" *ngIf="article$ | async as article">
         <h5>Mi a legfrissebb?</h5>
         <h3 class="card-title">{{ article[0].title }}</h3>
         <p class="card-text">
           {{ article[0].abstract }}
         </p>
         <div class="card-footer">
-          <a routerLink="/details/{{ article[0]._id }}" class="card-link">Bővebben</a>
+          <a routerLink="/details/{{ article[0]._id }}" class="card-link"
+            >Bővebben</a
+          >
         </div>
       </div>
+    </div>
+  </div>
+</div>
+
+<div class="container border-top mt-5">
+  <div class="d-flex justify-content-center m-4">
+    <a href="" class="">
+      <img
+        src="../../../assets/image/logo_x135_teljes_szurke_kerekitett.png"
+        class=""
+        alt="..."
+        width="200px"
+      />
+    </a>
+  </div>
+
+  <div class="row justify-content-center">
+    <div class="card shadow rounded m-1 p-0 slider slider1">
+      <a href="" class="text-decoration-no">
+        <img
+          src="../../../assets/image/slider/idojaras.jpg"
+          class="card-img-top"
+          alt="..."
+        />
+        <p class="text-center align-middle mt-1 p-0">Időjárás</p>
+      </a>
+    </div>
+
+    <div class="card shadow rounded m-1 p-0 slider slider2">
+      <a href="" class="text-decoration-no">
+        <img
+          src="../../../assets/image/slider/agro.jpg"
+          class="card-img-top"
+          alt="..."
+        />
+        <p class="text-center align-middle mt-1 p-0">Agrome-teorológia</p>
+      </a>
+    </div>
+
+    <div class="card shadow rounded m-1 p-0 slider slider3">
+      <a href="" class="text-decoration-no">
+        <img
+          src="../../../assets/image/slider/eghajlat.jpg"
+          class="card-img-top"
+          alt="..."
+        />
+        <p class="text-center align-middle mt-1 p-0">Éghajlat</p>
+      </a>
+    </div>
+
+    <div class="card shadow rounded m-1 p-0 slider slider4">
+      <a href="" class="text-decoration-no">
+        <img
+          src="../../../assets/image/slider/elorejelzes1.jpg"
+          class="card-img-top"
+          alt="..."
+        />
+        <p class="text-center align-middle mt-1 p-0">Előrejelzés</p>
+      </a>
+    </div>
+
+    <div class="card shadow rounded m-1 p-0 slider slider5">
+      <a href="" class="text-decoration-no">
+        <img
+          src="../../../assets/image/slider/humanmet.jpg"
+          class="card-img-top"
+          alt="..."
+        />
+        <p class="text-center align-middle mt-1 p-0">Humánme-teorológia</p>
+      </a>
+    </div>
+
+    <div class="card shadow rounded m-1 p-0 slider slider6">
+      <a href="" class="text-decoration-no">
+        <img
+          src="../../../assets/image/slider/levegokornyezet.jpg"
+          class="card-img-top"
+          alt="..."
+        />
+        <p class="text-center align-middle mt-1 p-0">Levegő-környezet</p>
+      </a>
+    </div>
+
+    <div class="card shadow rounded m-1 p-0 slider slider7">
+      <a href="" class="text-decoration-no">
+        <img
+          src="../../../assets/image/slider/meteora.jpg"
+          class="card-img-top"
+          alt="..."
+        />
+        <p class="text-center align-middle mt-1 p-0">Meteora</p>
+      </a>
+    </div>
+
+    <div class="card shadow rounded m-1 p-0 slider slider8">
+      <a href="" class="text-decoration-no">
+        <img
+          src="../../../assets/image/slider/radar1.jpg"
+          class="card-img-top"
+          alt="..."
+        />
+        <p class="text-center align-middle mt-1 p-0">Élő radar</p>
+      </a>
+    </div>
+
+    <div class="card shadow rounded m-1 p-0 slider slider9">
+      <a href="" class="text-decoration-no">
+        <img
+          src="../../../assets/image/slider/metesz.jpg"
+          class="card-img-top"
+          alt="..."
+        />
+        <p class="text-center align-middle mt-1 p-0">MET-ÉSZ</p>
+      </a>
+    </div>
+
+    <div class="card shadow rounded m-1 p-0 slider slider10">
+      <a href="" class="text-decoration-no">
+        <img
+          src="../../../assets/image/slider/repules.jpg"
+          class="card-img-top"
+          alt="..."
+        />
+        <p class="text-center align-middle mt-1 p-0">Repülésme-teorológia</p>
+      </a>
+    </div>
+
+    <div class="card shadow rounded m-1 p-0 slider slider11">
+      <a href="" class="text-decoration-no">
+        <img
+          src="../../../assets/image/slider/tavaink.jpg"
+          class="card-img-top"
+          alt="..."
+        />
+        <p class="text-center align-middle mt-1 p-0">Tavaink időjárása</p>
+      </a>
+    </div>
+
+    <div class="card shadow rounded m-1 p-0 slider slider12">
+      <a href="" class="text-decoration-no">
+        <img
+          src="../../../assets/image/slider/veszelyjelzes.jpg"
+          class="card-img-top"
+          alt="..."
+        />
+        <p class="text-center align-middle mt-1 p-0">Veszély-jelzés</p>
+      </a>
     </div>
   </div>
 </div>

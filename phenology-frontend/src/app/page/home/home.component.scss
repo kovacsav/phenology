@@ -1,3 +1,13 @@
+/*
+.mainTitle {
+  background-image: url("../../../assets/image/mainTitleBackground.jpg");
+  min-height: 500px;
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+*/
 .main_header {
   //font-size: 6rem;
   color: darkgreen;
@@ -8,6 +18,194 @@
   //font-size: 2rem;
   color: darkgreen;
   font-size: 3vw;
+}
+
+.mt-n1 {
+  //margin-top: -10rem !important;
+}
+
+.card:hover{
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19) !important;
+}
+
+.text-decoration-no {
+  color: white;
+  font-size: 0.8rem;
+  //font-weight: bold;
+  text-decoration: none;
+}
+
+.slider {
+  background-color: rgb(97, 97, 97);
+  width: 75px;
+  height: 95px;
+}
+
+// slider animation
+
+.slider1{
+  animation-name: a;
+  animation-duration: 20s;
+  animation-iteration-count: infinite;
+}
+
+.slider2{
+  animation-name: b;
+  animation-duration: 20s;
+  animation-iteration-count: infinite;
+}
+
+.slider3{
+  animation-name: c;
+  animation-duration: 20s;
+  animation-iteration-count: infinite;
+}
+
+.slider4{
+  animation-name: d;
+  animation-duration: 20s;
+  animation-iteration-count: infinite;
+}
+
+.slider5{
+  animation-name: e;
+  animation-duration: 20s;
+  animation-iteration-count: infinite;
+}
+
+.slider6{
+  animation-name: f;
+  animation-duration: 20s;
+  animation-iteration-count: infinite;
+}
+
+.slider7{
+  animation-name: g;
+  animation-duration: 20s;
+  animation-iteration-count: infinite;
+}
+
+.slider8{
+  animation-name: h;
+  animation-duration: 20s;
+  animation-iteration-count: infinite;
+}
+
+.slider9{
+  animation-name: i;
+  animation-duration: 20s;
+  animation-iteration-count: infinite;
+}
+
+.slider10{
+  animation-name: j;
+  animation-duration: 20s;
+  animation-iteration-count: infinite;
+}
+
+.slider11{
+  animation-name: k;
+  animation-duration: 20s;
+  animation-iteration-count: infinite;
+}
+
+.slider12{
+  animation-name: l;
+  animation-duration: 20s;
+  animation-iteration-count: infinite;
+}
+
+@keyframes a {
+  0%   {opacity: 1;}
+  8.3%  {opacity: 0.6;}
+  91.6%  {opacity: 0.6;}
+  100% {opacity: 1;}
+}
+
+@keyframes b {
+  0%   {opacity: 0.6;}
+  8.3%  {opacity: 1;}
+  16.6% {opacity: 0.6;}
+  100% {opacity: 0.6;}
+}
+
+@keyframes c {
+  0%   {opacity: 0.6;}
+  8.3%  {opacity: 0.6;}
+  16.6%  {opacity: 1;}
+  24.9% {opacity: 0.6;}
+  100% {opacity: 0.6;}
+}
+
+@keyframes d {
+  0%   {opacity: 0.6;}
+  16.6%  {opacity: 0.6;}
+  24.9%  {opacity: 1;}
+  33.2%  {opacity: 0.6;}
+  100% {opacity: 0.6;}
+}
+
+@keyframes e {
+  0%   {opacity: 0.6;}
+  24.9%  {opacity: 0.6;}
+  33.2%  {opacity: 1;}
+  41.5%  {opacity: 0.6;}
+  100% {opacity: 0.6;}
+}
+
+@keyframes f {
+  0%   {opacity: 0.6;}
+  33.2%  {opacity: 0.6;}
+  41.5%  {opacity: 1;}
+  49.8%  {opacity: 0.6;}
+  100% {opacity: 0.6;}
+}
+
+@keyframes g {
+  0%   {opacity: 0.6;}
+  41.5%  {opacity: 0.6;}
+  49.8%  {opacity: 1;}
+  58.1%  {opacity: 0.6;}
+  100% {opacity: 0.6;}
+}
+
+@keyframes h {
+  0%   {opacity: 0.6;}
+  49.8%  {opacity: 0.6;}
+  58.1%  {opacity: 1;}
+  66.4%  {opacity: 0.6;}
+  100% {opacity: 0.6;}
+}
+
+@keyframes i {
+  0%   {opacity: 0.6;}
+  58.1%  {opacity: 0.6;}
+  66.4%  {opacity: 1;}
+  74.7%  {opacity: 0.6;}
+  100% {opacity: 0.6;}
+}
+
+@keyframes j {
+  0%   {opacity: 0.6;}
+  66.4%  {opacity: 0.6;}
+  74.7%  {opacity: 1;}
+  83%  {opacity: 0.6;}
+  100% {opacity: 0.6;}
+}
+
+@keyframes k {
+  0%   {opacity: 0.6;}
+  74.7%  {opacity: 0.6;}
+  83%  {opacity: 1;}
+  91.3%  {opacity: 0.6;}
+  100% {opacity: 0.6;}
+}
+
+@keyframes l {
+  0%   {opacity: 0.6;}
+  83%  {opacity: 0.6;}
+  91.3%  {opacity: 1;}
+  100% {opacity: 0.6;}
 }
 
 // cookie

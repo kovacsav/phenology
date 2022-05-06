@@ -1,7 +1,7 @@
 <div *ngIf="signedin">
   <div class="container p-3">
     <div class="row">
-      <h2 class="m-2 text-center">Új megfigyelés rögzítése</h2>
+      <h1 class="m-2 text-center">Új megfigyelés rögzítése</h1>
       <form #observationForm="ngForm" (ngSubmit)="save()">
         <div class="form-group mt-5 col-4">
           <label class="mb-1 subtitle" for="">Dátum*</label>
@@ -210,13 +210,13 @@
 
         <!-- {{ observation | json }} -->
 
-        <p class="my-5">
+        <p class="my-3">
           A *-gal jelölt mezők megadása nélkül nem értelmezhető a
           megfigyelés, ezért azok kitöltése kötelező.
         </p>
 
         <button
-          class="btn btn-outline-success mt-5"
+          class="btn btn-outline-success my-2"
           [disabled]="observationForm.invalid || observation.phase === ''"
           type="submit"
         >

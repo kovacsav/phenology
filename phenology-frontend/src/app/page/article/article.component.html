@@ -1,27 +1,46 @@
-<div class="m-5" *ngIf="article$ | async as articles">
+<div class="container m-5" *ngIf="article$ | async as articles">
   <div
     class="d-block d-flex"
-    *ngFor="let article of articles | slice: pageSliceStart:pageSliceEnd"
-  >
-    <div class="d-inline-block">
+    *ngFor="let article of articles | paginate: { itemsPerPage: 3, currentPage: p }">
+    <!--  | slice: pageSliceStart:pageSliceEnd" -->
+
+    <div class="d-inline-block my-3">
+      <h1 class="mb-1">{{ article.title }}</h1>
       <p>
-        <i> {{ article.date }} </i>
+        <i> {{ article.date | date : 'YYYY. MM. dd.' }} </i>
       </p>
-      <h1>{{ article.title }}</h1>
-      <p>{{ article.abstract }}</p>
       <p>
         <img
-          [src]="article.images[0]"
-          alt="cikk"
-          style="float: left; max-width: 300px"
-          class="me-3"
+        [src]="article.images[0]"
+        alt="cikk"
+        style="float: left; max-width: 300px"
+        class="me-3"
         />
+        {{ article.abstract }}
+        <br>
+        <br>
         <a routerLink="/details/{{ article._id }}">Bővebben</a>
       </p>
     </div>
   </div>
 </div>
 
+  <div class="d-flex justify-content-center">
+    <style>
+      .my-pagination /deep/ .ngx-pagination .current {
+        background: darkgreen;
+      }
+    </style>
+    <pagination-controls
+      class="my-pagination"
+      (pageChange)="p = $event"
+      previousLabel="Előző"
+      nextLabel="Következő"
+    ></pagination-controls>
+  </div>
+
+
+<!--
 <div class="row">
   <div class="col-12">
     <nav class="d-flex justify-content-center">
@@ -154,3 +173,5 @@
     </ul>
   </nav>
 </div>
+
+-->
