@@ -2,6 +2,13 @@ h1 {
   font-size: 6vw;
 }
 
+h2 {
+  font-size: 4vw;
+}
+
+h3 {
+  font-size: 3vw;
+}
 
 .fixed-bg {
   background-image: url("../../../assets/image/megfigyelok2.jpg");
@@ -10,4 +17,9 @@ h1 {
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
+}
+
+.dark-background{
+  background-color: rgba($color: #252525, $alpha: 0.5);
+  //opacity: 0.5;
 }

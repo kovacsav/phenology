@@ -1,54 +1,91 @@
 <div class="m-5">
-
   <div class="fixed-bg">
     <h1 class="p-3 text-light text-end fw-bold">Önkénteseket keresünk!</h1>
+    <h3 class="p-3 text-light text-end fw-bold">Csatlakozz hozzánk!</h3>
   </div>
 
+  <div class="d-block">
+    <div class="row g-4 mx-5 my-5 justify-content-center">
+      <div class="col pe-4">
+        <div class="card h-100" class="shadow bg-body rounded">
+          <img
+            src="../../../assets/image/termes.jpg"
+            class="card-img-top"
+            alt="..."
+          />
+          <div class="card-body">
+            <h2 class="card-title fw-bold">Mit kellene tenni?</h2>
+            <p class="card-text">
+              A feladat nagyon egyszerű, figyelni kell, hogy egy-egy növény pl.
+              mikor kezd virágozni, mikor lombosodik, mikor kezd ősszel hullani
+              a levele, és azt itt egy rövid regisztráció után rögzíteni. Nem
+              kell mindenféle növényt folyamatosan figyelni, ha valaki csak egy
+              növényfaj egy fejlődési fázisának kezdetét tudja megfigyelni, az
+              is nagyon jó. Rajtunk múlik: amennyire lehetőségünk van, amennyit
+              időnk, energiánk enged. Ha ma nem figyeljük és mérjük meg a
+              környezetünk állapotát (pl. időjárást, növényeket), valamint azt
+              nem dokumentáljuk, akkor azt a jövőben már soha senki nem fogja
+              tudni megmérni, megfigyelni.
+            </p>
+            <div class="card-footer">
+              <p>
+                Az
+                <a routerLink="/guide" class="link text-blue">útmutatóban</a>
+                részletes leírás található a megfigyelések technikájáról,
+                valamint segítjük a
+                <a routerLink="/plant" class="link text-blue">növények</a>
+                és fenológiai fázisainak beazonosítását is.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col pe-4">
+        <div class="card h-100" class="shadow bg-body rounded">
+          <img
+            src="../../../assets/image/termes.jpg"
+            class="card-img-top"
+            alt="..."
+          />
+          <div class="card-body">
+            <h2 class="card-title fw-bold">Mi értelme van ennek?</h2>
+            <p class="card-text">
+              A növényfenológia a növények környezeti viszonyoktól függő,
+              szabályszerű egymásutánban bekövetkező jelenségeinek (rügyfakadás,
+              virágzás, stb.) vizsgálatával foglalkozó tudomány. A vadnövények
+              és a táplálékunkként szolgáló kultúrnövényeink fejlődési fázisait
+              az időjárás döntő mértékben befolyásolja. Mivel az időjárás
+              évről-évre másként alakul, a növények is évről-évre más időpontban
+              érik el az egyes fejlettségi állapotaikat. A hosszú, évtizedekre
+              szóló vadnövény fenológiai adatsorok az éghajlat és az
+              éghajlat-változás szempontjából rendkívül fontosak, hiszen a
+              növények fejlődési stádiumai az éghajat változásával eltolódnak,
+              azt nyomjelzőként mutatják. Ezért a növényfenológiai
+              megfigyeléseknek óriási jelentősége van.
+            </p>
+            <div class="card-footer">
+              <p>
+                A növényfenológiai megfigyelések történetéről
+                <a [routerLink]="'/history'" class="card-link">itt </a>
+                olvashatsz bővebben.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 
-  <h3>Csatlakozz hozzánk!</h3>
-
-  <h4>Mit kellene tenni?</h4>
-
-  <p>
-    A feladat nagyon egyszerű, figyelni kell, hogy egy-egy növény pl. mikor kezd
-    virágozni, mikor lombosodik, mikor kezd ősszel hullani a levele, és azt itt
-    egy rövid regisztráció után rögzíteni. Nem kell mindenféle növényt
-    folyamatosan figyelni, ha valaki csak egy növényfaj egy fejlődési fázisának
-    kezdetét tudja megfigyelni, az is nagyon jó. Rajtunk múlik: amennyire
-    lehetőségünk van, amennyit időnk, energiánk enged. Ha ma nem figyeljük és
-    mérjük meg a környezetünk állapotát (pl. időjárást, növényeket), valamint
-    azt nem dokumentáljuk, akkor azt a jövőben már soha senki nem fogja tudni
-    megmérni, megfigyelni.
-  </p>
-
-  <h4>Mi értelme van ennek?</h4>
-
-  <p>
-    A növényfenológia a növények környezeti viszonyoktól függő, szabályszerű
-    egymásutánban bekövetkező jelenségeinek (rügyfakadás, virágzás, stb.)
-    vizsgálatával foglalkozó tudomány. A vadnövények és a táplálékunkként
-    szolgáló kultúrnövényeink fejlődési fázisait az időjárás döntő mértékben
-    befolyásolja. Mivel az időjárás évről-évre másként alakul, a növények is
-    évről-évre más időpontban érik el az egyes fejlettségi állapotaikat. A
-    hosszú, évtizedekre szóló vadnövény fenológiai adatsorok az éghajlat és az
-    éghajlat-változás szempontjából rendkívül fontosak, hiszen a növények
-    fejlődési stádiumai az éghajat változásával eltolódnak, azt nyomjelzőként
-    mutatják. Ezért a növényfenológiai megfigyeléseknek óriási jelentősége van.
-    <a [routerLink]="'/history'" class="card-link">Bővebben</a>
-  </p>
-
-  <p>
-    Az
-    <a routerLink="/guide" class="link text-blue">útmutatóban</a>
-    részletes leírás található a megfigyelések technikájáról, és segítjük a
-    <a routerLink="/plant" class="link text-blue">növények</a>
-    és fenológiai fázisainak beazonosítását is.
-  </p>
-
-  <h4>
-    Megfigyeléseiddel bővítsd te is hazánk fenológiai adatsorát, nemzeti
-    vagyonunkat!
-  </h4>
-
-  <h4>Közreműködését mindenkinek előre is köszönjük!</h4>
+  <div class="fixed-bg row justify-content-end">
+    <div class="col-5 dark-background">
+      <h3 class="p-1 py-5 text-light text-end fw-bold">
+        Megfigyeléseiddel bővítsd te is hazánk fenológiai adatsorát, nemzeti
+        vagyonunkat!
+      </h3>
+      <br>
+      <h3 class="p-1 py-5 text-light text-end fw-bold">
+        Közreműködését mindenkinek előre is köszönjük!
+      </h3>
+    </div>
+  </div>
 </div>
