@@ -19,7 +19,20 @@ h3 {
   background-size: cover;
 }
 
+.fixed-bg-2 {
+  background-image: url("../../../assets/image/megfigyelok3.jpg");
+  min-height: 500px;
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
 .dark-background{
   background-color: rgba($color: #252525, $alpha: 0.5);
   //opacity: 0.5;
+}
+
+.card-text, .card-footer{
+  text-align: justify;
 }

@@ -1,9 +1,40 @@
-.fixed-bg {
-  background-image: url("../../../assets/image/aranyfa_1.gif");
-  //url("https://cdn.pixabay.com/photo/2020/01/26/11/46/paper-flower-background-4794429_960_720.jpg");
+h1 {
+  font-size: 6vw;
+}
+
+h2 {
+  font-size: 4vw;
+}
+
+h3 {
+  font-size: 3vw;
+}
+
+.fixed-bg{
   min-height: 500px;
   background-attachment: fixed;
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
+}
+
+.importance-bg {
+  background-image: url("../../../assets/image/orgona.jpg");
+}
+
+.history-bg {
+  background-image: url("../../../assets/image/pitypang.jpg");
+}
+
+.omsz-bg{
+  background-image: url("../../../assets/image/akac_fekvo.jpg");
+}
+
+.dark-background{
+  background-color: rgba($color: #252525, $alpha: 0.7);
+  //opacity: 0.5;
+}
+
+.text-justify{
+  text-align: justify;
 }
