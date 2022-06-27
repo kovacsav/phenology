@@ -1,53 +1,63 @@
 <div class="container">
-
-<h1 class="mt-5">Növények részletes bemutatása</h1>
-
-<h2>Fák</h2>
-<div class="d-block">
-  <div class="row row-cols-3 row-cols-md-6 g-3 mt-3 text-dark">
-    <div class="col" *ngFor="let plant of trees">
-      <div class="card h-100 shadow hovered">
-        <a routerLink="/plant/{{ plant._id }}">
-          <img [src]="plant.image[0]" class="card-img-top" alt="..." />
-          <div class="card-body">
-            <h6 class="card-title fw-bold">{{ plant.name }}</h6>
-          </div>
-        </a>
-      </div>
-    </div>
-  </div>
-</div>
-
-<h2>Cserjék</h2>
-<div class="d-block">
-  <div class="row row-cols-3 row-cols-md-6 g-3 mt-3 text-dark">
-    <div class="col" *ngFor="let plant of shrub">
-      <div class="card h-100 shadow hovered">
-        <a routerLink="/plant/{{ plant._id }}">
-          <img [src]="plant.image[0]" class="card-img-top" alt="..." />
-          <div class="card-body">
-            <h6 class="card-title fw-bold">{{ plant.name }}</h6>
-          </div>
-        </a>
-      </div>
+  <div class="fixed-bg row justify-content-end">
+    <div class="col-5 dark-background vertical-center">
+      <h2 class="p-3 text-light text-end fw-bold">
+        Növények részletes bemutatása
+      </h2>
     </div>
   </div>
 
-  <h2>Lágyszárúak</h2>
-  <div class="d-block">
-    <div class="row row-cols-3 row-cols-md-6 g-3 mt-3 text-dark">
-      <div class="col" *ngFor="let plant of herbaceous">
-        <div class="card h-100 shadow hovered">
-          <a routerLink="/plant/{{ plant._id }}">
-            <img [src]="plant.image[0]" class="card-img-top" alt="..." />
-            <div class="card-body">
-              <h6 class="card-title fw-bold">{{ plant.name }}</h6>
-            </div>
-          </a>
+  <div class="my-5">
+    <h2 class="fw-bold">Fák</h2>
+    <div class="d-block">
+      <div class="row row-cols-3 row-cols-md-6 g-3 mt-3 text-dark">
+        <div class="col" *ngFor="let plant of trees">
+          <div class="card h-100 shadow hovered">
+            <a routerLink="/plant/{{ plant._id }}">
+              <img [src]="plant.image[0]" class="card-img-top" alt="..." />
+              <div class="card-body">
+                <h6 class="card-title fw-bold">{{ plant.name }}</h6>
+              </div>
+            </a>
+          </div>
         </div>
       </div>
     </div>
   </div>
-</div>
 
+  <div class="my-5">
+    <h2 class="fw-bold">Cserjék</h2>
+    <div class="d-block">
+      <div class="row row-cols-3 row-cols-md-6 g-3 mt-3 text-dark">
+        <div class="col" *ngFor="let plant of shrub">
+          <div class="card h-100 shadow hovered">
+            <a routerLink="/plant/{{ plant._id }}">
+              <img [src]="plant.image[0]" class="card-img-top" alt="..." />
+              <div class="card-body">
+                <h6 class="card-title fw-bold">{{ plant.name }}</h6>
+              </div>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="my-5">
+      <h2 class="fw-bold">Lágyszárúak</h2>
+      <div class="d-block">
+        <div class="row row-cols-3 row-cols-md-6 g-3 mt-3 text-dark">
+          <div class="col" *ngFor="let plant of herbaceous">
+            <div class="card h-100 shadow hovered">
+              <a routerLink="/plant/{{ plant._id }}">
+                <img [src]="plant.image[0]" class="card-img-top" alt="..." />
+                <div class="card-body">
+                  <h6 class="card-title fw-bold">{{ plant.name }}</h6>
+                </div>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
