@@ -1,0 +1,39 @@
+.tooltipp {
+  position: relative;
+  display: inline-block;
+}
+
+.tooltipp .tooltipptext {
+  visibility: hidden;
+  width: 120px;
+  background-color: rgb(15, 97, 0);
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 10px;
+  position: absolute;
+  z-index: 1;
+  bottom: 150%;
+  left: 50%;
+  margin-left: -60px;
+
+  /* animation */
+  opacity: 0;
+  transition: opacity 2s;
+}
+
+.tooltipp .tooltipptext::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: black transparent transparent transparent;
+}
+
+.tooltipp:hover .tooltipptext {
+  visibility: visible;
+  opacity: 1;
+}

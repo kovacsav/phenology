@@ -1,5 +1,5 @@
-<div class="card my-2 shadow">
-  <h4 class="card-header">Regisztráció</h4>
+<div class="card m-5 shadow">
+  <h3 class="card-header">Regisztráció</h3>
   <div *ngIf="!registrationOK">
     <div class="card-body">
       <form [formGroup]="form" (ngSubmit)="onSubmit()">
@@ -110,7 +110,9 @@
           />
           <label for="termsConditions"
             >Az
-            <a href="">adatvédelmi nyilatkozatot</a>
+            <a href="../../../assets/fenologia_jogi_nyilatkozat.pdf"
+            target="_blank">
+            adatvédelmi nyilatkozatot</a>
             elolvastam, tartalmát megismertem, azt elfogadom.</label
           >
           <div

@@ -35,5 +35,18 @@ h5 {
 }
 
 .card-background{
-  background-color: beige;
+  background-color: rgb(255, 255, 255);
+  box-shadow: 4px 4px 8px 4px rgba(0, 0, 0, 0.2), 0px 6px 20px 4px rgba(0, 0, 0, 0.19);
+}
+
+.title-background{
+  //background-image: url("../../../assets/image/textura.jpg");
+  //opacity: 0.3;
+  background-color: rgb(231, 255, 213);
+  box-shadow: 4px 4px 8px 4px rgba(0, 0, 0, 0.2), 0px 6px 20px 4px rgba(0, 0, 0, 0.19);
+}
+
+.mt-n5 {
+  margin-top: -2rem !important;
+  z-index: -1;
 }

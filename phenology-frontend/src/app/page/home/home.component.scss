@@ -25,7 +25,9 @@
 }
 
 .card:hover{
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19) !important;
+  box-shadow: 4px 8px 16px 4px rgba(0, 0, 0, 0.2), 4px 8px 16px 4px rgba(0, 0, 0, 0.19) !important;
+  border-color: rgb(0, 149, 25);
+  border-width: 2px;
 }
 
 .text-decoration-no {
