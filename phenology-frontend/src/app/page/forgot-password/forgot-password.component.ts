@@ -26,13 +26,13 @@ export class ForgotPasswordComponent implements OnInit {
       .subscribe({
         next: () => {
           this.forgotPasswordStatus = 'success';
-          console.log(this.forgotPasswordStatus);
+          //console.log(this.forgotPasswordStatus);
         },
         error: (error) => {
           this.forgotPasswordStatus = 'failed';
           //this.alertService.error(error);
           //alert('Sikertelen regisztráció!');
-          alert(JSON.stringify(error));
+          //alert(JSON.stringify(error));
           //this.router.navigate(['/', 'register']);
         },
       });
