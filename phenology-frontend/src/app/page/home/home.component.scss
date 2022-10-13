@@ -24,11 +24,7 @@
   //margin-top: -10rem !important;
 }
 
-.card:hover{
-  box-shadow: 4px 8px 16px 4px rgba(0, 0, 0, 0.2), 4px 8px 16px 4px rgba(0, 0, 0, 0.19) !important;
-  border-color: rgb(0, 149, 25);
-  border-width: 2px;
-}
+
 
 .text-decoration-no {
   color: white;
@@ -41,6 +37,11 @@
   background-color: rgb(97, 97, 97);
   width: 75px;
   height: 95px;
+}
+.slider:hover{
+  box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.2), 4px 4px 4px 4px rgba(0, 0, 0, 0.19) !important;
+  border-color: rgb(0, 149, 25);
+  border-width: 2px;
 }
 
 // slider animation

@@ -5,7 +5,7 @@
     <i> {{ article.date | date : 'YYYY. MM. dd.' }} </i>
   </p>
 
-  <p>{{ article.abstract }}</p>
+  <p class="article__abstact">{{ article.abstract }}</p>
 
   <div *ngIf="article.images[0]" class="my-4">
     <img [src]="article.images[0]" alt="" class="me-4" style="float:left" width="60%"/>
