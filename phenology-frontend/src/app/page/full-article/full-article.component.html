@@ -1,14 +1,44 @@
 <div class="container" *ngIf="article$ | async as article">
-  <h1 class="mt-5">{{ article.title }}</h1>
+  <h1 class="mt-5 text-center">{{ article.title }}</h1>
 
-  <p>
-    <i> {{ article.date | date : 'YYYY. MM. dd.' }} </i>
+  <p class="mt-3 mb-5">
+    <i> {{ article.author }} </i> <br />
+    <i> {{ article.date | date: "YYYY. MM. dd." }} </i>
   </p>
 
   <p class="article__abstact">{{ article.abstract }}</p>
 
-  <div *ngIf="article.images[0]" class="my-4">
-    <img [src]="article.images[0]" alt="" class="me-4" style="float:left" width="60%"/>
+  <div *ngIf="article.image[0]" class="d-flex justify-content-center my-5">
+    <div>
+      <img [src]="article.image[0].imgPath" alt="első ábra" class="me-4" />
+      <p class="mt-3 mb-0 text-center">
+        <i>1. ábra</i>
+      </p>
+      <p class="text-center">
+        <i> {{ article.image[0].imgTitle }} </i>
+      </p>
+    </div>
+  </div>
+
+  <p class="article__main">{{ article.main }}</p>
+
+  <div *ngFor="let img of article.image; let i = index">
+    <div *ngIf="i > 0" class="d-flex justify-content-center my-5">
+      <div>
+        <img [src]="img.imgPath" alt="" class="me-2" />
+        <p class="mt-3 mb-0 text-center">
+          <i> {{ i + 1 }}. ábra </i>
+        </p>
+        <p class="text-center">
+          <i> {{ img.imgTitle }} </i>
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <!--
+  <div *ngIf="article.image[0]" class="my-4">
+    <img [src]="article.image[0]" alt="" class="me-4" style="float:left" width="60%"/>
   </div>
 
   <p class="">{{ article.main }}</p>
@@ -21,4 +51,6 @@
     <img [src]="article.images[2]" alt="" class="me-2 my-4" style="float:left" width="60%"/>
   </div>
 
+</div>
+ -->
 </div>

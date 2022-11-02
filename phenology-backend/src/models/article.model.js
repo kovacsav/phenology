@@ -6,7 +6,10 @@ const ArticleSchema = mongoose.Schema({
   abstract: String,
   author: String,
   date: String,
-  images: [String],
+  image: [{
+    imgPath: String,
+    imgTitle: String
+  }],
   main: String,
   title: String,
 }, {

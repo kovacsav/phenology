@@ -3,7 +3,9 @@ export class Article {
   abstract: string = '';
   author: string = '';
   date: string = '';
-  images: string[] = [];
+  image: Array<{imgPath: String, imgTitle: String}> = [
+    {imgPath: '', imgTitle: ''}
+  ]
   main: string = '';
   title: string = '';
 }
