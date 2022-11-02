@@ -3,6 +3,7 @@ import { Observable } from 'rxjs';
 import { map, switchMap } from 'rxjs/operators';
 import { Article } from 'src/app/model/article';
 import { ArticleService } from 'src/app/service/article.service';
+import { SliderLinksService } from 'src/app/service/slider-links.service';
 //import {NgcCookieConsentModule, NgcCookieConsentConfig} from 'ngx-cookieconsent';
 
 @Component({
@@ -24,9 +25,19 @@ export class HomeComponent implements OnInit {
       )
     );
 
-  constructor(private articleService: ArticleService) {}
+  sliderLinks: Array<object> = [{}]
+
+  constructor(
+    private articleService: ArticleService,
+    private linkService: SliderLinksService
+    ) {}
 
   ngOnInit(): void {
+
+    this.sliderLinks = this.linkService.links;
+    //JSON.stringify(this.sliderLinks);
+    console.log(this.sliderLinks);
+
     // cookie alert
     // https://www.npmjs.com/package/ngx-cookieconsent
     // https://developers.de/2018/10/29/implementing-cookie-for-angular-app/
