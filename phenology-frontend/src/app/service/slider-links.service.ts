@@ -5,7 +5,13 @@ import { Injectable } from '@angular/core';
 })
 export class SliderLinksService {
 
-  links: Array<object> = [
+  links: {
+      id: number,
+      iconAlt: string,
+      omszLink: string,
+      iconPath: string,
+      title: string
+    }[] = [
     {
       id: 1,
       iconAlt: "Időjárás",

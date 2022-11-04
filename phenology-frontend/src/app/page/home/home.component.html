@@ -7,7 +7,9 @@
 
 <div class="container">
   <div class="row">
-    <div class="row-cols-md-12 row-cols-lg-4 row-cols-xl-4 d-flex justify-content-center">
+    <div
+      class="row-cols-md-12 row-cols-lg-4 row-cols-xl-4 d-flex justify-content-center"
+    >
       <div class="card h-100 shadow bg-body rounded">
         <img
           src="../../../assets/image/gyongyvirag.jpg"
@@ -18,8 +20,7 @@
           <h5>Mi a jelentősége?</h5>
           <h3 class="card-title">Növényfenológiai megfigyelések</h3>
           <p class="card-text">
-            A növények fejlődése összegzi a környezeti hatásokat, az időjárási
-            elemek összhatását mutatja. Így a növény kiváló meteorológiai eszköz
+            A növények fejlődése összegzi a környezeti hatásokat, így a növény kiváló meteorológiai eszköz
             az éghajlat, az éghajlat változásának jellemzésére. A fenológiai
             jelenségek a növény fejlődésének látható jelei, a fenológiai fázisok
             az egyes élettani szakaszok határpontjai, melyek szabályszerű
@@ -41,14 +42,12 @@
         />
         <div class="card-body d-flex flex-column">
           <h5>Én is részt vehetek?</h5>
-          <h3 class="card-title">Legyél te is megfigyelő!</h3>
+          <h3 class="card-title">Legyen Ön is megfigyelő!</h3>
           <p class="card-text">
             Önkénteseket keresünk növényfenológiai megfigyelésekhez: A feladat
             nagyon egyszerű, figyelni kell, hogy egy-egy növény pl. mikor kezd
             virágozni, mikor lombosodik, mikor kezd ősszel hullani a levele, és
-            azt itt egy rövid regisztráció után rögzíteni. Nem kell mindenféle
-            növényt folyamatosan figyelni, ha valaki csak egy növényfaj egy
-            fejlődési fázisának kezdetét tudja megfigyelni, az is nagyon jó. Ha
+            azt itt egy rövid regisztráció után rögzíteni. Ha
             ma nem figyeljük és mérjük meg a környezetünk állapotát és azt nem
             dokumentáljuk, akkor azt a jövőben már soha senki nem fogja tudni
             megmérni, megfigyelni.
@@ -65,8 +64,11 @@
           class="card-img-top"
           alt="..."
         />
-        <div class="card-body d-flex flex-column" *ngIf="article$ | async as article">
-          <h5>Mi a legfrissebb?</h5>
+        <div
+          class="card-body d-flex flex-column"
+          *ngIf="article$ | async as article"
+        >
+          <h5>Miről írtunk legutóbb?</h5>
           <h3 class="card-title">{{ article[0].title }}</h3>
           <p class="card-text">
             {{ article[0].abstract }}
@@ -84,7 +86,7 @@
 
 <div class="container border-top mt-5">
   <div class="d-flex justify-content-center m-4">
-    <a href="https://www.met.hu/"  target="_blank" class="">
+    <a href="https://www.met.hu/" target="_blank" class="">
       <img
         src="../../../assets/image/logo_x135_teljes_szurke_kerekitett.png"
         class=""
@@ -95,154 +97,17 @@
   </div>
 
   <div class="row justify-content-center">
-    {{ sliderLinks }}
-    {{ sliderLinks[0] | json }}
-    <div *ngFor="let sl of sliderLinks; let i=index"> <!-- class="card shadow rounded m-1 p-0 slider slider{{i+1}}" -->
-      {{sl}}
-      <!-- <a [href]= "slider.omszLink" target="_blank" class="text-decoration-no">
+    <div
+      *ngFor="let slider of sliderLinks; let i = index"
+      class="card shadow rounded m-1 p-0 slider slider{{ i + 1 }}"
+    >
+      <a [href]="slider.omszLink" target="_blank" class="text-decoration-no">
         <img
-          [src]= "slider.iconPath"
+          [src]="slider.iconPath"
           class="card-img-top"
-          [alt]= "slider.iconAlt"
+          [alt]="slider.iconAlt"
         />
         <p class="text-center align-middle mt-3">{{ slider.title }}</p>
-      </a> -->
-  </div>
-
-  </div>
-
-
-  <div class="row justify-content-center">
-
-    <div class="card shadow rounded m-1 p-0 slider slider1">
-      <a href="" target="_blank" class="text-decoration-no">
-        <img
-          src="../../../assets/image/slider/idojaras.jpg"
-          class="card-img-top"
-          alt="..."
-        />
-        <p class="text-center align-middle mt-3">Időjárás</p>
-      </a>
-    </div>
-
-    <div class="card shadow rounded m-1 p-0 slider slider2">
-      <a href="" target="_blank" class="text-decoration-no">
-        <img
-          src="../../../assets/image/slider/agro.jpg"
-          class="card-img-top"
-          alt="..."
-        />
-        <p class="text-center align-middle mt-1 p-0">Agrome-teorológia</p>
-      </a>
-    </div>
-
-    <div class="card shadow rounded m-1 p-0 slider slider3">
-      <a href="" target="_blank" class="text-decoration-no">
-        <img
-          src="../../../assets/image/slider/eghajlat.jpg"
-          class="card-img-top"
-          alt="..."
-        />
-        <p class="text-center align-middle mt-3 p-0">Éghajlat</p>
-      </a>
-    </div>
-
-    <div class="card shadow rounded m-1 p-0 slider slider4">
-      <a href="" target="_blank" class="text-decoration-no">
-        <img
-          src="../../../assets/image/slider/elorejelzes1.jpg"
-          class="card-img-top"
-          alt="..."
-        />
-        <p class="text-center align-middle mt-3 p-0">Előrejelzés</p>
-      </a>
-    </div>
-
-    <div class="card shadow rounded m-1 p-0 slider slider5">
-      <a href="" target="_blank" class="text-decoration-no">
-        <img
-          src="../../../assets/image/slider/humanmet.jpg"
-          class="card-img-top"
-          alt="..."
-        />
-        <p class="text-center align-middle mt-1 p-0">Humánme-teorológia</p>
-      </a>
-    </div>
-
-    <div class="card shadow rounded m-1 p-0 slider slider6">
-      <a href="" target="_blank" class="text-decoration-no">
-        <img
-          src="../../../assets/image/slider/levegokornyezet.jpg"
-          class="card-img-top"
-          alt="..."
-        />
-        <p class="text-center align-middle mt-1 p-0">Levegő-környezet</p>
-      </a>
-    </div>
-
-    <div class="card shadow rounded m-1 p-0 slider slider7">
-      <a href="" target="_blank" class="text-decoration-no">
-        <img
-          src="../../../assets/image/slider/meteora.jpg"
-          class="card-img-top"
-          alt="..."
-        />
-        <p class="text-center align-middle mt-3 p-0">Meteora</p>
-      </a>
-    </div>
-
-    <div class="card shadow rounded m-1 p-0 slider slider8">
-      <a href="" target="_blank" class="text-decoration-no">
-        <img
-          src="../../../assets/image/slider/radar1.jpg"
-          class="card-img-top"
-          alt="..."
-        />
-        <p class="text-center align-middle mt-3 p-0">Élő radar</p>
-      </a>
-    </div>
-
-    <div class="card shadow rounded m-1 p-0 slider slider9">
-      <a href="" target="_blank" class="text-decoration-no">
-        <img
-          src="../../../assets/image/slider/metesz.jpg"
-          class="card-img-top"
-          alt="..."
-        />
-        <p class="text-center align-middle mt-3 p-0">MET-ÉSZ</p>
-      </a>
-    </div>
-
-    <div class="card shadow rounded m-1 p-0 slider slider10">
-      <a href="" target="_blank" class="text-decoration-no">
-        <img
-          src="../../../assets/image/slider/repules.jpg"
-          class="card-img-top"
-          alt="..."
-        />
-        <p class="text-center align-middle mt-1 p-0">Repülésme-teorológia</p>
-      </a>
-    </div>
-
-    <div class="card shadow rounded m-1 p-0 slider slider11">
-      <a href="" target="_blank" class="text-decoration-no">
-        <img
-          src="../../../assets/image/slider/tavaink.jpg"
-          class="card-img-top"
-          alt="..."
-        />
-        <p class="text-center align-middle mt-1 p-0">Tavaink időjárása</p>
-      </a>
-    </div>
-
-    <div class="card shadow rounded m-1 p-0 slider slider12">
-      <a href="" target="_blank" class="text-decoration-no">
-        <img
-          src="../../../assets/image/slider/veszelyjelzes.jpg"
-          class="card-img-top"
-          alt="..."
-        />
-        <p class="text-center align-middle mt-1 p-0">Veszély-jelzés</p>
       </a>
     </div>
   </div>

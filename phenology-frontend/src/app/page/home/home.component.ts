@@ -25,19 +25,20 @@ export class HomeComponent implements OnInit {
       )
     );
 
-  sliderLinks: Array<object> = [{}]
+  sliderLinks: {
+    id: number;
+    iconAlt: string;
+    omszLink: string;
+    iconPath: string;
+    title: string;
+  }[] = this.linkService.links;
 
   constructor(
     private articleService: ArticleService,
     private linkService: SliderLinksService
-    ) {}
+  ) {}
 
   ngOnInit(): void {
-
-    this.sliderLinks = this.linkService.links;
-    //JSON.stringify(this.sliderLinks);
-    console.log(this.sliderLinks);
-
     // cookie alert
     // https://www.npmjs.com/package/ngx-cookieconsent
     // https://developers.de/2018/10/29/implementing-cookie-for-angular-app/

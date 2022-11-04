@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg">
+<nav class="navbar navbar-expand-lg navbar__top">
   <div class="container-fluid">
     <!-- Navbar Brand-->
     <a class="navbar-brand ps-3 text-white" routerLink="/"
@@ -10,47 +10,20 @@
       />
       <strong>Növényfenológia</strong>
     </a>
-    <div class="">
-      <button
-        class="navbar-toggler text-white"
-        type="button"
-        data-bs-toggle="collapse"
-        data-bs-target="#navbarTogglerDemo02"
-        aria-controls="navbarTogglerDemo02"
-        aria-expanded="false"
-        aria-label="Toggle navigation"
-      >
-        <i class="fa fa-bars"></i>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+    <div class="justify-content-center">
+      <div class="collapse navbar-collapse" id="navbarTogglerDemo">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-
-          <li class="nav-item">
-            <a
-              class="nav-link active text-white me-3"
-              aria-current="page"
-              routerLink="/observation"
-              >Új megfigyelés</a
-            >
+          <li class="OMSZ__logo">
+            <a href="https://www.met.hu/" target="_blank" class="">
+              <img
+                src="../../../assets/image/logo_x135_teljes_szurke_kerekitett.png"
+                class=""
+                alt="Országos Meteorológiai Szolgálat"
+                width="120px"
+              />
+            </a>
           </li>
-          <li class="nav-item">
-            <a
-              class="nav-link active text-white me-3"
-              aria-current="page"
-              routerLink="/data"
-              >Megfigyelések</a
-            >
-          </li>
-          <li class="nav-item">
-            <a
-              class="nav-link active text-white me-3"
-              aria-current="page"
-              routerLink="/article"
-              >Cikkek</a
-            >
-          </li>
-
-          <li class="nav-item dropdown me-3">
+          <!-- <li class="nav-item dropdown me-3">
             <a
               class="nav-link dropdown-toggle text-white"
               href="#"
@@ -83,9 +56,11 @@
                 >
               </li>
             </ul>
-          </li>
+          </li> -->
 
-          <li *ngIf="userFirstName"><hr class="dropdown-divider text-white" /></li>
+          <li *ngIf="userFirstName">
+            <hr class="dropdown-divider text-white" />
+          </li>
           <li *ngIf="userFirstName" class="nav-link text-white ms-0 ms-lg-5">
             Üdvözlünk: {{ userFirstName }} {{ userLastName }}
           </li>
@@ -101,12 +76,19 @@
             >
               <i class="fa fa-user"></i>
             </a>
-            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarScrollingDropdown">
+            <ul
+              class="dropdown-menu dropdown-menu-end"
+              aria-labelledby="navbarScrollingDropdown"
+            >
               <li>
-                <a class="dropdown-item text-white" routerLink="/profile">Profil</a>
+                <a class="dropdown-item text-white" routerLink="/profile"
+                  >Profil</a
+                >
               </li>
               <li>
-                <a class="dropdown-item text-white" routerLink="/myobservations">Megfigyeléseim</a>
+                <a class="dropdown-item text-white" routerLink="/myobservations"
+                  >Megfigyeléseim</a
+                >
               </li>
               <!-- <li><a class="dropdown-item" href="#!">Activity Log</a></li> -->
               <li><hr class="dropdown-divider text-white" /></li>
@@ -123,5 +105,103 @@
     <button routerLink="/login" *ngIf="!userFirstName" class="btn btn-success">
       <i class="fa fa-sign-in"></i>
     </button>
+  </div>
+</nav>
+
+<nav class="navbar navbar-expand-lg navbar__bottom">
+  <div class="container-fluid justify-content-center">
+    <div class="">
+      <button
+        class="navbar-toggler text-white"
+        type="button"
+        data-bs-toggle="collapse"
+        data-bs-target="#navbarTogglerDemo02"
+        aria-controls="navbarTogglerDemo02"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <i class="fa fa-bars"></i>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a
+              class="nav-link text-white me-3"
+              routerLinkActive="active"
+              [routerLinkActiveOptions]="{exact: true}"
+              aria-current="page"
+              routerLink="/observation"
+              >Új megfigyelés</a
+            >
+          </li>
+
+          <li class="nav-item">
+            <a
+              class="nav-link text-white me-3"
+              routerLinkActive="active"
+              [routerLinkActiveOptions]="{exact: true}"
+              aria-current="page"
+              routerLink="/data"
+              >Megfigyelések</a
+            >
+          </li>
+
+          <li class="nav-item">
+            <a
+              class="nav-link text-white me-3"
+              routerLinkActive="active"
+              [routerLinkActiveOptions]="{exact: true}"
+              aria-current="page"
+              routerLink="/history"
+              >Jelentőség</a
+            >
+          </li>
+
+          <li class="nav-item">
+            <a
+              class="nav-link text-white me-3"
+              routerLinkActive="active"
+              [routerLinkActiveOptions]="{exact: true}"
+              aria-current="page"
+              routerLink="/challenge"
+              >Kihívás</a
+            >
+          </li>
+
+          <li class="nav-item">
+            <a
+              class="nav-link text-white me-3"
+              routerLinkActive="active"
+              [routerLinkActiveOptions]="{exact: true}"
+              aria-current="page"
+              routerLink="/guide"
+              >Útmutató</a
+            >
+          </li>
+
+          <li class="nav-item">
+            <a
+              class="nav-link text-white me-3"
+              routerLinkActive="active"
+              [routerLinkActiveOptions]="{exact: true}"
+              aria-current="page"
+              routerLink="/plant"
+              >Növények</a
+            >
+          </li>
+
+          <li class="nav-item">
+            <a
+              class="nav-link text-white me-3"
+              routerLinkActive="active"
+              [routerLinkActiveOptions]="{exact: true}"
+              aria-current="page"
+              routerLink="/article"
+              >Cikkek</a
+            >
+          </li>
+        </ul>
+      </div>
+    </div>
   </div>
 </nav>
