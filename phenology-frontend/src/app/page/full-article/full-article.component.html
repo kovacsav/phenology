@@ -8,15 +8,17 @@
 
   <p class="article__abstact">{{ article.abstract }}</p>
 
-  <div *ngIf="article.image[0]" class="d-flex justify-content-center my-5">
-    <div>
-      <img [src]="article.image[0].imgPath" alt="első ábra" class="me-4" />
-      <p class="mt-3 mb-0 text-center">
-        <i>1. ábra</i>
-      </p>
-      <p class="text-center">
-        <i> {{ article.image[0].imgTitle }} </i>
-      </p>
+  <div *ngIf="article.image[0]">
+    <div class="my-5">
+      <img [src]="article.image[0].imgPath" alt="első ábra" class="d-block mx-auto" style="max-width: 80%"/>
+      <div>
+        <p class="mt-3 mb-0 text-center">
+          <i>1. ábra</i>
+        </p>
+        <p class="text-center">
+          <i> {{ article.image[0].imgTitle }} </i>
+        </p>
+      </div>
     </div>
   </div>
 
@@ -25,7 +27,7 @@
   <div *ngFor="let img of article.image; let i = index">
     <div *ngIf="i > 0" class="d-flex justify-content-center my-5">
       <div>
-        <img [src]="img.imgPath" alt="" class="me-2" />
+        <img [src]="img.imgPath" alt="" class="me-2 d-block mx-auto" style="max-width: 80%"/>
         <p class="mt-3 mb-0 text-center">
           <i> {{ i + 1 }}. ábra </i>
         </p>
