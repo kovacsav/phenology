@@ -18,11 +18,12 @@ h5 {
 
 .fixed-bg {
   background-image: url("../../../assets/image/aubreys-phenology-wheel-southern-hemisphere.jpg");
-  min-height: 500px;
+  min-height: 50vh;
   background-attachment: fixed;
-  background-position: center;
+  background-position-x: 8vw;
+  background-position-y: 15vw;
   background-repeat: no-repeat;
-  background-size: cover;
+  background-size: 30vw;
 }
 
 .dark-background{
@@ -34,9 +35,37 @@ h5 {
   text-align: justify;
 }
 
+.card__shadow {
+  box-shadow: 0px 20px 30px -20px;
+  border-top: 3px solid rgb(0, 212, 35);
+}
+
 .card-background{
   background-color: rgb(255, 255, 255);
   box-shadow: 4px 4px 8px 4px rgba(0, 0, 0, 0.2), 0px 6px 20px 4px rgba(0, 0, 0, 0.19);
+}
+
+.card__image {
+  width: 150px;
+  height: 200px;
+  background-image: url("../../../assets/image/pipacs.jpg");
+  background-size: 150px 200px;
+  background-repeat: no-repeat;
+  box-shadow: 0px 0px 20px 20px white inset;
+}
+
+.float__div {
+  float: inline-end;
+}
+
+.card__fullBackground {
+  background-image: url("../../../assets/image/pipacs.jpg");
+  background-size: 100%;
+  background-repeat: no-repeat;
+}
+
+.card__inside {
+  background-color: rgba(255, 255, 255, 0.8);
 }
 
 .title-background{
