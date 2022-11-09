@@ -6,8 +6,30 @@ h2 {
   font-size: 4vw;
 }
 
-h3 {
-  font-size: 3vw;
+.card-text, .card-footer{
+  text-align: justify;
+}
+
+.card__shadow {
+  box-shadow: 0px 20px 30px -20px;
+  border-top: 3px solid rgb(0, 212, 35);
+}
+
+i {
+ font-size: 6em;
+ margin: 10px 0 20px 30px;
+}
+
+.fa-calendar {
+  color: brown;
+}
+
+.fa-leaf {
+  color: green;
+}
+
+.float__div {
+  float: inline-end;
 }
 
 .fixed-bg {

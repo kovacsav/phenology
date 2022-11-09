@@ -1,1 +1,10 @@
 /* You can add global styles to this file, and also import other style files */
+$base-color: rgb(0, 76, 0);
+
+$lighten-base-color: lighten($base-color, 10);
+$darker-base-color: darken($base-color, 10);
+
+
+$base-font: Roboto;
+
+$base-box-shadow: 0px 20px 30px -20px;

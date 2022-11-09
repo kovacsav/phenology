@@ -1,20 +1,17 @@
+@use '../../../styles.scss';
+
 .navbar__top, .dropdown-menu {
-  background-color: rgb(0, 61, 0);
+  background-color: styles.$base-color;
 }
 
 .navbar__bottom {
-  background-color: rgb(0, 110, 0);
+  background-color: styles.$base-color;
 }
 
 .OMSZ__logo{
   position: absolute;
   left: 44vw;
   top: 5px;
-}
-
-.dropdown-menu > li > a:hover {
-    background-image: none;
-    background-color: lightgreen;
 }
 
 .active {

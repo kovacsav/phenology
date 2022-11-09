@@ -1,11 +1,11 @@
 <div class="container">
-  <div class="fixed-bg row justify-content-end">
+  <h2 class="mt-5 text-center fw-bold">
+    Növények részletes bemutatása
+  </h2>
+  <!-- <div class="fixed-bg row justify-content-end">
     <div class="col-5 dark-background vertical-center">
-      <h2 class="p-3 text-light text-end fw-bold">
-        Növények részletes bemutatása
-      </h2>
     </div>
-  </div>
+  </div> -->
 
   <div class="my-5">
     <h2 class="fw-bold">Fák</h2>
@@ -16,7 +16,7 @@
             <a routerLink="/plant/{{ plant._id }}">
               <img [src]="plant.image[0]" class="card-img-top" alt="..." />
               <div class="card-body">
-                <h6 class="card-title fw-bold">{{ plant.name }}</h6>
+                <h6 class="card-title fw-bold text-center">{{ plant.name }}</h6>
               </div>
             </a>
           </div>
@@ -34,7 +34,7 @@
             <a routerLink="/plant/{{ plant._id }}">
               <img [src]="plant.image[0]" class="card-img-top" alt="..." />
               <div class="card-body">
-                <h6 class="card-title fw-bold">{{ plant.name }}</h6>
+                <h6 class="card-title fw-bold text-center">{{ plant.name }}</h6>
               </div>
             </a>
           </div>
@@ -51,7 +51,7 @@
               <a routerLink="/plant/{{ plant._id }}">
                 <img [src]="plant.image[0]" class="card-img-top" alt="..." />
                 <div class="card-body">
-                  <h6 class="card-title fw-bold">{{ plant.name }}</h6>
+                  <h6 class="card-title fw-bold text-center">{{ plant.name }}</h6>
                 </div>
               </a>
             </div>
