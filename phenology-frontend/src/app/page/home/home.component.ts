@@ -47,18 +47,18 @@ export class HomeComponent implements OnInit {
     cc.cookieconsent.initialise({
       palette: {
         popup: {
-          background: '#164969',
+          background: 'rgb(0, 90, 0)',
         },
         button: {
-          background: '#ffe000',
-          text: '#164969',
+          background: 'rgb(0, 150, 0)',
+          text: 'rgb(255,255,255)',
         },
       },
       theme: 'classic',
       content: {
         message: 'Az oldal alapvető működéséhez sütiket használunk.',
         dismiss: 'Rendben',
-        link: 'Részletek',
+        link: '',
         href: '',
       },
     });

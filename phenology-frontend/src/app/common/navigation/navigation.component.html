@@ -1,12 +1,12 @@
 <nav class="navbar navbar-expand-lg navbar__top">
   <div class="container-fluid">
     <!-- Navbar Brand-->
-    <a class="navbar-brand text-white" routerLink="/"
+    <a class="navbar-brand" routerLink="/"
       ><img
         src="../../../assets/image/logo2.png"
         alt=""
-        width="30px"
-        class="mr-2"
+        width="40px"
+        class="mr-2 img__logo p-2 rounded"
       />
       <strong>Növényfenológia</strong>
     </a>
@@ -59,59 +59,60 @@
           </li> -->
 
           <li *ngIf="userFirstName">
-            <hr class="dropdown-divider text-white" />
+            <hr class="dropdown-divider" />
           </li>
-          <li *ngIf="userFirstName" class="nav-link text-white ms-0 ms-lg-5">
+          <li *ngIf="userFirstName" class="nav-link ms-0 ms-lg-5">
             Üdvözlünk: {{ userFirstName }} {{ userLastName }}
           </li>
 
           <li *ngIf="userFirstName" class="nav-item dropdown">
             <a
-              class="nav-link dropdown-toggle text-white"
+              class="nav-link dropdown-toggle"
               href="#"
-              id="navbarScrollingDropdown"
               role="button"
-              data-bs-toggle="dropdown"
+              data-toggle="dropdown"
               aria-expanded="false"
             >
               <i class="fa fa-user"></i>
             </a>
             <ul
-              class="dropdown-menu dropdown-menu-end"
+              class="dropdown-menu dropdown-menu-right"
               aria-labelledby="navbarScrollingDropdown"
             >
               <li>
-                <a class="dropdown-item text-white" routerLink="/profile"
-                  >Profil</a
-                >
+                <a class="dropdown-item" routerLink="/profile">Profil</a>
               </li>
               <li>
-                <a class="dropdown-item text-white" routerLink="/myobservations"
+                <a class="dropdown-item" routerLink="/myobservations"
                   >Megfigyeléseim</a
                 >
               </li>
-              <!-- <li><a class="dropdown-item" href="#!">Activity Log</a></li> -->
-              <li><hr class="dropdown-divider text-white" /></li>
+
+              <li><hr class="dropdown-divider" /></li>
               <li>
-                <a class="dropdown-item text-white" (click)="onLogout()"
-                  >Kijelentkezés</a
-                >
+                <a class="dropdown-item" (click)="onLogout()">Kijelentkezés</a>
               </li>
             </ul>
           </li>
         </ul>
       </div>
     </div>
-    <button routerLink="/login" *ngIf="!userFirstName" class="btn btn-success">
+    <button
+      routerLink="/login"
+      *ngIf="!userFirstName"
+      class="btn button__signIn"
+    >
       <i class="fa fa-sign-in"></i>
     </button>
   </div>
 </nav>
 
-<nav class="navbar navbar-expand-lg navbar__bottom d-flex justify-content-center">
+<nav
+  class="navbar navbar-expand-lg navbar__bottom d-flex justify-content-center mt-1"
+>
   <div class="">
     <button
-      class="navbar-toggler text-white"
+      class="navbar-toggler"
       type="button"
       data-toggle="collapse"
       data-target="#navbarNav"
@@ -125,7 +126,7 @@
       <ul class="navbar-nav">
         <li class="nav-item">
           <a
-            class="nav-link text-white me-3"
+            class="nav-link me-3"
             routerLinkActive="active"
             [routerLinkActiveOptions]="{ exact: true }"
             aria-current="page"
@@ -135,7 +136,7 @@
         </li>
         <li class="nav-item">
           <a
-            class="nav-link text-white me-3"
+            class="nav-link me-3"
             routerLinkActive="active"
             [routerLinkActiveOptions]="{ exact: true }"
             aria-current="page"
@@ -145,7 +146,7 @@
         </li>
         <li class="nav-item">
           <a
-            class="nav-link text-white me-3"
+            class="nav-link me-3"
             routerLinkActive="active"
             [routerLinkActiveOptions]="{ exact: true }"
             aria-current="page"
@@ -155,7 +156,7 @@
         </li>
         <li class="nav-item">
           <a
-            class="nav-link text-white me-3"
+            class="nav-link me-3"
             routerLinkActive="active"
             [routerLinkActiveOptions]="{ exact: true }"
             aria-current="page"
@@ -165,7 +166,7 @@
         </li>
         <li class="nav-item">
           <a
-            class="nav-link text-white me-3"
+            class="nav-link me-3"
             routerLinkActive="active"
             [routerLinkActiveOptions]="{ exact: true }"
             aria-current="page"
@@ -175,7 +176,7 @@
         </li>
         <li class="nav-item">
           <a
-            class="nav-link text-white me-3"
+            class="nav-link me-3"
             routerLinkActive="active"
             [routerLinkActiveOptions]="{ exact: true }"
             aria-current="page"
@@ -185,7 +186,7 @@
         </li>
         <li class="nav-item">
           <a
-            class="nav-link text-white me-3"
+            class="nav-link me-3"
             routerLinkActive="active"
             [routerLinkActiveOptions]="{ exact: true }"
             aria-current="page"
