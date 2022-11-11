@@ -4,6 +4,7 @@
   border-bottom-style: solid;
   border-width: 3px;
   border-color: styles.$base-color;
+  background-color: styles.$light-base-color;
 }
 
 .navbar__bottom {
@@ -23,8 +24,12 @@
 
 .OMSZ__logo{
   position: absolute;
-  left: 44vw;
-  top: 5px;
+  left: 45vw;
+  top: 10px;
+}
+
+.img__OMSZ__logo {
+  width: 10vw;
 }
 
 .button__signIn {
@@ -46,4 +51,20 @@
 
 .dropdown-item {
   color: styles.$darken-base-color;
+}
+
+@media only screen and (max-width: 2000px){
+  .nav__greeting--short {
+    display: none;
+  }
+}
+
+@media only screen and (max-width: 600px){
+  .title {
+    display: none;
+  }
+
+  .nav__greeting--long {
+    display: none;
+  }
 }

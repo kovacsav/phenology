@@ -1,79 +1,92 @@
 <div *ngIf="signedin">
-  <div class="container p-3">
+  <h1 class="text-center mt-5 mb-3">Új megfigyelés rögzítése</h1>
+  <div class="container mx-2">
     <div class="row">
-      <h1 class="m-2 text-center">Új megfigyelés rögzítése</h1>
       <form #observationForm="ngForm" (ngSubmit)="save()">
-        <div class="form-group mt-5 col-4">
-          <label class="mb-1 subtitle" for="">Dátum*</label>
+        <div class="mt-5 p-0 col-4 section__border">
+          <!-- <label class="mb-1 subtitle" for="">Dátum*</label> -->
+          <h4 class="my-2">Dátum*</h4>
           <input
             name="date"
             [(ngModel)]="observation.date"
             type="date"
-            class="form-control shadow mb-2"
+            class="form-control shadow mb-2 ml-2"
             max="{{ maxDate }}"
             required
           />
         </div>
 
-        <div class="form-group mt-5 col-4">
-          <label class="mb-1 subtitle" for="">Helyszín*</label>
+        <div class="my-5 p-0 col-4 section__border">
+          <!-- <label class="mb-1 subtitle" for="">Helyszín*</label> -->
+          <h4 class="my-2">Helyszín*</h4>
           <input
             name="location"
             [(ngModel)]="observation.location"
             type="text"
-            class="form-control shadow"
+            class="form-control shadow ml-2"
             required
           />
         </div>
 
-        <label class="mt-5 subtitle" for="">Megfigyelt növény*</label>
+        <div class="section__border">
+          <!-- <label class="mt-5 subtitle" for="">Megfigyelt növény*</label> -->
+          <h4 class="my-2">Megfigyelt növény*</h4>
 
-        <h5 class="mt-4 ms-5">Fák</h5>
-        <div class="row row-cols-3 row-cols-md-6 g-3 my-2 ms-5 text-dark">
-          <div class="col" *ngFor="let plant of trees">
+          <div class="ml-2">
+            <h5 class="mt-2 ms-5">Fák</h5>
             <div
-              class="card h-100 shadow hovered"
-              [ngClass]="{ highlighted: plant === selectedPlant }"
-              (click)="setPlant(plant)"
+              class="row row-cols-2 row-cols-sm-3 row-cols-md-4 row-cols-lg-6 g-3 my-2 text-dark"
             >
-              <img [src]="plant.image[0]" class="card-img-top" alt="..." />
-              <div class="card-body">
-                <h6 class="card-title fw-bold">{{ plant.name }}</h6>
-                <p class="card-text">{{ plant.latin }}</p>
+              <div class="col mb-3" *ngFor="let plant of trees">
+                <div
+                  class="card h-100 shadow hovered"
+                  [ngClass]="{ highlighted: plant === selectedPlant }"
+                  (click)="setPlant(plant)"
+                >
+                  <img [src]="plant.image[0]" class="card-img-top" alt="..." />
+                  <div class="card-body">
+                    <h6 class="card-title fw-bold">{{ plant.name }}</h6>
+                    <p class="card-text">{{ plant.latin }}</p>
+                  </div>
+                </div>
               </div>
             </div>
-          </div>
-        </div>
 
-        <h5 class="mt-5 ms-5">Cserjék</h5>
-        <div class="row row-cols-3 row-cols-md-6 g-3 my-2 ms-5 text-dark">
-          <div class="col" *ngFor="let plant of shrub">
+            <h5 class="mt-5 ms-5">Cserjék</h5>
             <div
-              class="card h-100 shadow hovered"
-              [ngClass]="{ highlighted: plant === selectedPlant }"
-              (click)="setPlant(plant)"
+              class="row row-cols-2 row-cols-sm-3 row-cols-md-4 row-cols-lg-6 g-3 my-2 text-dark"
             >
-              <img [src]="plant.image[0]" class="card-img-top" alt="..." />
-              <div class="card-body">
-                <h6 class="card-title fw-bold">{{ plant.name }}</h6>
-                <p class="card-text">{{ plant.latin }}</p>
+              <div class="col mb-3" *ngFor="let plant of shrub">
+                <div
+                  class="card h-100 shadow hovered"
+                  [ngClass]="{ highlighted: plant === selectedPlant }"
+                  (click)="setPlant(plant)"
+                >
+                  <img [src]="plant.image[0]" class="card-img-top" alt="..." />
+                  <div class="card-body">
+                    <h6 class="card-title fw-bold">{{ plant.name }}</h6>
+                    <p class="card-text">{{ plant.latin }}</p>
+                  </div>
+                </div>
               </div>
             </div>
-          </div>
-        </div>
 
-        <h5 class="mt-5 ms-5">Lágyszárúak</h5>
-        <div class="row row-cols-3 row-cols-md-6 g-3 my-2 ms-5 text-dark">
-          <div class="col" *ngFor="let plant of herbaceous">
+            <h5 class="mt-5 ms-5">Lágyszárúak</h5>
             <div
-              class="card h-100 shadow hovered"
-              [ngClass]="{ highlighted: plant === selectedPlant }"
-              (click)="setPlant(plant)"
+              class="row row-cols-2 row-cols-sm-3 row-cols-md-4 row-cols-lg-6 g-3 my-2 text-dark"
             >
-              <img [src]="plant.image[0]" class="card-img-top" alt="..." />
-              <div class="card-body">
-                <h6 class="card-title fw-bold">{{ plant.name }}</h6>
-                <p class="card-text">{{ plant.latin }}</p>
+              <div class="col mb-3" *ngFor="let plant of herbaceous">
+                <div
+                  class="card h-100 shadow hovered"
+                  [ngClass]="{ highlighted: plant === selectedPlant }"
+                  (click)="setPlant(plant)"
+                >
+                  <img [src]="plant.image[0]" class="card-img-top" alt="..." />
+                  <div class="card-body">
+                    <h6 class="card-title fw-bold">{{ plant.name }}</h6>
+                    <p class="card-text">{{ plant.latin }}</p>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -81,20 +94,22 @@
 
         <!--<button class="m-5">Más növény</button>-->
 
-        <div *ngIf="observation.plant._id" class="form-group mt-3">
-          <label class="mt-5 mb-1 subtitle" for="">Fenológiai fázis*</label>
-          <br />
-
+        <div
+          *ngIf="observation.plant._id"
+          class="form-group mt-3 section__border"
+        >
+          <!-- <label class="mt-5 mb-1 subtitle" for="">Fenológiai fázis*</label> -->
+          <h4 class="my-2">Fenológiai fázis*</h4>
           <div *ngFor="let phase of selectedPlant.phase" class="">
             <div
-              class="my-3 ms-5"
+              class="my-3 ml-2"
               (click)="setPhase(phase)"
               role="group"
               aria-label=""
             >
               <input
                 type="radio"
-                class=""
+                class="radio__input"
                 name="btnradio"
                 [id]="phase"
                 autocomplete="off"
@@ -106,53 +121,56 @@
 
           <!-- Uplaod photo -->
 
-          <div class="mt-5">
-            <label class="subtitle" for="">Fénykép feltöltés</label>
-            <p class="my-2">
-              Egymás után több kép is feltölthető, melyek automatikusan
-              optimális méretűre állítunk be.
-              Ha van az eszköznek kamerája, lehet azt is használni,
-              akár több kép is készíthető. A kiválasztás után a képek
-              megjelennek, ellenőrizhetőek, a kiválasztás vissza is
-              vonható.
-              A megfigyelés adatai és fényképei csak a "Megfigyelés rögzítése"
-              után kerülnek mentésre.
-            </p>
+          <div class="mt-5 section__border">
+            <!-- <label class="subtitle" for="">Fénykép feltöltés</label> -->
+            <h4 class="my-2">Fénykép feltöltés</h4>
+            <div class="ml-2">
+              <p class="my-2">
+                Egymás után több kép is feltölthető, melyek automatikusan
+                optimális méretűre állítunk be. Ha van az eszköznek kamerája,
+                lehet azt is használni, akár több kép is készíthető. A
+                kiválasztás után a képek megjelennek, ellenőrizhetőek, a
+                kiválasztás vissza is vonható. A megfigyelés adatai és fényképei
+                csak a "Megfigyelés rögzítése" után kerülnek mentésre.
+              </p>
 
-            <!-- --------------- webcam -->
-            <app-camera
-              (getPicture)="handleImage($event)"
-              name="webcamImage"
-            ></app-camera>
-            <div class="webcam-image" *ngIf="webcamImage">
+              <!-- --------------- webcam -->
+              <app-camera
+                (getPicture)="handleImage($event)"
+                name="webcamImage"
+              ></app-camera>
+              <!-- <div class="webcam-image" *ngIf="webcamImage">
               <img [src]="webcamImage.imageAsDataUrl" />
-            </div>
+            </div> -->
 
-            <form [formGroup]="fileUploadForm">
-              <div class="row">
-                <div class="col-sm-12">
-                  <div class="ms-5">
-                    <h6 class="head-title margin-top-8">
+              <form [formGroup]="fileUploadForm">
+                <div class="row">
+                  <div class="col-sm-12">
+                    <div class="ms-5">
+                      <!-- <h6 class="my-3">
                       <span>Válassz fényképet!</span>
-                    </h6>
+                    </h6> -->
+                      <h5 class="my-2">
+                        Válassz korábban készített fényképet!
+                      </h5>
+                    </div>
                   </div>
-                </div>
-                <div class="col-sm-6">
-                  <div class="custom-file ms-5 mt-3">
-                    <label for="image-inpit" class="custom-file-upload">
-                      Tallózás
-                    </label>
-                    <input
-                      type="file"
-                      accept=".jpg, .png, .jpeg"
-                      id="image-inpit"
-                      class="custom-file-input"
-                      name="uploadedImage"
-                      (change)="selectFile($event)"
-                      #UploadFileInput
-                      multiple
-                    />
-                    <!--
+                  <div class="col-sm-6">
+                    <div class="custom-file ms-5 mt-3">
+                      <label for="image-inpit" class="custom-file-upload">
+                        Tallózás
+                      </label>
+                      <input
+                        type="file"
+                        accept=".jpg, .png, .jpeg"
+                        id="image-inpit"
+                        class="custom-file-input"
+                        name="uploadedImage"
+                        (change)="selectFile($event)"
+                        #UploadFileInput
+                        multiple
+                      />
+                      <!--
                     <div class="row">
                       <div
                         *ngFor="let selectedFile of compressedFiles"
@@ -161,72 +179,80 @@
                         <img [src]="selectedFile" width="150" />
                       </div>
                     </div>
-                    -->
+                    --></div>
                   </div>
                 </div>
-              </div>
 
-              <br />
+                <h5 class="mt-5 mb-2">Feltöltésre kiválasztott fényképek</h5>
 
-              <div class="row">
-                <div
-                  *ngFor="
-                    let selectedFile of compressedFiles;
-                    let indexOfelement = index
-                  "
-                  class="col m-2"
-                >
-                  <img [src]="selectedFile" width="150" />
-                  <button
-                    (click)="onRemove(indexOfelement)"
-                    class="btn btn-danger"
+                <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3">
+                  <div
+                    *ngFor="
+                      let selectedFile of compressedFiles;
+                      let indexOfelement = index
+                    "
+                    class="col d-flex justify-content-center align-items-center"
                   >
-                    File eltávolítása
-                  </button>
+                    <img [src]="selectedFile" width="150px" class="d-block" />
+                    <button
+                      (click)="onRemove(indexOfelement)"
+                      class="btn btn-danger m-2 button__height"
+                      type="button"
+                    >
+                      Mégsem
+                    </button>
+                  </div>
                 </div>
-              </div>
-            </form>
+              </form>
+            </div>
           </div>
         </div>
 
-        <div class="form-group mt-3">
-          <div class="d-flex justify-content-between">
-            <label class="mt-5 mb-2 subtitle" for="">Megjegyzés</label>
-            <div
-              [hidden]="observationForm.controls.note?.valid"
-              class="error-message mt-1"
-            >
-              A leírás 2-1400 karakter hosszú lehet!
+        <div class="form-group mt-3 section__border">
+          <div class="">
+            <!-- <label class="mt-5 mb-2 subtitle" for="">Megjegyzés</label> -->
+            <h4 class="my-4">Megjegyzés</h4>
+            <div class="ml-2">
+              <div
+                [hidden]="observationForm.controls.note?.valid"
+                class="error-message mt-1"
+              >
+                A leírás 2-1400 karakter hosszú lehet!
+              </div>
+              <textarea
+                name="note"
+                [(ngModel)]="observation.note"
+                type="textarea"
+                class="form-control px-2 maxwidth"
+                pattern="^.{2,1400}$"
+                placeholder="A megfigyelt növény napos/árnyékos helyen, déli/északi lejtőn él. A növénycsoport hány százalékára jellemző a megfigyelés?"
+              ></textarea>
             </div>
           </div>
-          <textarea
-            name="note"
-            [(ngModel)]="observation.note"
-            type="textarea"
-            class="form-control"
-            pattern="^.{2,1400}$"
-          ></textarea>
         </div>
 
         <!-- {{ observation | json }} -->
+        <div class="section__border">
+          <p class="my-3">
+            A *-gal jelölt mezők megadása nélkül nem értelmezhető a megfigyelés,
+            ezért azok kitöltése kötelező.
+          </p>
 
-        <p class="my-3">
-          A *-gal jelölt mezők megadása nélkül nem értelmezhető a
-          megfigyelés, ezért azok kitöltése kötelező.
-        </p>
-
-        <button
-          class="btn btn-outline-success my-2"
-          [disabled]="observationForm.invalid || observation.phase === ''"
-          type="submit"
-        >
-          Megfigyelés elküldése
-        </button>
-        <p *ngIf="observationForm.invalid || observation.phase === ''"
-        class = "text-danger">
-          Valami hiányzik a beviteli mezőkben: dátum, helyszín, növény,
-          fenológiai fázis.
-        </p>
+          <button
+            class="btn btn-outline-success my-2"
+            [disabled]="observationForm.invalid || observation.phase === ''"
+            type="submit"
+          >
+            Megfigyelés elküldése
+          </button>
+          <p
+            *ngIf="observationForm.invalid || observation.phase === ''"
+            class="text-danger maxwidth"
+          >
+            Valami hiányzik a beviteli mezőkben: dátum, helyszín, növény,
+            fenológiai fázis.
+          </p>
+        </div>
       </form>
     </div>
   </div>

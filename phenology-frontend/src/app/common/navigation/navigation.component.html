@@ -8,18 +8,17 @@
         width="40px"
         class="mr-2 img__logo p-2 rounded"
       />
-      <strong>Növényfenológia</strong>
+      <strong class="title">Növényfenológia</strong>
     </a>
     <div class="justify-content-center">
-      <div class="collapse navbar-collapse" id="navbarTogglerDemo">
+      <div class="" id="navbarTogglerDemo">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
           <li class="OMSZ__logo">
             <a href="https://www.met.hu/" target="_blank" class="">
               <img
                 src="../../../assets/image/logo_x135_teljes_szurke_kerekitett.png"
-                class=""
+                class="img__OMSZ__logo"
                 alt="Országos Meteorológiai Szolgálat"
-                width="120px"
               />
             </a>
           </li>
@@ -61,8 +60,12 @@
           <li *ngIf="userFirstName">
             <hr class="dropdown-divider" />
           </li>
-          <li *ngIf="userFirstName" class="nav-link ms-0 ms-lg-5">
+          <li *ngIf="userFirstName" class="nav-link nav__greeting--long">
             Üdvözlünk: {{ userFirstName }} {{ userLastName }}
+          </li>
+
+          <li *ngIf="userFirstName" class="nav-link nav__greeting--short">
+            Üdv: {{ userLastName }}
           </li>
 
           <li *ngIf="userFirstName" class="nav-item dropdown">

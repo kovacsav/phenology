@@ -1,0 +1,13 @@
+@use '../../../styles.scss';
+
+.btn-outline-success {
+  border-color: styles.$base-color;
+  border-width: 2px;
+  color: styles.$base-color;
+}
+
+.btn-outline-success:hover {
+  background-color: styles.$lighten-base-color;
+  border-color: styles.$darken-base-color;
+  color: white;
+}

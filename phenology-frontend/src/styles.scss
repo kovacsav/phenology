@@ -2,6 +2,8 @@
 $base-color: rgb(0, 80, 0);
 
 $lighten-base-color: lighten($base-color, 5%);
+$lighten-20-base-color: lighten($base-color, 20%);
+$light-base-color: lighten($base-color, 80%);
 $darken-base-color: darken($base-color, 5%);
 
 

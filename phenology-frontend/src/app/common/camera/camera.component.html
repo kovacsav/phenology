@@ -1,19 +1,20 @@
 <div *ngIf="isCameraExist; else noCameraExist">
   <div class="mt-5 ms-5">
     <div>
-      <h6 class="head-title margin-top-8">
+      <!-- <h6 class="head-title margin-top-8">
         <span>Készíts és küldj fényképet eszközöd kamerájával!</span>
-      </h6>
+      </h6> -->
+      <h5 class="my-2">Készíts és küldj fényképet eszközöd kamerájával!</h5>
     </div>
-    <div class="btn-group">
+    <div class="btn-group my-3">
       <div *ngIf="showWebcam">
-        <button class="btn btn-outline-success" (click)="takeSnapshot()">
+        <button class="btn btn-outline-success mb-3" (click)="takeSnapshot()">
           {{ photoString }}
         </button>
       </div>
       <div *ngIf="!showWebcam">
         <button class="btn btn-outline-success" (click)="onOffWebCam()">
-          Kép készítése
+          Új fénykép készítése
         </button>
       </div>
     </div>

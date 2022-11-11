@@ -1,5 +1,19 @@
+@use '../../../styles.scss';
+
 .container {
   //background: linear-gradient(120deg, rgb(44, 128, 10), rgb(41, 184, 148));
+}
+
+.section__border{
+  //border-top: 1px solid styles.$base-color;
+}
+
+.card {
+  max-width: 40vw;
+}
+
+.maxwidth {
+  max-width: 90vw;
 }
 
 .error-message {
@@ -41,18 +55,29 @@
 
 .custom-file-upload {
   border: 1px solid #ccc;
+  border-color: styles.$base-color;
+  border-width: 2px;
+  border-radius: 5px;
+  color: styles.$base-color;
+  cursor: pointer;
   display: inline-block;
   padding: 6px 12px;
-  cursor: pointer;
+}
+
+.custom-file-upload:hover {
+  background-color: styles.$lighten-base-color;
+  border-color: styles.$darken-base-color;
+  color: white;
 }
 
 .hovered:hover {
   //box-shadow: 10px 10px 5px grey;
-  border-color:rgb(1, 160, 1);
+  border-color: styles.$lighten-base-color;
+  border-width: 2px;
 }
 
 .highlighted {
-  border-color:rgb(1, 160, 1);
+  border-color:styles.$lighten-base-color;
   border-width: 5px;
 }
 
@@ -65,3 +90,23 @@
   min-height: 30vh;
   margin-top: 30vh;
 }
+
+.btn-outline-success {
+  border-color: styles.$base-color;
+  border-width: 2px;
+  color: styles.$base-color;
+}
+
+.btn-outline-success:hover {
+  background-color: styles.$lighten-base-color;
+  border-color: styles.$darken-base-color;
+  color: white;
+}
+.button__height{
+  height: auto;
+}
+
+.radio__input {
+  accent-color: styles.$base-color;
+}
+

@@ -92,7 +92,7 @@ export class ObservationDatasComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    console.log("maxdate:", this.maxDate);
+    //console.log("maxdate:", this.maxDate);
     // authorization and set current user
     this.auth.currentUserSubject$.subscribe({
       next: (user) => {
@@ -153,8 +153,8 @@ export class ObservationDatasComponent implements OnInit {
   }
 
   save(): any {
-    console.log('filenames', this.fileNames);
-    console.log('this.uploadArray', this.uploadArray);
+    //console.log('filenames', this.fileNames);
+    //console.log('this.uploadArray', this.uploadArray);
 
     // handle uploaded files
 
@@ -176,12 +176,12 @@ export class ObservationDatasComponent implements OnInit {
       }
     });
 
-    console.log(this.observation);
+    //console.log(this.observation);
     //console.log('hello');
 
     this.observationService.create(this.observation).subscribe({
       next: (response) => {
-        console.log('response:', response);
+        //console.log('response:', response);
         if (response) {
           // set new accessToken
 
@@ -194,7 +194,7 @@ export class ObservationDatasComponent implements OnInit {
         }
       },
       error: () => {
-        console.log("response error:", Error);
+        //console.log("response error:", Error);
         alert(
           'A felhasználó azonosítása nem sikerült, lehetséges, hogy a rendszer biztonsági okokból a hosszú inaktivitás miatt kiléptette. Kérjük jelentkezzen be újra.'
         );

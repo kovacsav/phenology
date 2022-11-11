@@ -1,3 +1,5 @@
+@use '../../../../styles.scss';
+
 h1 {
   font-size: 6vw;
 }
@@ -47,5 +49,6 @@ h5 {
 
 .hovered:hover {
   //box-shadow: 10px 10px 5px grey;
-  border-color:rgb(1, 160, 1);
+  border-color: styles.$lighten-base-color;
+  border-width: 2px;
 }
