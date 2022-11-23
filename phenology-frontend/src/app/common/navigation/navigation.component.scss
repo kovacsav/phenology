@@ -53,18 +53,39 @@
   color: styles.$darken-base-color;
 }
 
-@media only screen and (max-width: 2000px){
-  .nav__greeting--short {
+@media only screen and (max-width: 576px){
+  .title {
     display: none;
   }
-}
 
-@media only screen and (max-width: 600px){
-  .title {
+  .img__OMSZ__logo {
+    width: 20vw;
+  }
+
+  .OMSZ__logo{
+    left: 40vw;
+    top: 10px;
+  }
+
+  .nav__greeting--short {
     display: none;
   }
 
   .nav__greeting--long {
     display: none;
   }
+}
+
+@media only screen and (max-width: 992px){
+  .nav__greeting--long {
+    display: none;
+  }
+
+}
+
+@media only screen and (min-width: 992px){
+  .nav__greeting--short {
+    display: none;
+  }
+
 }

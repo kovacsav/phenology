@@ -1,6 +1,6 @@
 <div *ngIf="signedin">
-  <h1 class="text-center mt-5 mb-3">Új megfigyelés rögzítése</h1>
-  <div class="container mx-2">
+  <h1 class="text-center mt-5 mb-3">Új megfigyelés</h1>
+  <div class="container">
     <div class="row">
       <form #observationForm="ngForm" (ngSubmit)="save()">
         <div class="mt-5 p-0 col-4 section__border">
@@ -209,7 +209,7 @@
         </div>
 
         <div class="form-group mt-3 section__border">
-          <div class="">
+          <div class="remark__div">
             <!-- <label class="mt-5 mb-2 subtitle" for="">Megjegyzés</label> -->
             <h4 class="my-4">Megjegyzés</h4>
             <div class="ml-2">
@@ -223,7 +223,7 @@
                 name="note"
                 [(ngModel)]="observation.note"
                 type="textarea"
-                class="form-control px-2 maxwidth"
+                class="form-control textarea"
                 pattern="^.{2,1400}$"
                 placeholder="A megfigyelt növény napos/árnyékos helyen, déli/északi lejtőn él. A növénycsoport hány százalékára jellemző a megfigyelés?"
               ></textarea>

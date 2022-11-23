@@ -2,6 +2,8 @@
 
 .container {
   //background: linear-gradient(120deg, rgb(44, 128, 10), rgb(41, 184, 148));
+  margin-left: 10vw;
+  margin-right: 10vw;
 }
 
 .section__border{
@@ -12,8 +14,12 @@
   max-width: 40vw;
 }
 
-.maxwidth {
+.remark__div {
   max-width: 90vw;
+}
+
+.textarea{
+  width: 70vw;
 }
 
 .error-message {
@@ -110,3 +116,9 @@
   accent-color: styles.$base-color;
 }
 
+@media only screen and (max-width: 600px){
+  .container{
+    margin-left: 5vw;
+    margin-right: 5vw;
+  }
+}

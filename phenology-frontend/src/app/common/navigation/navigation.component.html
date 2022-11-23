@@ -11,64 +11,28 @@
       <strong class="title">Növényfenológia</strong>
     </a>
     <div class="justify-content-center">
-      <div class="" id="navbarTogglerDemo">
-        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-          <li class="OMSZ__logo">
-            <a href="https://www.met.hu/" target="_blank" class="">
-              <img
-                src="../../../assets/image/logo_x135_teljes_szurke_kerekitett.png"
-                class="img__OMSZ__logo"
-                alt="Országos Meteorológiai Szolgálat"
-              />
-            </a>
-          </li>
-          <!-- <li class="nav-item dropdown me-3">
-            <a
-              class="nav-link dropdown-toggle text-white"
-              href="#"
-              id="navbarScrollingDropdown"
-              role="button"
-              data-bs-toggle="dropdown"
-              aria-expanded="false"
-            >
-              Útmutató
-            </a>
-            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarScrollingDropdown">
-              <li>
-                <a class="dropdown-item text-white" routerLink="/history"
-                  >A növényfenológia története és jelentősége</a
-                >
-              </li>
-              <li>
-                <a class="dropdown-item text-white" routerLink="/challenge"
-                  >A kihívás</a
-                >
-              </li>
-              <li>
-                <a class="dropdown-item text-white" routerLink="/guide"
-                  >Megfigyelési útmutató</a
-                >
-              </li>
-              <li>
-                <a class="dropdown-item text-white" routerLink="/plant"
-                  >Növények leírása</a
-                >
-              </li>
-            </ul>
-          </li> -->
+      <div class="me-auto mb-2 mb-lg-0">
 
-          <li *ngIf="userFirstName">
-            <hr class="dropdown-divider" />
-          </li>
-          <li *ngIf="userFirstName" class="nav-link nav__greeting--long">
+        <div class="OMSZ__logo">
+          <a href="https://www.met.hu/" target="_blank" class="">
+            <img
+              src="../../../assets/image/logo_x135_teljes_szurke_kerekitett.png"
+              class="img__OMSZ__logo"
+              alt="Országos Meteorológiai Szolgálat"
+            />
+          </a>
+        </div>
+
+        <div class="d-flex">
+          <div *ngIf="userFirstName" class="nav__greeting--long align-items-center pt-2">
             Üdvözlünk: {{ userFirstName }} {{ userLastName }}
-          </li>
+          </div>
 
-          <li *ngIf="userFirstName" class="nav-link nav__greeting--short">
+          <div *ngIf="userFirstName" class="nav__greeting--short align-items-center pt-2">
             Üdv: {{ userLastName }}
-          </li>
+          </div>
 
-          <li *ngIf="userFirstName" class="nav-item dropdown">
+          <div *ngIf="userFirstName" class="nav-item dropdown">
             <a
               class="nav-link dropdown-toggle"
               href="#"
@@ -96,8 +60,8 @@
                 <a class="dropdown-item" (click)="onLogout()">Kijelentkezés</a>
               </li>
             </ul>
-          </li>
-        </ul>
+          </div>
+        </div>
       </div>
     </div>
     <button

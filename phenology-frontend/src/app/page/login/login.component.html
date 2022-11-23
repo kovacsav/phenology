@@ -1,17 +1,17 @@
 <div class="m-5">
   <h1 class="text-center">Bejelentkezés</h1>
   <br />
-  <h3 class="text-center my-3">
+  <h5 class="text-center my-1">
     Új megfigyelés rögzítéséhez kérjük jelentkezzen be.
     <br />
     <br />
     Amennyiben még nem regisztrált portálunkon, egy név, email cím és jelszó
     megadásával csatlakozhat a megfigyelők csapatához.
-  </h3>
+  </h5>
 </div>
 
 <div class="row d-flex justify-content-center align-items-center">
-  <div class="login col-10 col-lg-6 my-5 p-5">
+  <div class="login col-10 col-lg-6 p-3">
     <!-- <img class="edenkert my-3" src="http://localhost:3000/images/edenkert.png" alt=""> -->
     <form (ngSubmit)="onLogin()">
       <div class="form-group">
@@ -35,10 +35,11 @@
       <button type="submit" class="btn btn-primary col-12 my-3">
         Bejelentkezés
       </button>
-      <a routerLink="../register" class="btn btn-link">Regisztráció</a>
-      <a routerLink="../forgotPassword" class="btn btn-link"
-        >Elfelejtett jelszó</a
-      >
+      <div class="d-flex justify-content-center">
+        <a routerLink="../register" class="btn btn-link">Regisztráció</a>
+        <a routerLink="../forgotPassword" class="btn btn-link"
+          >Elfelejtett jelszó</a>
+        </div>
     </form>
   </div>
 </div>
