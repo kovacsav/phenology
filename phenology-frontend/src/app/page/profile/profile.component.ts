@@ -68,7 +68,7 @@ export class ProfileComponent implements OnInit {
         this.confirmPassword = this.user.password;
         //this.user.password = user?.password || '';
         this.user.email = user?.email;
-        console.log("user", user);
+        //console.log("user", user);
       },
       error: () => {
         this.user.firstName = '';

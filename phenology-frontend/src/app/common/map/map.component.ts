@@ -88,7 +88,7 @@ export class MapComponent implements OnInit {
       latitude: [34.060620, 40.724546],
       longitude: [-118.330491, -73.850344]
     }];
-    console.log(this.navigationLineSettings)
+    //console.log(this.navigationLineSettings)
     // this.shapeData = world_map;
   }
 

@@ -53,7 +53,7 @@ export class NavigationComponent implements OnInit {
       next: (user) => {
         this.userFirstName = user?.firstName;
         //this.userFirstName = this.cookieService.get("FirstName");
-        console.log('user first name:', this.userFirstName);
+        //console.log('user first name:', this.userFirstName);
         this.userLastName = user?.lastName;
         //this.userLastName = this.cookieService.get("LastName");
       },

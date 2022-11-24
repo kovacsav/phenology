@@ -20,14 +20,14 @@ export class ObservationService extends BaseService<Observation>  {
   uploadFile(formData: FormData): string {
     this.http
       .post<any>('http://localhost:3000/uploadfile', formData).subscribe(response => {
-        console.log(response);
+        //console.log(response);
         if (response.statusCode === 200) {
           // Reset the file input
           // uploadFileInput.nativeElement.value = "";
         }
         return response.uploadedFile.path
       }, er => {
-        console.log(er);
+        //console.log(er);
         alert(er.error.error);
       });
     return '';

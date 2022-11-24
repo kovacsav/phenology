@@ -188,11 +188,13 @@ export class PersonalObservedDatasComponent implements OnInit {
   }
 
   onDelete(): void {
+    /*
     console.log(
       'selectedObservationID:',
       this.selectedObservationID,
       this.user.email
     );
+    */
     this.observationService
       .deleteObservation(this.selectedObservationID, this.user.email)
       .pipe(first())

@@ -169,7 +169,7 @@ export class ObservationDatasComponent implements OnInit {
         formData.append('uploadedImage', file, this.fileNames[index]);
         formData.append('agentId', '007');
 
-        console.log('formData:', formData);
+        //console.log('formData:', formData);
         //formData.append('filename', this.fileNames[index]);
         this.observation.photo?.push(this.fileNames[index]);
         this.observationService.uploadFile(formData);
@@ -263,7 +263,7 @@ export class ObservationDatasComponent implements OnInit {
   }
 
   onRemove(index: any): void {
-    console.log(index);
+    //console.log(index);
     this.uploadArray.splice(index, 1);
     this.compressedFiles.splice(index, 1);
   }

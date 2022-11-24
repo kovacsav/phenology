@@ -39,23 +39,27 @@ export class AuthService {
       this.currentUserSubject$.next(user);
     }
   */
+
+    /*
     if (this.cookieService.get('currentUser')) {
       const user: User = JSON.parse(this.cookieService.get('currentUser'));
       this.lastToken = user.accessToken || '';
       this.currentUserSubject$.next(user);
+      console.log("auth service - user:", user)
     }
+    */
   }
 
   login(loginData: User): Observable<User | null> {
-    console.log('küldöm a kérést:', `${this.loginUrl}`, loginData);
+    //console.log('küldöm a kérést:', `${this.loginUrl}`, loginData);
     return this.http
       .post<{ user: User; accessToken: string }>(this.loginUrl, loginData)
       .pipe(
         map((response) => {
           //response.user = loginData;
           //console.log('authservice', loginData);
-          console.log('response', response);
-          console.log('user name:', JSON.stringify(response.user.email));
+          //console.log('response', response);
+          //console.log('user name:', JSON.stringify(response.user.email));
           if (response.user && response.accessToken) {
             this.lastToken = response.accessToken;
             //response.user.accessToken = response.accessToken;
@@ -77,10 +81,10 @@ export class AuthService {
               'accessToken',
               JSON.stringify(response.accessToken)
             );
-            this.cookieService.set(
+            /*this.cookieService.set(
               'password',
               JSON.stringify(loginData.password)
-            );
+            );*/
             //localStorage.currentUser = JSON.stringify(response.user);
             return response.user;
           }
@@ -96,11 +100,11 @@ export class AuthService {
     this.cookieService.delete('currentUserFirstName');
     this.cookieService.delete('currentUserLastName');
     this.cookieService.delete('accessToken');
-    this.cookieService.delete('password');
+    //this.cookieService.delete('password');
   }
 
   register(userObject: Object): Observable<Object> {
-    console.log('küldöm a kérést:', `${this.registerUrl}`, userObject);
+    //console.log('küldöm a kérést:', `${this.registerUrl}`, userObject);
     return this.http.post<User>(`${this.registerUrl}`, userObject);
   }
 
@@ -109,24 +113,24 @@ export class AuthService {
   }
 
   sendNewPasswordRequest(email: string): Observable<Object> {
-    console.log('küldöm a kérést:', `${this.newPasswordUrl}`, email);
+    //console.log('küldöm a kérést:', `${this.newPasswordUrl}`, email);
     return this.http.get(this.newPasswordUrl + '/' + email);
   }
 
   sendNewPassword(object: Object): Observable<Object> {
-    console.log('küldöm a kérést:', `${this.setNewPasswordURL}`, object);
+    //console.log('küldöm a kérést:', `${this.setNewPasswordURL}`, object);
     return this.http.post<object>(`${this.setNewPasswordURL}`, object);
   }
 
   profileUpdate(userObject: Object): Observable<User | null> {
-    console.log('küldöm a kérést:', `${this.profileUpdateURL}`, userObject);
+    //console.log('küldöm a kérést:', `${this.profileUpdateURL}`, userObject);
     return this.http
       .post<{ user: User; accessToken: string }>(`${this.profileUpdateURL}`, userObject)
       .pipe(
         map((response) => {
           //console.log('authservice', loginData);
-          console.log('response', response);
-          console.log('user name:', JSON.stringify(response.user.email));
+          //console.log('response', response);
+          //console.log('user name:', JSON.stringify(response.user.email));
           if (response.user) {
             this.currentUserSubject$.next(response.user);
             // set updated access token
@@ -143,13 +147,13 @@ export class AuthService {
   }
 
   profileDelete(userObject: Object): Observable<User | null> {
-    console.log('küldöm a kérést:', `${this.profileDeleteURL}`, userObject);
+    //console.log('küldöm a kérést:', `${this.profileDeleteURL}`, userObject);
     return this.http
       .post<{ user: User }>(`${this.profileDeleteURL}`, userObject)
       .pipe(
         map((response) => {
           //console.log('authservice', loginData);
-          console.log('response', response);
+          //console.log('response', response);
           //console.log('user name:', JSON.stringify(response.user.email));
           if (response.user) {
             this.logout();

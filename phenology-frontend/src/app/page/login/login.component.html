@@ -10,6 +10,14 @@
   </h5>
 </div>
 
+<div *ngIf="!isLoginOk" class="m-5">
+  <h5 class="text-center text-danger">Sikertelen bejelentkezés!</h5>
+  <br />
+  <h5 *ngIf="!isEmailRegistrated" class="text-center text-danger my-1">
+    Ezzel az email címmel felhasználó nem található. Kérjük ellenőrizze a megadott email címet, vagy regisztráljon honlapunkon.
+  </h5>
+</div>
+
 <div class="row d-flex justify-content-center align-items-center">
   <div class="login col-10 col-lg-6 p-3">
     <!-- <img class="edenkert my-3" src="http://localhost:3000/images/edenkert.png" alt=""> -->

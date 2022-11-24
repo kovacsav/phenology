@@ -14,6 +14,9 @@ export class LoginComponent implements OnInit {
 
   user: User = new User();
 
+  isLoginOk: boolean = true;
+  isEmailRegistrated: boolean = true;
+
   @Output() currentUser: EventEmitter<User> = new EventEmitter<User>();
 
   constructor(
@@ -27,25 +30,25 @@ export class LoginComponent implements OnInit {
 
   onLogin(): void {
     this.currentUser.emit(this.user);
-    console.log(this.user)
+    //console.log(this.user)
     this.auth.login(this.user).pipe(first()).subscribe({
       next: (user) => {
         if (user) {
+          this.isLoginOk = true;
+          this.isEmailRegistrated = true;
           this.router.navigate(['/observation']);
         }
       },
       error: (error) => {
-        alert("Sikertelen bejelentkezés.");
-        alert(JSON.stringify(error));
+        // http error response:
+        // "message":"Http failure response for http://localhost:3000/login: 401 Unauthorized",
+        //"error":{"msg":"Ezzel az email címmel nincs regisztrált felhasználó."}}
+        this.isLoginOk = false;
+        this.isEmailRegistrated = !JSON.stringify(error).includes("Ezzel az email");
+        //alert("Sikertelen bejelentkezés.");
+        //alert(JSON.stringify(error));
+        //console.log(JSON.stringify(error).includes("Ezzel az email"));
       },
-      /*
-      user => {
-        if (user) {
-          this.router.navigate(['/observation']);
-        }
-        else alert("nem sikerült a bejelentkezés")
-      },
-      */
     });
   }
 

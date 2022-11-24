@@ -57,14 +57,14 @@ export class ResetPasswordComponent implements OnInit {
   }
 
   onSubmit() {
-    console.log('password reset starts');
+    //console.log('password reset starts');
     this.submitted = true;
     this.token = this.activatedRoute.snapshot.params.token;
     this.userID = this.activatedRoute.snapshot.params.id;
-    console.log(this.token, this.userID);
+    //console.log(this.token, this.userID);
     this.newPassword = this.form.value.password;
 
-    console.log(this.form.invalid);
+    //console.log(this.form.invalid);
 
     // stop here if form is invalid
     if (this.form.invalid) {
@@ -87,7 +87,7 @@ export class ResetPasswordComponent implements OnInit {
       .subscribe({
         next: () => {
           this.resetPasswordStatus = 'success';
-          console.log(this.resetPasswordStatus);
+          //console.log(this.resetPasswordStatus);
         },
         error: (error) => {
           this.resetPasswordStatus = 'failed';

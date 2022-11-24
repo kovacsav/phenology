@@ -23,21 +23,21 @@ export class RegistrationConfirmationComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    console.log('confirmation starts');
+    //console.log('confirmation starts');
     this.confirmationCode =
       this.activatedRoute.snapshot.params.confirmationCode;
     //this.activatedRoute.queryParams.subscribe(
     //  (params) => (this.confirmationCode = params.get('confirmationCode'))
     //);
     //this.activatedRoute.queryParams.subscribe(params => this.confirmationCode = params.get('confirmationCode'));
-    console.log(this.confirmationCode);
+    //console.log(this.confirmationCode);
     this.authService
       .verifyUser(this.confirmationCode)
       .pipe(first())
       .subscribe({
         next: () => {
           this.confirmationStatus = 'success';
-          console.log(this.confirmationStatus);
+          //console.log(this.confirmationStatus);
         },
         error: (error) => {
           this.confirmationStatus = 'failed';

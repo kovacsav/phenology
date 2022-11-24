@@ -8,7 +8,7 @@ export class FilterPipe implements PipeTransform {
   transform(value: any | null, selectedPlant: string, selectedYear: string = ''): any | null {
 
     if (!Array.isArray(value) || !(selectedPlant || selectedYear)) {
-      console.log("nincs adat");
+      //console.log("nincs adat");
       return value;
     }
 

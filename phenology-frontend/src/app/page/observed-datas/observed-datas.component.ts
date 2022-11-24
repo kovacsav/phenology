@@ -119,14 +119,14 @@ export class ObservedDatasComponent implements OnInit {
     this.paginationObject.endIndex =
       this.paginationObject.startIndex + this.perPage;
 
-    console.log('küldöm a kérést:', this.paginationObject);
+    //console.log('küldöm a kérést:', this.paginationObject);
     this.observationService.getPaginatedData(this.paginationObject).pipe(
       tap((res) => {
         this.p = page;
         this.loading = false;
         //this.totalNumberOfObservations = res.total;
         //this.paginatedData$ = res.observations;
-        console.log('response:', res);
+        //console.log('response:', res);
       })
     );
 

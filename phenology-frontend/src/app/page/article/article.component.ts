@@ -80,6 +80,6 @@ export class ArticleComponent implements OnInit {
 
   async setProductProperties(): Promise<any> {
     this.productsProperties.count = (await lastValueFrom(this.article$)).length;
-    console.log(this.productsProperties.count);
+    //console.log(this.productsProperties.count);
   }
 }
