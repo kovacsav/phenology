@@ -1,5 +1,5 @@
 <div *ngIf="signedin">
-  <h1>Saját megfigyeléseim</h1>
+  <h1 class="text-center my-4">Saját megfigyeléseim</h1>
 
   <div *ngIf="plantData$ | async as plants">
     <div *ngIf="observedData$ | async as observations" class="col-10 offset-1">
@@ -82,8 +82,8 @@
               <button
                 type="button"
                 class="btn btn-danger m-2"
-                data-bs-toggle="modal"
-                data-bs-target="#staticBackdrop"
+                data-toggle="modal"
+                data-target="#staticBackdrop"
                 (click)="selectObservation(observation._id)"
               >
                 <i class="fa fa-trash"></i>
@@ -123,7 +123,7 @@
               <button
                 type="button"
                 class="btn-close"
-                data-bs-dismiss="modal"
+                data-dismiss="modal"
                 aria-label="Close"
               ></button>
             </div>
@@ -137,7 +137,7 @@
               <button
                 type="button"
                 class="btn btn-secondary"
-                data-bs-dismiss="modal"
+                data-dismiss="modal"
               >
                 Mégsem
               </button>

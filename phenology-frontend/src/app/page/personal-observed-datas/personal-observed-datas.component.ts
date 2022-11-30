@@ -58,7 +58,7 @@ export class PersonalObservedDatasComponent implements OnInit {
     ])
   );
 
-  observedData$!: Observable<Observation[]>;
+  observedData$: Observable<Observation[]> = new Observable<Observation[]>();
 
   selectedYear: string = '';
   observedYears: (string | null)[] | null = [];
