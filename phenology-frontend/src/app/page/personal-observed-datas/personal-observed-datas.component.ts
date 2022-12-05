@@ -9,6 +9,7 @@ import { ConfigService } from '../../service/config.service';
 import { CookieService } from 'ngx-cookie-service';
 import { AuthService } from 'src/app/service/auth.service';
 import { User } from 'src/app/model/user';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-personal-observed-datas',
@@ -81,7 +82,8 @@ export class PersonalObservedDatasComponent implements OnInit {
     private plantService: PlantService,
     public configService: ConfigService,
     private authService: AuthService,
-    private cookieService: CookieService
+    private cookieService: CookieService,
+    private toastrService: ToastrService
   ) {}
 
   ngOnInit(): void {
@@ -185,6 +187,12 @@ export class PersonalObservedDatasComponent implements OnInit {
 
   selectObservation(id: string): void {
     this.selectedObservationID = id;
+    this.toastrService.success('Rendben', 'A megfigyelés törlése sikeres.', {
+      timeOut: 6000,
+      closeButton: true,
+      positionClass: 'toast-bottom-right',
+      progressBar: true
+    });
   }
 
   onDelete(): void {
@@ -205,12 +213,24 @@ export class PersonalObservedDatasComponent implements OnInit {
             //console.log("response:", Object.values(response));
             this.cookieService.set('accessToken', JSON.stringify(response));
             alert('A megfigyelés törlése sikeres.');
+            this.toastrService.success('Rendben', 'A megfigyelés törlése sikeres.', {
+              timeOut: 3000,
+              closeButton: true,
+              positionClass: 'toast-bottom-right',
+              progressBar: true
+            });
             this.getObservations();
           }
         },
         error: (error) => {
           alert('A megfigyelés törlése sikertelen.');
           alert(JSON.stringify(error));
+          this.toastrService.error('Hiba történt', 'A megfigyelés törlése sikertelen.', {
+            timeOut: 3000,
+            closeButton: true,
+            positionClass: 'toast-bottom-right',
+            progressBar: true
+          });
         },
       });
   }

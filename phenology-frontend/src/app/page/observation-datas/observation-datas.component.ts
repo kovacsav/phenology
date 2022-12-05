@@ -17,6 +17,7 @@ import { NgxImageCompressService } from 'ngx-image-compress';
 import { CameraComponent } from 'src/app/common/camera/camera.component';
 import { CookieService } from 'ngx-cookie-service';
 import { AuthService } from 'src/app/service/auth.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-observation-datas',
@@ -80,7 +81,8 @@ export class ObservationDatasComponent implements OnInit {
     private imageCompress: NgxImageCompressService,
     private cameraComponent: CameraComponent,
     private cookieService: CookieService,
-    private auth: AuthService
+    private auth: AuthService,
+    private toastrService: ToastrService
   ) {
     // console.log('observation',this.user$)
     // this.observation.date = new Date().toISOString().split('T')[0];
@@ -190,6 +192,12 @@ export class ObservationDatasComponent implements OnInit {
             JSON.stringify(response));
 
           alert('Köszönjük! Megfigyelését rögzítettük.');
+          this.toastrService.success('Köszönjük!', 'Megfigyelését rögzítettük.', {
+            timeOut: 3000,
+            closeButton: true,
+            positionClass: 'toast-bottom-right',
+            progressBar: true
+          });
           this.router.navigate(['/']);
         }
       },
@@ -198,6 +206,12 @@ export class ObservationDatasComponent implements OnInit {
         alert(
           'A felhasználó azonosítása nem sikerült, lehetséges, hogy a rendszer biztonsági okokból a hosszú inaktivitás miatt kiléptette. Kérjük jelentkezzen be újra.'
         );
+        this.toastrService.error('Hiba történt', 'A felhasználó azonosítása nem sikerült, lehetséges, hogy a rendszer biztonsági okokból a hosszú inaktivitás miatt kiléptette. Kérjük jelentkezzen be újra.', {
+          timeOut: 3000,
+          closeButton: true,
+          positionClass: 'toast-bottom-right',
+          progressBar: true
+        });
         this.auth.logout();
         this.router.navigate(['/login']);
       },

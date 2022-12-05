@@ -67,7 +67,7 @@
                     class="myModal"
                     [style.display]="modalStyleDisplay"
                   >
-                    <span class="close" (click)="closePhoto()">&times;</span>
+                    <span class="close__photo" (click)="closePhoto()">&times;</span>
                     <img
                       class="myModal-content"
                       id="img01"
@@ -107,6 +107,7 @@
       </div>
 
       <!-- Bootstarp modal -->
+
       <div
         class="modal"
         id="staticBackdrop"
@@ -120,12 +121,9 @@
               <h4 class="modal-title" id="staticBackdropLabel">
                 Biztos, hogy törölni szeretné a megfigyelését?
               </h4>
-              <button
-                type="button"
-                class="btn-close"
-                data-dismiss="modal"
-                aria-label="Close"
-              ></button>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
             </div>
             <div class="modal-body">
               <p>
@@ -133,7 +131,7 @@
                 hogy törölje a rosszat és küldjön újat! Köszönjük!
               </p>
             </div>
-            <div class="modal-footer">
+            <div class="modal-footer d-flex justify-content-center">
               <button
                 type="button"
                 class="btn btn-secondary"
@@ -144,7 +142,7 @@
               <button
                 type="button"
                 class="btn btn-primary"
-                data-bs-dismiss="modal"
+                data-dismiss="modal"
                 (click)="onDelete()"
               >
                 Törlés megerősítése

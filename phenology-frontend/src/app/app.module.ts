@@ -1,8 +1,9 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
 import { WebcamModule } from 'ngx-webcam';
 import { NgxFileDropModule } from 'ngx-file-drop';
 import { GoogleMapsModule } from '@angular/google-maps';
@@ -11,6 +12,7 @@ import { MapsModule } from '@syncfusion/ej2-angular-maps';
 import { CookieService } from 'ngx-cookie-service';
 import { JwtInterceptorService } from './service/jwt-interceptor.service';
 import {NgxPaginationModule} from 'ngx-pagination';
+import { ToastrModule } from 'ngx-toastr';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -70,6 +72,7 @@ import { PersonalObservedDatasComponent } from './page/personal-observed-datas/p
     AppRoutingModule,
     FormsModule,
     HttpClientModule,
+    BrowserAnimationsModule,
     WebcamModule,
     NgxFileDropModule,
     ReactiveFormsModule,
@@ -78,7 +81,8 @@ import { PersonalObservedDatasComponent } from './page/personal-observed-datas/p
       apiKey: 'AIzaSyCg8fF_7JOUEWLbbHKpZ1_vjsiQTTk6e5Q',
     }),
     MapsModule,
-    NgxPaginationModule
+    NgxPaginationModule,
+    ToastrModule.forRoot()
   ],
   providers: [
     {
