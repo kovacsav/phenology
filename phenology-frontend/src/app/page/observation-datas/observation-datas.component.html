@@ -1,9 +1,9 @@
 <div *ngIf="signedin">
   <h1 class="text-center mt-5 mb-3">Új megfigyelés</h1>
-  <div class="container">
-    <div class="row">
+  <div class="container p-0">
+    <div class="">
       <form #observationForm="ngForm" (ngSubmit)="save()">
-        <div class="mt-5 p-0 col-4 section__border">
+        <div class="mt-5 p-0 col-6 col-md-4 section__border">
           <!-- <label class="mb-1 subtitle" for="">Dátum*</label> -->
           <h4 class="my-2">Dátum*</h4>
           <input
@@ -16,7 +16,7 @@
           />
         </div>
 
-        <div class="my-5 p-0 col-4 section__border">
+        <div class="my-5 p-0 col-6 col-md-4 section__border">
           <!-- <label class="mb-1 subtitle" for="">Helyszín*</label> -->
           <h4 class="my-2">Helyszín*</h4>
           <input
@@ -32,12 +32,14 @@
           <!-- <label class="mt-5 subtitle" for="">Megfigyelt növény*</label> -->
           <h4 class="my-2">Megfigyelt növény*</h4>
 
-          <div class="ml-2">
+          <div class="">
             <h5 class="mt-2 ms-5">Fák</h5>
-            <div
-              class="row row-cols-2 row-cols-sm-3 row-cols-md-4 row-cols-lg-6 g-3 my-2 text-dark"
-            >
-              <div class="col mb-3" *ngFor="let plant of trees">
+
+            <div class="row text-dark">
+              <div
+                class="col-lg-2 col-md-4 col-6 mb-3"
+                *ngFor="let plant of trees"
+              >
                 <div
                   class="card h-100 shadow hovered"
                   [ngClass]="{ highlighted: plant === selectedPlant }"
@@ -53,10 +55,11 @@
             </div>
 
             <h5 class="mt-5 ms-5">Cserjék</h5>
-            <div
-              class="row row-cols-2 row-cols-sm-3 row-cols-md-4 row-cols-lg-6 g-3 my-2 text-dark"
-            >
-              <div class="col mb-3" *ngFor="let plant of shrub">
+            <div class="row text-dark">
+              <div
+                class="col-lg-2 col-md-4 col-6 mb-3"
+                *ngFor="let plant of shrub"
+              >
                 <div
                   class="card h-100 shadow hovered"
                   [ngClass]="{ highlighted: plant === selectedPlant }"
@@ -72,10 +75,11 @@
             </div>
 
             <h5 class="mt-5 ms-5">Lágyszárúak</h5>
-            <div
-              class="row row-cols-2 row-cols-sm-3 row-cols-md-4 row-cols-lg-6 g-3 my-2 text-dark"
-            >
-              <div class="col mb-3" *ngFor="let plant of herbaceous">
+            <div class="row text-dark">
+              <div
+                class="col-lg-2 col-md-4 col-6 mb-3"
+                *ngFor="let plant of herbaceous"
+              >
                 <div
                   class="card h-100 shadow hovered"
                   [ngClass]="{ highlighted: plant === selectedPlant }"
@@ -121,12 +125,12 @@
 
           <!-- Uplaod photo -->
 
-          <div class="mt-5 section__border">
+          <div class="mt-5 section__border remark__div">
             <!-- <label class="subtitle" for="">Fénykép feltöltés</label> -->
             <h4 class="my-2">Fénykép feltöltés</h4>
             <div class="ml-2">
               <p class="my-2">
-                Egymás után több kép is feltölthető, melyek automatikusan
+                Egymás után több kép is feltölthető, melyeket automatikusan
                 optimális méretűre állítunk be. Ha van az eszköznek kamerája,
                 lehet azt is használni, akár több kép is készíthető. A
                 kiválasztás után a képek megjelennek, ellenőrizhetőek, a
@@ -138,13 +142,14 @@
               <app-camera
                 (getPicture)="handleImage($event)"
                 name="webcamImage"
+                class="remark__div"
               ></app-camera>
               <!-- <div class="webcam-image" *ngIf="webcamImage">
               <img [src]="webcamImage.imageAsDataUrl" />
             </div> -->
 
               <form [formGroup]="fileUploadForm">
-                <div class="row">
+                <div class="">
                   <div class="col-sm-12">
                     <div class="ms-5">
                       <!-- <h6 class="my-3">
@@ -185,22 +190,24 @@
 
                 <h5 class="mt-5 mb-2">Feltöltésre kiválasztott fényképek</h5>
 
-                <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3">
+                <div class="row">
                   <div
                     *ngFor="
                       let selectedFile of compressedFiles;
                       let indexOfelement = index
                     "
-                    class="col d-flex justify-content-center align-items-center"
+                    class="col-lg-2 col-md-4 col-6 m-3"
                   >
-                    <img [src]="selectedFile" width="150px" class="d-block" />
-                    <button
-                      (click)="onRemove(indexOfelement)"
-                      class="btn btn-danger m-2 button__height"
-                      type="button"
-                    >
-                      Mégsem
-                    </button>
+                    <div>
+                      <img [src]="selectedFile" width="150px" class="d-block" />
+                      <button
+                        (click)="onRemove(indexOfelement)"
+                        class="btn btn-danger m-2 button__height"
+                        type="button"
+                      >
+                        Mégsem
+                      </button>
+                    </div>
                   </div>
                 </div>
               </form>
@@ -232,7 +239,7 @@
         </div>
 
         <!-- {{ observation | json }} -->
-        <div class="section__border">
+        <div class="section__border remark__div">
           <p class="my-3">
             A *-gal jelölt mezők megadása nélkül nem értelmezhető a megfigyelés,
             ezért azok kitöltése kötelező.
@@ -261,6 +268,9 @@
 <div *ngIf="!signedin" class="m-5">
   <h3 class="text-center height">
     Új megfigyelés rögzítéséhez be kell
-    <a routerLink="../login" class="">jelentkeznie</a>. Köszönjük.
+    <a routerLink="../login" class="">jelentkeznie</a>.
+    <br />
+    <br />
+    Köszönjük.
   </h3>
 </div>

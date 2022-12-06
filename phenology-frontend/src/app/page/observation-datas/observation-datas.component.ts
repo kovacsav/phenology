@@ -191,14 +191,14 @@ export class ObservationDatasComponent implements OnInit {
             'accessToken',
             JSON.stringify(response));
 
-          alert('Köszönjük! Megfigyelését rögzítettük.');
+          //alert('Köszönjük! Megfigyelését rögzítettük.');
           this.toastrService.success('Köszönjük!', 'Megfigyelését rögzítettük.', {
             timeOut: 3000,
             closeButton: true,
-            positionClass: 'toast-bottom-right',
+            positionClass: 'toast-top-right',
             progressBar: true
           });
-          this.router.navigate(['/']);
+          this.router.navigate(['/data']);
         }
       },
       error: () => {
@@ -209,7 +209,7 @@ export class ObservationDatasComponent implements OnInit {
         this.toastrService.error('Hiba történt', 'A felhasználó azonosítása nem sikerült, lehetséges, hogy a rendszer biztonsági okokból a hosszú inaktivitás miatt kiléptette. Kérjük jelentkezzen be újra.', {
           timeOut: 3000,
           closeButton: true,
-          positionClass: 'toast-bottom-right',
+          positionClass: 'toast-top-right',
           progressBar: true
         });
         this.auth.logout();

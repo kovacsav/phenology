@@ -187,12 +187,6 @@ export class PersonalObservedDatasComponent implements OnInit {
 
   selectObservation(id: string): void {
     this.selectedObservationID = id;
-    this.toastrService.success('Rendben', 'A megfigyelés törlése sikeres.', {
-      timeOut: 6000,
-      closeButton: true,
-      positionClass: 'toast-bottom-right',
-      progressBar: true
-    });
   }
 
   onDelete(): void {
@@ -212,11 +206,11 @@ export class PersonalObservedDatasComponent implements OnInit {
             // set new accessToken
             //console.log("response:", Object.values(response));
             this.cookieService.set('accessToken', JSON.stringify(response));
-            alert('A megfigyelés törlése sikeres.');
+            //alert('A megfigyelés törlése sikeres.');
             this.toastrService.success('Rendben', 'A megfigyelés törlése sikeres.', {
               timeOut: 3000,
               closeButton: true,
-              positionClass: 'toast-bottom-right',
+              positionClass: 'toast-top-right',
               progressBar: true
             });
             this.getObservations();
@@ -228,7 +222,7 @@ export class PersonalObservedDatasComponent implements OnInit {
           this.toastrService.error('Hiba történt', 'A megfigyelés törlése sikertelen.', {
             timeOut: 3000,
             closeButton: true,
-            positionClass: 'toast-bottom-right',
+            positionClass: 'toast-top-right',
             progressBar: true
           });
         },

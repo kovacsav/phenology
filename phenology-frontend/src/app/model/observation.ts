@@ -6,7 +6,7 @@ export class Observation {
   // _id: string = '';
   date: string | null = '';
   // date: string | null= new Date().toLocaleDateString('hu-HU');
-  location: string = 'Miskolc';
+  location: string = '';
   gps?: string = '';
   plant: Plant = new Plant();
   phase: string = '';

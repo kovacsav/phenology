@@ -2,8 +2,9 @@
 
 .container {
   //background: linear-gradient(120deg, rgb(44, 128, 10), rgb(41, 184, 148));
-  margin-left: 10vw;
-  margin-right: 10vw;
+  //margin-left: 10vw;
+  //margin-right: 10vw;
+  max-width: 90%;
 }
 
 .section__border{
@@ -11,11 +12,11 @@
 }
 
 .card {
-  max-width: 40vw;
+  max-width: 35vw;
 }
 
 .remark__div {
-  max-width: 90vw;
+  max-width: 70vw;
 }
 
 .textarea{
@@ -94,7 +95,7 @@
 
 .height {
   min-height: 30vh;
-  margin-top: 30vh;
+  margin-top: 20vh;
 }
 
 .btn-outline-success {

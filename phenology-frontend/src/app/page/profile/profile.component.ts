@@ -5,7 +5,7 @@ import { first } from 'rxjs/operators';
 import { AuthService } from 'src/app/service/auth.service';
 import { CookieService } from 'ngx-cookie-service';
 import { User } from 'src/app/model/user';
-
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-profil',
@@ -17,9 +17,10 @@ export class ProfileComponent implements OnInit {
   @Output() currentUser: EventEmitter<User> = new EventEmitter<User>();
 
   form: FormGroup = new FormGroup({});
-  loading = false;
-  submitted = false;
-  profileUpdateOK = false;
+  loading: boolean = false;
+  submitted: boolean = false;
+  profileUpdateOK: boolean = false;
+  profileUpdateError: boolean = false;
   signedin: boolean = false;
   user: User = new User();
   confirmPassword: string = '';
@@ -39,7 +40,8 @@ export class ProfileComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private authService: AuthService,
-    private cookieService: CookieService
+    private cookieService: CookieService,
+    private toastrService: ToastrService
   ) {}
 
   ngOnInit() {
@@ -129,6 +131,7 @@ export class ProfileComponent implements OnInit {
         },
         error: (error) => {
           //this.alertService.error(error);
+          this.profileUpdateError= true;
           alert(
             'Sikertelen regisztráció! Ezzel az email címmel már regisztráltak. Amennyiben az email cím az Öné, kérhet új jelszót.'
           );

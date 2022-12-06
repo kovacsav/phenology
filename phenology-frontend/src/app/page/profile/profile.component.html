@@ -175,5 +175,8 @@
     <div *ngIf="profileUpdateOK">
       <h3>A profil szerkesztése sikerült.</h3>
     </div>
+    <div *ngIf="profileUpdateError">
+      <h3>Sikertelen regisztráció! Ezzel az email címmel már regisztráltak. Amennyiben az email cím az Öné, kérhet új jelszót.</h3>
+    </div>
   </div>
 </div>
