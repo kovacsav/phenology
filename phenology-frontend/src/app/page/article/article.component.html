@@ -1,11 +1,11 @@
-<div class="container m-5" *ngIf="article$ | async as articles">
+<div class="container m-lg-5" *ngIf="article$ | async as articles">
   <div
     class="d-block d-flex"
     *ngFor="let article of articles | paginate: { itemsPerPage: 3, currentPage: p }">
     <!--  | slice: pageSliceStart:pageSliceEnd" -->
 
     <div class="d-inline-block my-2 py-4 border-bottom">
-      <h1 class="mb-1">{{ article.title }}</h1>
+      <h2 class="mb-1 text-center text-md-left">{{ article.title }}</h2>
       <p>
         <i> {{ article.date | date : 'YYYY. MM. dd.' }} </i>
       </p>
@@ -13,8 +13,8 @@
         <img
         [src]="article.image[0].imgPath"
         alt="cikk"
-        style="float: left; max-width: 300px"
-        class="mx-5"
+        style="float: left; max-width: 350px"
+        class="mx-lg-5 mx-3 mb-3"
         />
         {{ article.abstract }}
         <br>

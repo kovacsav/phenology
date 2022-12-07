@@ -1,10 +1,18 @@
 @use '../../../styles.scss';
 
+tr:nth-child(even) {
+  background-color: styles.$light-base-color;
+}
+
  /* Style the Image Used to Trigger the Modal */
  .myImg {
   border-radius: 5px;
   cursor: pointer;
   transition: 0.3s;
+}
+
+.td__photo{
+  border: none;
 }
 
 .myImg:hover {opacity: 0.7;}

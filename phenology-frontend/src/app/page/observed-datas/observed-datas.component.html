@@ -1,24 +1,30 @@
 <div class="container" *ngIf="plantData$ | async as plants">
   <div *ngIf="observedData$ | async as observations" class="">
-
     <h1 class="text-center my-4">Beérkezett megfigyelések</h1>
 
-    <label class="fw-bold" for="">Megfigyelések szűrése</label>
-    <select name="plantSelection" id="" [(ngModel)]="selectedPlant" class="m-5">
-      <option *ngFor="let plant of plants" [value]="plant.name">
-        {{ plant.name }}
-      </option>
-    </select>
+    <div class="row mb-3">
+      <label class="col-md-4 col-lg-2 fw-bold mt-1" for="">Megfigyelések szűrése</label>
+      <div class="col-sm-8">
+        <select
+          name="plantSelection"
+          id=""
+          [(ngModel)]="selectedPlant"
+          class="m-2"
+        >
+          <option *ngFor="let plant of plants" [value]="plant.name">
+            {{ plant.name }}
+          </option>
+        </select>
 
-    <select name="yearSelection" id="" [(ngModel)]="selectedYear">
-    <option *ngFor="let year of observedYears " [value]="year">
-      {{ year }}
-    </option>
-  </select>
+        <select name="yearSelection" id="" [(ngModel)]="selectedYear">
+          <option *ngFor="let year of observedYears" [value]="year">
+            {{ year }}
+          </option>
+        </select>
+      </div>
+    </div>
 
-  <div > {{selectedPlant}}</div>
-
-    <table class="table table-striped">
+    <table class="table">
       <thead>
         <tr>
           <th>Dátum</th>
@@ -32,11 +38,12 @@
       <tbody>
         <tr
           *ngFor="
-            let observation of observations | filter:selectedPlant:selectedYear
-              | paginate: { itemsPerPage: 10, currentPage: p }
+            let observation of observations
+              | filter : selectedPlant : selectedYear
+              | paginate : { itemsPerPage: 10, currentPage: p }
           "
         >
-          <td>{{ observation.date | date: "yyyy. MM. dd." }}</td>
+          <td>{{ observation.date | date : "yyyy. MM. dd." }}</td>
           <td>
             {{ observation.user.firstName }} {{ observation.user.lastName }}
           </td>
@@ -45,7 +52,7 @@
           <td>{{ observation.phase }}</td>
           <td *ngIf="observation.photo as photos">
             <div>
-              <td *ngFor="let photo of photos">
+              <td *ngFor="let photo of photos" class="td__photo">
                 <img
                   src="{{ backendImageURL }}{{ photo }}"
                   class="myImg"
