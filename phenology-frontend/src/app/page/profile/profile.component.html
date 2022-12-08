@@ -1,5 +1,7 @@
 <div *ngIf="signedin" class="container">
-  <div class="card my-5 px-2 px-md-0 shadow col-12 col-md-10 offset-md-1 col-lg-6 offset-lg-3">
+  <div
+    class="card my-5 px-2 px-md-0 shadow col-12 col-md-10 offset-md-1 col-lg-6 offset-lg-3"
+  >
     <h4 class="card-header text-center">Profil szerkesztése</h4>
     <div *ngIf="!profileUpdateOK">
       <div class="card-body">
@@ -164,7 +166,12 @@
             >
               Mégsem
             </button>
-            <button type="button" class="btn btn-primary" (click)="onDelete()">
+            <button
+              type="button"
+              class="btn btn-primary"
+              (click)="onDelete()"
+              data-dismiss="modal"
+            >
               Törlés megerősítése
             </button>
           </div>
@@ -172,11 +179,14 @@
       </div>
     </div>
 
-    <div *ngIf="profileUpdateOK">
-      <h3>A profil szerkesztése sikerült.</h3>
+    <div *ngIf="profileUpdateOK" class="my-5">
+      <h5 class="text-center">A profil szerkesztése sikerült.</h5>
     </div>
-    <div *ngIf="profileUpdateError">
-      <h3>Sikertelen regisztráció! Ezzel az email címmel már regisztráltak. Amennyiben az email cím az Öné, kérhet új jelszót.</h3>
+    <div *ngIf="profileUpdateError" class="my-5">
+      <h3 class="text-center">
+        Sikertelen regisztráció! Ezzel az email címmel már regisztráltak.
+        Amennyiben az email cím az Öné, kérhet új jelszót.
+      </h3>
     </div>
   </div>
 </div>

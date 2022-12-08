@@ -1,9 +1,16 @@
-<div *ngIf="confirmationStatus === 'success'" class="m-3">
-  <h3 class="m-2">Sikeresen megerősített regisztráció</h3>
-  <a routerLink="../../login" class="btn btn-link">Bejelentkezés</a>
+<div *ngIf="confirmationStatus === 'success'" class="my-5">
+  <h3 class="my-5 text-center">Sikeresen megerősített regisztráció</h3>
+
+  <h4 class="my-5 text-center">
+    <a routerLink="../../login" class="mt-5">Bejelentkezés</a>
+  </h4>
+
 </div>
 
-<div *ngIf="confirmationStatus === 'failed'" class="m-3">
-  <h3 class="m-2">A regisztráció megerősítése sikertelen, próbálja meg újra.</h3>
-  <a routerLink="../../register" class="btn btn-link">Regisztráció</a>
+<div *ngIf="confirmationStatus === 'failed'" class="my-5">
+  <h3 class="my-5 text-center">A regisztráció megerősítése sikertelen, kérjük próbálja meg újra.</h3>
+
+  <h4 class="my-5 text-center">
+    <a routerLink="../../register" class="mt-5">Regisztráció</a>
+  </h4>
 </div>

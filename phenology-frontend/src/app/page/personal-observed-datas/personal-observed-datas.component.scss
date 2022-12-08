@@ -1,3 +1,9 @@
+@use '../../../styles.scss';
+
+tr:nth-child(even) {
+  background-color: styles.$light-base-color;
+}
+
 /* Style the Image Used to Trigger the Modal */
 .myImg {
   border-radius: 5px;

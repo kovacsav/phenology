@@ -93,8 +93,8 @@ export class ResetPasswordComponent implements OnInit {
           this.resetPasswordStatus = 'failed';
           //this.alertService.error(error);
           this.serverResponse = JSON.stringify(error);
-          alert('Sikertelen regisztráció!');
-          alert(JSON.stringify(error));
+          //alert('Sikertelen regisztráció!');
+          //alert(JSON.stringify(error));
           //this.router.navigate(['/', 'register']);
         },
       });

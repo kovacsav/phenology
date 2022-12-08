@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { ObservationService } from 'src/app/service/observation.service';
 import { PlantService } from 'src/app/service/plant.service';
 import { observable, Observable } from 'rxjs';
@@ -78,6 +79,7 @@ export class PersonalObservedDatasComponent implements OnInit {
   selectedObservationID: string = '';
 
   constructor(
+    private router: Router,
     private observationService: ObservationService,
     private plantService: PlantService,
     public configService: ConfigService,
@@ -203,6 +205,7 @@ export class PersonalObservedDatasComponent implements OnInit {
       .subscribe({
         next: (response) => {
           if (response) {
+            this.getObservations();
             // set new accessToken
             //console.log("response:", Object.values(response));
             this.cookieService.set('accessToken', JSON.stringify(response));
@@ -213,12 +216,12 @@ export class PersonalObservedDatasComponent implements OnInit {
               positionClass: 'toast-top-right',
               progressBar: true
             });
-            this.getObservations();
+            this.router.navigate(['/', 'home']);
           }
         },
         error: (error) => {
-          alert('A megfigyelés törlése sikertelen.');
-          alert(JSON.stringify(error));
+          //alert('A megfigyelés törlése sikertelen.');
+          //alert(JSON.stringify(error));
           this.toastrService.error('Hiba történt', 'A megfigyelés törlése sikertelen.', {
             timeOut: 3000,
             closeButton: true,

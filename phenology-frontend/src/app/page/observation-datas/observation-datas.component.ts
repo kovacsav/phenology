@@ -198,7 +198,7 @@ export class ObservationDatasComponent implements OnInit {
             positionClass: 'toast-top-right',
             progressBar: true
           });
-          this.router.navigate(['/data']);
+          this.router.navigate(['/home']);
         }
       },
       error: () => {

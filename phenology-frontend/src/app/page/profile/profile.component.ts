@@ -172,15 +172,25 @@ export class ProfileComponent implements OnInit {
       .subscribe({
         next: (user) => {
           if (user) {
-            alert("A profil törlése sikeres.");
+            //alert("A profil törlése sikeres.");
+            this.toastrService.success('Rendben', 'A profil törlése sikeres.', {
+              timeOut: 3000,
+              closeButton: true,
+              positionClass: 'toast-top-right',
+              progressBar: true
+            });
           }
         },
         error: (error) => {
           //this.alertService.error(error);
-          alert(
-            'A profil törlése sikertelen.'
-          );
-          alert(JSON.stringify(error));
+          //alert('A profil törlése sikertelen.');
+          //alert(JSON.stringify(error));
+          this.toastrService.error('Hiba történt', 'A profil törlése sikertelen.', {
+            timeOut: 3000,
+            closeButton: true,
+            positionClass: 'toast-top-right',
+            progressBar: true
+          });
           this.loading = false;
         },
       });
